@@ -1,21 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Estudiantes</title>
+    <title>Sistema de Gestión de Estudiantes</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <header>
-        <h1>Sistema de Estudiantes</h1>
-        <p>Gestión de información de estudiantes</p>
+    <header class="header">
+        <div class="container">
+            <h1>Sistema de Gestión de Estudiantes</h1>
+
+            <nav class="nav">
+                <a href="index.html">Inicio</a>
+                <a href="formulario.html">Estudiantes</a>
+            </nav>
+        </div>
     </header>
-    
-    <section>
-    <h2>Registro de estudiantes</h2>
-    <p>En esta sección se podrá registrar y consultar la información de los estudiantes.</p>
-    </section>
+
+    <main>
+
+        <section class="hero">
+            <div class="container">
+                <h2>Bienvenido al Sistema</h2>
+                <p>
+                    Administra de manera sencilla la información
+                    de los estudiantes.
+                </p>
+
+                <a href="formulario.html" class="btn">
+                    Registrar estudiante
+                </a>
+            </div>
+        </section>
+
+        <section class="opciones">
+            <div class="container">
+                <h2>Opciones del sistema</h2>
+
+                <div class="cards">
+
+                    <div class="card">
+                        <h3>Estudiantes</h3>
+                        <p>
+                            Registra y administra la informacion
+                            de los estudiantes.
+                        </p>
+
+                        <a href="formulario.html">
+                            Ir al formulario
+                        </a>
+                    </div>
+
+                    <div class="card">
+                        <h3>Gestión</h3>
+                        <p>
+                            Consulta y organiza la informacion
+                            registrada en el sistema.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Informacion</h3>
+                        <p>
+                            Mantén organizada la informacion
+                            academica de los estudiantes.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>
+            © 2026 Sistema de Gestión de Estudiantes
+        </p>
+    </footer>
 
 </body>
+
 </html>
