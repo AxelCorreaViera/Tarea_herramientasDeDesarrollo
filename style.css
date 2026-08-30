@@ -78,6 +78,7 @@ body {
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
+    cursor:pointer
 }
 
 .btn:hover {
@@ -155,4 +156,44 @@ body {
     .hero h2 {
         font-size: 28px;
     }
+}
+
+.formulario-card {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.campo {
+    margin-bottom: 20px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #1f4e79;
+}
+
+.campo input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.campo input:focus {
+    outline: none;
+    border-color: #1f4e79;
+}
+
+.formulario-card .btn {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+.pad{
+    padding: 20px 0px 0px 0px;
 }
