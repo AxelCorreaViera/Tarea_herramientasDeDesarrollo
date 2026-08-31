@@ -197,3 +197,23 @@ body {
 .pad{
     padding: 20px 0px 0px 0px;
 }
+
+
+.registro {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.registro p {
+    margin-bottom: 5px;
+}
+
+.registro a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.registro a:hover {
+    text-decoration: underline;
+}
