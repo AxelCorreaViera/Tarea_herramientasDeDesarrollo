@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,22 +18,106 @@
 
         <div class="campo">
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" placeholder="Ingrese su nombre">
+            <input 
+                type="text" 
+                id="nombre" 
+                name="nombre"
+                placeholder="Ingrese su nombre"
+                autocomplete="given-name"
+                required>
         </div>
 
         <div class="campo">
             <label for="apellido">Apellido</label>
-            <input type="text" id="apellido" placeholder="Ingrese su apellido">
+            <input 
+                type="text" 
+                id="apellido" 
+                name="apellido"
+                placeholder="Ingrese su apellido"
+                autocomplete="family-name"
+                required>
         </div>
 
         <div class="campo">
-            <label for="correo">Correo</label>
-            <input type="email" id="correo" placeholder="correo@ejemplo.com">
+            <label for="correo">Correo electrónico</label>
+            <input 
+                type="email" 
+                id="correo" 
+                name="correo"
+                placeholder="correo@ejemplo.com"
+                autocomplete="email"
+                required>
         </div>
 
-        <button class="btn">
+        <div class="campo">
+            <label for="telefono">Teléfono</label>
+            <input 
+                type="tel" 
+                id="telefono" 
+                name="telefono"
+                placeholder="987 654 321"
+                autocomplete="tel"
+                pattern="[0-9]{9}"
+                maxlength="9"
+                required>
+        </div>
+
+        <div class="campo">
+            <label for="fechaNacimiento">Fecha de nacimiento</label>
+            <input 
+                type="date" 
+                id="fechaNacimiento" 
+                name="fechaNacimiento"
+                required>
+        </div>
+
+        <div class="campo">
+            <label for="carrera">Carrera</label>
+            <select id="carrera" name="carrera" required>
+                <option value="">Seleccione una carrera</option>
+                <option value="ingenieria-sistemas">Ingeniería de Sistemas</option>
+                <option value="ingenieria-industrial">Ingeniería Industrial</option>
+                <option value="administracion">Administración</option>
+                <option value="contabilidad">Contabilidad</option>
+                <option value="derecho">Derecho</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="contrasena">Contraseña</label>
+            <input 
+                type="password" 
+                id="contrasena" 
+                name="contrasena"
+                placeholder="Ingrese una contraseña"
+                autocomplete="new-password"
+                minlength="8"
+                required>
+        </div>
+
+        <div class="campo">
+            <label for="confirmarContrasena">Confirmar contraseña</label>
+            <input 
+                type="password" 
+                id="confirmarContrasena" 
+                name="confirmarContrasena"
+                placeholder="Repita su contraseña"
+                autocomplete="new-password"
+                minlength="8"
+                required>
+        </div>
+
+        <button type="submit" class="btn">
             Registrar Estudiante
         </button>
+
+    
+<div class="registro">
+    <p>¿Ya tienes una cuenta?</p>
+    <a href="login.html">Inicia sesión aquí</a>
+</div>
+
+
 
     </form>
 
@@ -40,3 +125,4 @@
 
 </body>
 </html>
+```
