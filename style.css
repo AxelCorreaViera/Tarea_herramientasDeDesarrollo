@@ -456,3 +456,221 @@ body {
         padding: 22px;
     }
 }
+/* ==================== GESTIÓN DE ESTUDIANTES ==================== */
+
+.pagina-gestion {
+    padding: 65px 0;
+    min-height: 700px;
+}
+
+.gestion-header {
+    background-color: white;
+    padding: 28px 32px;
+    border-radius: 14px;
+    border: 1px solid #e5edf5;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.gestion-header h3 {
+    color: #1f4e79;
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.gestion-header p {
+    color: #607d8b;
+}
+
+/* ==================== BUSQUEDA ==================== */
+
+.busqueda-card {
+    background-color: white;
+    padding: 32px;
+    border-radius: 14px;
+    border: 1px solid #e5edf5;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+
+    margin-bottom: 40px;
+}
+
+.busqueda-title {
+    margin-bottom: 25px;
+}
+
+.busqueda-title h3 {
+    color: #1f4e79;
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.busqueda-title p {
+    color: #607d8b;
+}
+
+.filtros {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.busqueda-card .campo {
+    margin-bottom: 0;
+}
+
+/* ==================== RESULTADOS ==================== */
+
+.resultados-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.resultados-header h3 {
+    color: #1f4e79;
+    font-size: 24px;
+}
+
+.cantidad {
+    background-color: #dbeaf7;
+    color: #1f4e79;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.estudiantes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.estudiante-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 14px;
+    border: 1px solid #e5edf5;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.estudiante-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.estudiante-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.estudiante-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 52px;
+    height: 52px;
+
+    background: linear-gradient(135deg, #dbeaf7, #c8e0f3);
+    color: #1f4e79;
+
+    border-radius: 50%;
+
+    font-weight: bold;
+}
+
+.estudiante-card-header h3 {
+    color: #1f4e79;
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+
+.estudiante-card-header p {
+    color: #78909c;
+    font-size: 13px;
+}
+
+.estudiante-datos {
+    border-top: 1px solid #e5edf5;
+    padding-top: 18px;
+    margin-bottom: 20px;
+}
+
+.estudiante-datos p {
+    color: #607d8b;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.estudiante-datos strong {
+    color: #37474f;
+}
+
+.btn-secundario {
+    display: block;
+    text-align: center;
+
+    color: #1f4e79;
+    background-color: #edf5fb;
+
+    padding: 10px;
+    border-radius: 7px;
+
+    text-decoration: none;
+    font-weight: bold;
+
+    transition: all 0.3s ease;
+}
+
+.btn-secundario:hover {
+    background-color: #dbeaf7;
+    color: #163a5c;
+}
+
+/* ==================== RESPONSIVE GESTIÓN ==================== */
+
+@media (max-width: 900px) {
+
+    .filtros {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .estudiantes-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .gestion-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .gestion-header .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .filtros {
+        grid-template-columns: 1fr;
+    }
+
+    .resultados-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
