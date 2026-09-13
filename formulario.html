@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,34 +10,190 @@
 
 <body>
 
-<div class="container">
+    <header class="header">
+        <div class="container header-content">
 
-    <h2 class="pad">Registro de Estudiantes</h2>
+            <div class="logo">
+                <div>
+                    <h1>Gestión Estudiantil</h1>
+                    <p>Registro de estudiantes</p>
+                </div>
+            </div>
 
-    <form class="pad">
+            <nav class="nav">
+                <a href="index.html">Inicio</a>
+                <a href="formulario.html" class="active">Registrar</a>
+                <a href="login.html">Iniciar sesión</a>
+            </nav>
 
-        <div class="campo">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" placeholder="Ingrese su nombre">
+        </div>
+    </header>
+
+    <main class="pagina-formulario">
+
+        <div class="container">
+
+            <div class="section-title">
+                <span>REGISTRO</span>
+
+                <h2>Registrar estudiante</h2>
+
+                <p>
+                    Complete los datos para registrar un nuevo estudiante.
+                </p>
+            </div>
+
+            <div class="formulario-card">
+
+                <form id="formularioEstudiante">
+
+                    <div class="campo">
+                        <label for="nombre">Nombre</label>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            placeholder="Ingrese su nombre"
+                            autocomplete="given-name"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="apellido">Apellido</label>
+
+                        <input
+                            type="text"
+                            id="apellido"
+                            name="apellido"
+                            placeholder="Ingrese su apellido"
+                            autocomplete="family-name"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="correo">Correo electrónico</label>
+
+                        <input
+                            type="email"
+                            id="correo"
+                            name="correo"
+                            placeholder="correo@ejemplo.com"
+                            autocomplete="email"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="telefono">Teléfono</label>
+
+                        <input
+                            type="tel"
+                            id="telefono"
+                            name="telefono"
+                            placeholder="987654321"
+                            autocomplete="tel"
+                            pattern="[0-9]{9}"
+                            maxlength="9"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="fechaNacimiento">
+                            Fecha de nacimiento
+                        </label>
+
+                        <input
+                            type="date"
+                            id="fechaNacimiento"
+                            name="fechaNacimiento"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="carrera">Carrera</label>
+
+                        <select id="carrera" name="carrera" required>
+                            <option value="">
+                                Seleccione una carrera
+                            </option>
+
+                            <option value="ingenieria-sistemas">
+                                Ingeniería de Sistemas
+                            </option>
+
+                            <option value="ingenieria-industrial">
+                                Ingeniería Industrial
+                            </option>
+
+                            <option value="administracion">
+                                Administración
+                            </option>
+
+                            <option value="contabilidad">
+                                Contabilidad
+                            </option>
+
+                            <option value="derecho">
+                                Derecho
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="contrasena">Contraseña</label>
+
+                        <input
+                            type="password"
+                            id="contrasena"
+                            name="contrasena"
+                            placeholder="Ingrese una contraseña"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="confirmarContrasena">
+                            Confirmar contraseña
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmarContrasena"
+                            name="confirmarContrasena"
+                            placeholder="Repita su contraseña"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required>
+                    </div>
+
+                    <button type="submit" class="btn">
+                        Registrar estudiante
+                    </button>
+
+                </form>
+
+                <div class="registro">
+                    <p>¿Ya tienes una cuenta?</p>
+
+                    <a href="login.html">
+                        Inicia sesión aquí
+                    </a>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="campo">
-            <label for="apellido">Apellido</label>
-            <input type="text" id="apellido" placeholder="Ingrese su apellido">
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 Sistema de Gestión de Estudiantes</p>
+            <p>Proyecto académico - Herramientas de Desarrollo</p>
         </div>
-
-        <div class="campo">
-            <label for="correo">Correo</label>
-            <input type="email" id="correo" placeholder="correo@ejemplo.com">
-        </div>
-
-        <button class="btn">
-            Registrar Estudiante
-        </button>
-
-    </form>
-
-</div>
+    </footer>
 
 </body>
+
 </html>
