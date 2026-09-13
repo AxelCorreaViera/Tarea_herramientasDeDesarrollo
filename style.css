@@ -17,13 +17,13 @@ body {
     margin: auto;
 }
 
-/* HEADER */
+/* ==================== HEADER ==================== */
 
 .header {
     background: linear-gradient(135deg, #1f4e79, #286aa6);
     color: white;
-    padding: 18px 0;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+    padding: 20px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
 }
 
 .header-content {
@@ -33,7 +33,8 @@ body {
 }
 
 .logo h1 {
-    font-size: 22px;
+    font-size: 23px;
+    margin-bottom: 2px;
 }
 
 .logo p {
@@ -43,34 +44,39 @@ body {
 
 .nav {
     display: flex;
-    gap: 10px;
+    gap: 8px;
 }
 
 .nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    padding: 9px 16px;
-    border-radius: 6px;
-    transition: 0.3s;
+    padding: 10px 17px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
-.nav a:hover,
+.nav a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+}
+
 .nav a.active {
-    background-color: rgba(255, 255, 255, 0.18);
+    background-color: white;
+    color: #1f4e79;
 }
 
-/* HERO */
+/* ==================== HERO ==================== */
 
 .hero {
     background: linear-gradient(135deg, #eaf3fb, #ffffff);
-    padding: 80px 20px;
+    padding: 90px 20px;
 }
 
 .hero-content {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 50px;
+    gap: 55px;
     align-items: center;
 }
 
@@ -80,14 +86,14 @@ body {
     color: #1f4e79;
     font-size: 13px;
     font-weight: bold;
-    padding: 7px 14px;
+    padding: 8px 15px;
     border-radius: 20px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 .hero h2 {
     color: #1f4e79;
-    font-size: 42px;
+    font-size: 44px;
     line-height: 1.2;
     margin-bottom: 20px;
 }
@@ -96,52 +102,58 @@ body {
     font-size: 18px;
     color: #546e7a;
     max-width: 650px;
-    margin-bottom: 30px;
+    margin-bottom: 32px;
 }
 
-/* BOTONES */
+/* ==================== BOTONES ==================== */
 
 .btn {
     display: inline-block;
-    background-color: #1f4e79;
+    background: linear-gradient(135deg, #1f4e79, #286aa6);
     color: white;
-    padding: 13px 24px;
-    border-radius: 7px;
+    padding: 14px 26px;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    transition: 0.3s;
+    transition: all 0.3s ease;
     border: none;
     cursor: pointer;
+    box-shadow: 0 4px 10px rgba(31, 78, 121, 0.2);
 }
 
 .btn:hover {
-    background-color: #163a5c;
+    background: linear-gradient(135deg, #163a5c, #1f4e79);
     transform: translateY(-2px);
-    box-shadow: 0 5px 12px rgba(31, 78, 121, 0.3);
+    box-shadow: 0 7px 16px rgba(31, 78, 121, 0.25);
 }
 
-/* HERO CARD */
+/* ==================== HERO CARD ==================== */
 
 .hero-card {
     background-color: white;
-    padding: 35px;
-    border-radius: 15px;
+    padding: 38px;
+    border-radius: 18px;
     text-align: center;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     border: 1px solid #e5edf5;
+    transition: transform 0.3s ease;
+}
+
+.hero-card:hover {
+    transform: translateY(-5px);
 }
 
 .hero-card-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 15px;
-    background-color: #dbeaf7;
+    width: 75px;
+    height: 75px;
+    margin: 0 auto 18px;
+    background: linear-gradient(135deg, #dbeaf7, #c8e0f3);
     color: #1f4e79;
     border-radius: 50%;
-    font-size: 22px;
+    font-size: 23px;
     font-weight: bold;
 }
 
@@ -155,15 +167,15 @@ body {
     margin-bottom: 0;
 }
 
-/* OPCIONES */
+/* ==================== SECCIONES ==================== */
 
 .opciones {
-    padding: 70px 0;
+    padding: 80px 0;
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 45px;
 }
 
 .section-title span,
@@ -171,12 +183,12 @@ body {
     color: #2878b8;
     font-size: 13px;
     font-weight: bold;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
 
 .section-title h2 {
     color: #1f4e79;
-    font-size: 32px;
+    font-size: 34px;
     margin: 8px 0;
 }
 
@@ -184,7 +196,7 @@ body {
     color: #607d8b;
 }
 
-/* CARDS */
+/* ==================== CARDS ==================== */
 
 .cards {
     display: grid;
@@ -194,29 +206,30 @@ body {
 
 .card {
     background-color: white;
-    padding: 30px;
-    border-radius: 12px;
+    padding: 32px;
+    border-radius: 14px;
     border: 1px solid #e5edf5;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-    transition: 0.3s;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-7px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+    border-color: #c9ddec;
 }
 
 .card-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
-    background-color: #dbeaf7;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #dbeaf7, #c8e0f3);
     color: #1f4e79;
-    border-radius: 8px;
+    border-radius: 9px;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .card h3 {
@@ -227,25 +240,26 @@ body {
 
 .card p {
     color: #607d8b;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .card a {
     color: #1f4e79;
     font-weight: bold;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .card a:hover {
     color: #2878b8;
 }
 
-/* INFORMACIÓN */
+/* ==================== INFORMACIÓN ==================== */
 
 .info {
-    background-color: #1f4e79;
+    background: linear-gradient(135deg, #1f4e79, #286aa6);
     color: white;
-    padding: 55px 0;
+    padding: 65px 0;
 }
 
 .info-content {
@@ -256,7 +270,7 @@ body {
 }
 
 .info h2 {
-    font-size: 30px;
+    font-size: 31px;
     margin-top: 8px;
 }
 
@@ -265,13 +279,13 @@ body {
     font-size: 16px;
 }
 
-/* FOOTER */
+/* ==================== FOOTER ==================== */
 
 .footer {
     background-color: #163a5c;
     color: white;
     text-align: center;
-    padding: 22px;
+    padding: 25px;
 }
 
 .footer p {
@@ -284,25 +298,25 @@ body {
     font-size: 12px;
 }
 
-/* FORMULARIOS */
+/* ==================== FORMULARIOS ==================== */
 
 .pagina-formulario {
-    padding: 60px 0;
-    min-height: 600px;
+    padding: 70px 0;
+    min-height: 650px;
 }
 
 .formulario-card {
     background-color: white;
     max-width: 600px;
     margin: 0 auto;
-    padding: 35px;
-    border-radius: 12px;
+    padding: 40px;
+    border-radius: 16px;
     border: 1px solid #e5edf5;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
 }
 
 .campo {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .campo label {
@@ -315,11 +329,18 @@ body {
 .campo input,
 .campo select {
     width: 100%;
-    padding: 12px;
+    padding: 13px 14px;
     border: 1px solid #d1d5db;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 15px;
     background-color: white;
+    color: #263238;
+    transition: all 0.3s ease;
+}
+
+.campo input:hover,
+.campo select:hover {
+    border-color: #9bb8ce;
 }
 
 .campo input:focus,
@@ -329,36 +350,47 @@ body {
     box-shadow: 0 0 0 3px rgba(31, 78, 121, 0.1);
 }
 
+.campo input::placeholder {
+    color: #9aa5ad;
+}
+
 .formulario-card .btn {
     width: 100%;
+    margin-top: 5px;
 }
 
 .registro {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e5edf5;
 }
 
 .registro p {
     margin-bottom: 5px;
+    color: #607d8b;
 }
 
 .registro a {
-    color: #007bff;
+    color: #1f4e79;
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .registro a:hover {
+    color: #2878b8;
     text-decoration: underline;
 }
 
-/* RESPONSIVE */
+/* ==================== RESPONSIVE ==================== */
 
 @media (max-width: 768px) {
 
     .header-content {
         flex-direction: column;
         gap: 15px;
+        text-align: center;
     }
 
     .nav {
@@ -367,7 +399,7 @@ body {
     }
 
     .hero {
-        padding: 55px 20px;
+        padding: 60px 20px;
     }
 
     .hero-content {
@@ -376,7 +408,11 @@ body {
     }
 
     .hero h2 {
-        font-size: 32px;
+        font-size: 34px;
+    }
+
+    .hero p {
+        font-size: 16px;
     }
 
     .cards {
@@ -385,11 +421,38 @@ body {
 
     .info-content {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 25px;
     }
 
     .formulario-card {
-        padding: 25px;
+        padding: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .container {
+        width: 92%;
     }
 
+    .logo h1 {
+        font-size: 20px;
+    }
+
+    .nav a {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .hero h2 {
+        font-size: 29px;
+    }
+
+    .section-title h2 {
+        font-size: 28px;
+    }
+
+    .formulario-card {
+        padding: 22px;
+    }
 }
