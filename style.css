@@ -674,3 +674,33 @@ body {
         gap: 10px;
     }
 }
+/* ==============================
+   MENSAJES DE VALIDACIÓN
+   ============================== */
+
+.mensaje-formulario,
+.mensaje-aviso {
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.mensaje-error {
+    border: 1px solid #dc3545;
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+.mensaje-exito {
+    border: 1px solid #198754;
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.mensaje-aviso {
+    border: 1px solid #ffc107;
+    background-color: #fff3cd;
+    color: #664d03;
+}
