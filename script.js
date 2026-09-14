@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // *============================================================*
-    // *MENSAJE DE ACCESO AL REGISTRO DE ESTUDIANTES*
-    // *============================================================*
+    // ============================================================
+    // MENSAJE DE ACCESO AL REGISTRO DE ESTUDIANTES
+    // ============================================================
 
     const parametros = new URLSearchParams(window.location.search);
 
@@ -15,25 +15,93 @@ document.addEventListener("DOMContentLoaded", function () {
             "aviso",
             "mensaje-aviso"
         );
-
     }
 
 
-    // *============================================================*
-    // *REGISTRO DE ESTUDIANTES*
-    // *============================================================*
+    // ============================================================
+    // REGISTRO Y EDICIÓN DE ESTUDIANTES
+    // ============================================================
 
     const formularioEstudiante =
         document.getElementById("formularioEstudiante");
 
     if (formularioEstudiante) {
 
+        // ========================================================
+        // DETECTAR SI SE ESTÁ EDITANDO UN ESTUDIANTE
+        // ========================================================
+
+        const codigoEditar = parametros.get("editar");
+
+        if (codigoEditar) {
+
+            const estudiantes =
+                JSON.parse(localStorage.getItem("estudiantes")) || [];
+
+            const estudianteEditar =
+                estudiantes.find(function (estudiante) {
+
+                    return estudiante.codigo.toLowerCase() ===
+                        codigoEditar.toLowerCase();
+
+                });
+
+            if (estudianteEditar) {
+
+                document.getElementById("codigo").value =
+                    estudianteEditar.codigo;
+
+                document.getElementById("dni").value =
+                    estudianteEditar.dni;
+
+                document.getElementById("nombre").value =
+                    estudianteEditar.nombre;
+
+                document.getElementById("apellido").value =
+                    estudianteEditar.apellido;
+
+                document.getElementById("correo").value =
+                    estudianteEditar.correo;
+
+                document.getElementById("telefono").value =
+                    estudianteEditar.telefono;
+
+                document.getElementById("fechaNacimiento").value =
+                    estudianteEditar.fechaNacimiento;
+
+                document.getElementById("carrera").value =
+                    estudianteEditar.carrera;
+
+                document.getElementById("ciclo").value =
+                    estudianteEditar.ciclo;
+
+                document.getElementById("turno").value =
+                    estudianteEditar.turno;
+
+                document.getElementById("modalidad").value =
+                    estudianteEditar.modalidad;
+
+                mostrarMensaje(
+                    "Editando información del estudiante.",
+                    "aviso",
+                    "mensaje-aviso"
+                );
+            }
+        }
+
+
+        // ========================================================
+        // ENVIAR FORMULARIO
+        // ========================================================
+
         formularioEstudiante.addEventListener("submit", function (evento) {
 
             evento.preventDefault();
 
 
-            // *Obtener datos del formulario*
+            // ====================================================
+            // OBTENER DATOS DEL FORMULARIO
+            // ====================================================
 
             const codigo =
                 document.getElementById("codigo").value.trim();
@@ -59,9 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const carrera =
                 document.getElementById("carrera").value;
 
-            const curso =
-                document.getElementById("curso").value;
-
             const ciclo =
                 document.getElementById("ciclo").value;
 
@@ -72,9 +137,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("modalidad").value;
 
 
-            // *====================================================*
-            // *VALIDACIONES*
-            // *====================================================*
+            // ====================================================
+            // VALIDACIONES
+            // ====================================================
 
             if (
                 !codigo ||
@@ -85,7 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 !telefono ||
                 !fechaNacimiento ||
                 !carrera ||
-                !curso ||
                 !ciclo ||
                 !turno ||
                 !modalidad
@@ -98,21 +162,112 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
                 return;
-
             }
 
 
-            // *====================================================*
-            // *OBTENER ESTUDIANTES GUARDADOS*
-            // *====================================================*
+            // ====================================================
+            // OBTENER ESTUDIANTES GUARDADOS
+            // ====================================================
 
             const estudiantesGuardados =
                 JSON.parse(localStorage.getItem("estudiantes")) || [];
 
 
-            // *====================================================*
-            // *VALIDAR CÓDIGO DUPLICADO*
-            // *====================================================*
+            // ====================================================
+            // EDITAR ESTUDIANTE
+            // ====================================================
+
+            if (codigoEditar) {
+
+                const indiceEstudiante =
+                    estudiantesGuardados.findIndex(function (estudiante) {
+
+                        return estudiante.codigo.toLowerCase() ===
+                            codigoEditar.toLowerCase();
+
+                    });
+
+
+                if (indiceEstudiante === -1) {
+
+                    mostrarMensaje(
+                        "No se encontró el estudiante que deseas editar.",
+                        "error",
+                        "mensaje-formulario"
+                    );
+
+                    return;
+                }
+
+
+                // =================================================
+                // VALIDAR CÓDIGO DUPLICADO AL EDITAR
+                // =================================================
+
+                const codigoExiste =
+                    estudiantesGuardados.some(function (estudiante, indice) {
+
+                        return indice !== indiceEstudiante &&
+                            estudiante.codigo.toLowerCase() ===
+                            codigo.toLowerCase();
+
+                    });
+
+
+                if (codigoExiste) {
+
+                    mostrarMensaje(
+                        "Ya existe otro estudiante registrado con ese código.",
+                        "error",
+                        "mensaje-formulario"
+                    );
+
+                    return;
+                }
+
+
+                // =================================================
+                // ACTUALIZAR ESTUDIANTE
+                // =================================================
+
+                estudiantesGuardados[indiceEstudiante] = {
+
+                    codigo: codigo,
+                    dni: dni,
+                    nombre: nombre,
+                    apellido: apellido,
+                    correo: correo,
+                    telefono: telefono,
+                    fechaNacimiento: fechaNacimiento,
+                    carrera: carrera,
+                    ciclo: ciclo,
+                    turno: turno,
+                    modalidad: modalidad
+
+                };
+
+
+                // =================================================
+                // GUARDAR CAMBIOS
+                // =================================================
+
+                localStorage.setItem(
+                    "estudiantes",
+                    JSON.stringify(estudiantesGuardados)
+                );
+
+
+                alert("Estudiante actualizado correctamente.");
+
+                window.location.href = "estudiantes.html";
+
+                return;
+            }
+
+
+            // ====================================================
+            // VALIDAR CÓDIGO DUPLICADO AL REGISTRAR
+            // ====================================================
 
             const codigoExiste =
                 estudiantesGuardados.some(function (estudiante) {
@@ -132,13 +287,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
                 return;
-
             }
 
 
-            // *====================================================*
-            // *CREAR NUEVO ESTUDIANTE*
-            // *====================================================*
+            // ====================================================
+            // CREAR NUEVO ESTUDIANTE
+            // ====================================================
 
             const nuevoEstudiante = {
 
@@ -150,7 +304,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 telefono: telefono,
                 fechaNacimiento: fechaNacimiento,
                 carrera: carrera,
-                curso: curso,
                 ciclo: ciclo,
                 turno: turno,
                 modalidad: modalidad
@@ -158,9 +311,9 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
 
-            // *====================================================*
-            // *GUARDAR ESTUDIANTE*
-            // *====================================================*
+            // ====================================================
+            // GUARDAR ESTUDIANTE
+            // ====================================================
 
             estudiantesGuardados.push(nuevoEstudiante);
 
@@ -170,9 +323,9 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-            // *====================================================*
-            // *MOSTRAR MENSAJE DE ÉXITO*
-            // *====================================================*
+            // ====================================================
+            // MOSTRAR MENSAJE DE ÉXITO
+            // ====================================================
 
             mostrarMensaje(
                 "Estudiante registrado correctamente.",
@@ -181,18 +334,16 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-            // *Limpiar formulario*
-
+            // Limpiar formulario
             formularioEstudiante.reset();
 
         });
-
     }
 
 
-    // *============================================================*
-    // *MOSTRAR ESTUDIANTES EN LA PÁGINA DE GESTIÓN*
-    // *============================================================*
+    // ============================================================
+    // MOSTRAR ESTUDIANTES EN LA PÁGINA DE GESTIÓN
+    // ============================================================
 
     const estudiantesGrid =
         document.querySelector(".estudiantes-grid");
@@ -204,9 +355,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // *============================================================*
-    // *BOTÓN DE BÚSQUEDA*
-    // *============================================================*
+    // ============================================================
+    // BOTÓN DE BÚSQUEDA
+    // ============================================================
 
     const btnBuscar =
         document.getElementById("btnBuscar");
@@ -222,9 +373,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // *============================================================*
-    // *FUNCIÓN PARA MOSTRAR ESTUDIANTES*
-    // *============================================================*
+    // ============================================================
+    // FUNCIÓN PARA MOSTRAR ESTUDIANTES
+    // ============================================================
 
     function mostrarEstudiantes() {
 
@@ -243,7 +394,6 @@ document.addEventListener("DOMContentLoaded", function () {
             actualizarCantidad(0);
 
             return;
-
         }
 
 
@@ -252,70 +402,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         estudiantes.forEach(function (estudiante) {
 
-            const iniciales =
-                obtenerIniciales(
-                    estudiante.nombre,
-                    estudiante.apellido
-                );
-
-
-            const tarjeta =
-                document.createElement("div");
-
-            tarjeta.classList.add("estudiante-card");
-
-
-            tarjeta.innerHTML = `
-                <div class="estudiante-avatar">
-                    ${iniciales}
-                </div>
-
-                <div class="estudiante-info">
-
-                    <h4>
-                        ${estudiante.nombre}
-                        ${estudiante.apellido}
-                    </h4>
-
-                    <p>
-                        <strong>Código:</strong>
-                        ${estudiante.codigo}
-                    </p>
-
-                    <p>
-                        <strong>Carrera:</strong>
-                        ${convertirCarrera(estudiante.carrera)}
-                    </p>
-
-                    <p>
-                        <strong>Curso:</strong>
-                        ${convertirCurso(estudiante.curso)}
-                    </p>
-
-                    <p>
-                        <strong>Ciclo:</strong>
-                        ${estudiante.ciclo}
-                    </p>
-
-                    <p>
-                        <strong>Turno:</strong>
-                        ${convertirTurno(estudiante.turno)}
-                    </p>
-
-                    <p>
-                        <strong>Modalidad:</strong>
-                        ${convertirModalidad(estudiante.modalidad)}
-                    </p>
-
-                    <a href="#" class="btn">
-                        Ver información
-                    </a>
-
-                </div>
-            `;
-
-
-            estudiantesGrid.appendChild(tarjeta);
+            crearTarjetaEstudiante(estudiante);
 
         });
 
@@ -325,36 +412,245 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // *============================================================*
-    // *BUSCAR Y FILTRAR ESTUDIANTES*
-    // *============================================================*
+    // ============================================================
+    // CREAR TARJETA DE ESTUDIANTE
+    // ============================================================
 
-function buscarEstudiantes() {
+    function crearTarjetaEstudiante(estudiante) {
 
-    const codigoBusqueda =
-        document.getElementById("codigoBusqueda").value
-            .trim()
-            .toLowerCase();
+        const iniciales =
+            obtenerIniciales(
+                estudiante.nombre,
+                estudiante.apellido
+            );
 
-    const estudiantes =
-        JSON.parse(localStorage.getItem("estudiantes")) || [];
 
-    const resultados =
-        estudiantes.filter(function (estudiante) {
+        const tarjeta =
+            document.createElement("div");
 
-            return estudiante.codigo
-                .toLowerCase()
-                .includes(codigoBusqueda);
+        tarjeta.classList.add("estudiante-card");
+
+
+        tarjeta.innerHTML = `
+
+    <div class="estudiante-avatar">
+        ${iniciales}
+    </div>
+
+    <div class="estudiante-info">
+
+        <h4>
+            ${estudiante.nombre}
+            ${estudiante.apellido}
+        </h4>
+
+        <p>
+            <strong>Código:</strong>
+            ${estudiante.codigo}
+        </p>
+
+        <p>
+            <strong>Carrera:</strong>
+            ${convertirCarrera(estudiante.carrera)}
+        </p>
+
+        <div class="informacion-adicional" style="display: none;">
+
+            <p>
+                <strong>DNI:</strong>
+                ${estudiante.dni}
+            </p>
+
+            <p>
+                <strong>Correo:</strong>
+                ${estudiante.correo}
+            </p>
+
+            <p>
+                <strong>Teléfono:</strong>
+                ${estudiante.telefono}
+            </p>
+
+            <p>
+                <strong>Fecha de nacimiento:</strong>
+                ${estudiante.fechaNacimiento}
+            </p>
+
+            <p>
+                <strong>Ciclo:</strong>
+                ${estudiante.ciclo}
+            </p>
+
+            <p>
+                <strong>Turno:</strong>
+                ${convertirTurno(estudiante.turno)}
+            </p>
+
+            <p>
+                <strong>Modalidad:</strong>
+                ${convertirModalidad(estudiante.modalidad)}
+            </p>
+
+        </div>
+
+        <div class="acciones-estudiante">
+
+            <button type="button" class="btn btn-info">
+                Más información
+            </button>
+
+            <button type="button" class="btn btn-editar">
+                Editar
+            </button>
+
+            <button type="button" class="btn btn-eliminar">
+                Eliminar
+            </button>
+
+        </div>
+
+    </div>
+`;
+// ========================================================
+// BOTÓN MÁS INFORMACIÓN
+// ========================================================
+
+const btnInfo =
+    tarjeta.querySelector(".btn-info");
+
+const informacionAdicional =
+    tarjeta.querySelector(".informacion-adicional");
+
+btnInfo.addEventListener("click", function () {
+
+    if (informacionAdicional.style.display === "none") {
+
+        informacionAdicional.style.display = "block";
+
+        btnInfo.textContent = "Ocultar información";
+
+    } else {
+
+        informacionAdicional.style.display = "none";
+
+        btnInfo.textContent = "Más información";
+
+    }
+
+});
+
+        // ========================================================
+        // BOTÓN EDITAR
+        // ========================================================
+
+        const btnEditar =
+            tarjeta.querySelector(".btn-editar");
+
+        btnEditar.addEventListener("click", function () {
+
+            window.location.href =
+                "formulario.html?editar=" +
+                encodeURIComponent(estudiante.codigo);
 
         });
 
-    mostrarResultados(resultados);
-}
+
+        // ========================================================
+        // BOTÓN ELIMINAR
+        // ========================================================
+
+        const btnEliminar =
+            tarjeta.querySelector(".btn-eliminar");
+
+        btnEliminar.addEventListener("click", function () {
+
+            eliminarEstudiante(estudiante.codigo);
+
+        });
 
 
-    // *============================================================*
-    // *MOSTRAR RESULTADOS DE LA BÚSQUEDA*
-    // *============================================================*
+        estudiantesGrid.appendChild(tarjeta);
+
+    }
+
+
+    // ============================================================
+    // ELIMINAR ESTUDIANTE
+    // ============================================================
+
+    function eliminarEstudiante(codigo) {
+
+        const confirmar =
+            confirm(
+                "¿Estás seguro de que deseas eliminar a este estudiante?"
+            );
+
+
+        if (!confirmar) {
+
+            return;
+
+        }
+
+
+        const estudiantes =
+            JSON.parse(localStorage.getItem("estudiantes")) || [];
+
+
+        const estudiantesActualizados =
+            estudiantes.filter(function (estudiante) {
+
+                return estudiante.codigo.toLowerCase() !==
+                    codigo.toLowerCase();
+
+            });
+
+
+        localStorage.setItem(
+            "estudiantes",
+            JSON.stringify(estudiantesActualizados)
+        );
+
+
+        mostrarEstudiantes();
+
+    }
+
+
+    // ============================================================
+    // BUSCAR ESTUDIANTES POR CÓDIGO
+    // ============================================================
+
+    function buscarEstudiantes() {
+
+        const codigoBusqueda =
+            document.getElementById("codigoBusqueda").value
+                .trim()
+                .toLowerCase();
+
+
+        const estudiantes =
+            JSON.parse(localStorage.getItem("estudiantes")) || [];
+
+
+        const resultados =
+            estudiantes.filter(function (estudiante) {
+
+                return estudiante.codigo
+                    .toLowerCase()
+                    .includes(codigoBusqueda);
+
+            });
+
+
+        mostrarResultados(resultados);
+
+    }
+
+
+    // ============================================================
+    // MOSTRAR RESULTADOS DE LA BÚSQUEDA
+    // ============================================================
 
     function mostrarResultados(resultados) {
 
@@ -362,14 +658,13 @@ function buscarEstudiantes() {
 
             estudiantesGrid.innerHTML = `
                 <div class="mensaje-aviso">
-                    No se encontraron estudiantes con el codigo ingresado.
+                    No se encontró ningún estudiante con ese código.
                 </div>
             `;
 
             actualizarCantidad(0);
 
             return;
-
         }
 
 
@@ -378,70 +673,7 @@ function buscarEstudiantes() {
 
         resultados.forEach(function (estudiante) {
 
-            const iniciales =
-                obtenerIniciales(
-                    estudiante.nombre,
-                    estudiante.apellido
-                );
-
-
-            const tarjeta =
-                document.createElement("div");
-
-            tarjeta.classList.add("estudiante-card");
-
-
-            tarjeta.innerHTML = `
-                <div class="estudiante-avatar">
-                    ${iniciales}
-                </div>
-
-                <div class="estudiante-info">
-
-                    <h4>
-                        ${estudiante.nombre}
-                        ${estudiante.apellido}
-                    </h4>
-
-                    <p>
-                        <strong>Código:</strong>
-                        ${estudiante.codigo}
-                    </p>
-
-                    <p>
-                        <strong>Carrera:</strong>
-                        ${convertirCarrera(estudiante.carrera)}
-                    </p>
-
-                    <p>
-                        <strong>Curso:</strong>
-                        ${convertirCurso(estudiante.curso)}
-                    </p>
-
-                    <p>
-                        <strong>Ciclo:</strong>
-                        ${estudiante.ciclo}
-                    </p>
-
-                    <p>
-                        <strong>Turno:</strong>
-                        ${convertirTurno(estudiante.turno)}
-                    </p>
-
-                    <p>
-                        <strong>Modalidad:</strong>
-                        ${convertirModalidad(estudiante.modalidad)}
-                    </p>
-
-                    <a href="#" class="btn">
-                        Ver información
-                    </a>
-
-                </div>
-            `;
-
-
-            estudiantesGrid.appendChild(tarjeta);
+            crearTarjetaEstudiante(estudiante);
 
         });
 
@@ -451,9 +683,9 @@ function buscarEstudiantes() {
     }
 
 
-    // *============================================================*
-    // *ACTUALIZAR CANTIDAD DE ESTUDIANTES*
-    // *============================================================*
+    // ============================================================
+    // ACTUALIZAR CANTIDAD DE ESTUDIANTES
+    // ============================================================
 
     function actualizarCantidad(cantidad) {
 
@@ -479,9 +711,9 @@ function buscarEstudiantes() {
     }
 
 
-    // *============================================================*
-    // *OBTENER INICIALES*
-    // *============================================================*
+    // ============================================================
+    // OBTENER INICIALES
+    // ============================================================
 
     function obtenerIniciales(nombre, apellido) {
 
@@ -498,9 +730,9 @@ function buscarEstudiantes() {
     }
 
 
-    // *============================================================*
-    // *CONVERTIR CARRERA*
-    // *============================================================*
+    // ============================================================
+    // CONVERTIR CARRERA
+    // ============================================================
 
     function convertirCarrera(carrera) {
 
@@ -528,47 +760,16 @@ function buscarEstudiantes() {
 
     }
 
-
-    // *============================================================*
-    // *CONVERTIR CURSO*
-    // *============================================================*
-
-    function convertirCurso(curso) {
-
-        const cursos = {
-
-            "programacion-web":
-                "Programación Web",
-
-            "base-de-datos":
-                "Base de Datos",
-
-            "ingenieria-software":
-                "Ingeniería de Software",
-
-            "algoritmos":
-                "Algoritmos"
-
-        };
-
-
-        return cursos[curso] || curso;
-
-    }
-
-
-    // *============================================================*
-    // *CONVERTIR TURNO*
-    // *============================================================*
+    // ============================================================
+    // CONVERTIR TURNO
+    // ============================================================
 
     function convertirTurno(turno) {
 
         const turnos = {
 
             "manana": "Mañana",
-
             "tarde": "Tarde",
-
             "noche": "Noche"
 
         };
@@ -579,18 +780,16 @@ function buscarEstudiantes() {
     }
 
 
-    // *============================================================*
-    // *CONVERTIR MODALIDAD*
-    // *============================================================*
+    // ============================================================
+    // CONVERTIR MODALIDAD
+    // ============================================================
 
     function convertirModalidad(modalidad) {
 
         const modalidades = {
 
             "presencial": "Presencial",
-
             "virtual": "Virtual",
-
             "semipresencial": "Semipresencial"
 
         };
@@ -601,9 +800,9 @@ function buscarEstudiantes() {
     }
 
 
-    // *============================================================*
-    // *REGISTRO DE DOCENTE*
-    // *============================================================*
+    // ============================================================
+    // REGISTRO DE DOCENTE
+    // ============================================================
 
     const formularioDocente =
         document.getElementById("formularioDocente");
@@ -687,9 +886,9 @@ function buscarEstudiantes() {
     }
 
 
-    // *============================================================*
-    // *LOGIN DEL DOCENTE*
-    // *============================================================*
+    // ============================================================
+    // LOGIN DEL DOCENTE
+    // ============================================================
 
     const formularioLogin =
         document.getElementById("formularioLogin");
@@ -734,9 +933,9 @@ function buscarEstudiantes() {
     }
 
 
-    // *============================================================*
-    // *FUNCIÓN GENERAL PARA MOSTRAR MENSAJES*
-    // *============================================================*
+    // ============================================================
+    // FUNCIÓN GENERAL PARA MOSTRAR MENSAJES
+    // ============================================================
 
     function mostrarMensaje(texto, tipo, clase) {
 
