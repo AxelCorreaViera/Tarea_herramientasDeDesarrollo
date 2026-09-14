@@ -1,40 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    /*
-     * ==========================================================
-     * MENSAJE DE REGISTRO DESDE LA PÁGINA PRINCIPAL
-     * ==========================================================
-     */
+    // ============================================================
+    // MENSAJE DE ACCESO AL REGISTRO DE ESTUDIANTES
+    // ============================================================
 
     const parametros = new URLSearchParams(window.location.search);
     const accion = parametros.get("accion");
 
     if (accion === "registrar") {
-
-        const formularioLogin = document.getElementById("formularioLogin");
-
-        if (formularioLogin) {
-
-            const mensaje = document.createElement("div");
-
-            mensaje.className = "mensaje-aviso";
-
-            mensaje.textContent =
-                "Primero debes iniciar sesión como docente para registrar estudiantes.";
-
-            formularioLogin.parentNode.insertBefore(
-                mensaje,
-                formularioLogin
-            );
-        }
+        mostrarMensaje(
+            "Debes iniciar sesión como docente para registrar un estudiante.",
+            "aviso",
+            "mensaje-aviso"
+        );
     }
 
 
-    /*
-     * ==========================================================
-     * VALIDACIÓN DEL FORMULARIO DE ESTUDIANTES
-     * ==========================================================
-     */
+    // ============================================================
+    // REGISTRO DE ESTUDIANTES
+    // ============================================================
 
     const formularioEstudiante =
         document.getElementById("formularioEstudiante");
@@ -45,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             evento.preventDefault();
 
+            // Obtener datos del formulario
             const codigo =
                 document.getElementById("codigo").value.trim();
 
@@ -78,161 +63,335 @@ document.addEventListener("DOMContentLoaded", function () {
             const modalidad =
                 document.getElementById("modalidad").value;
 
-            const contrasena =
-                document.getElementById("contrasena").value;
 
-            const confirmarContrasena =
-                document.getElementById("confirmarContrasena").value;
-
-
-            /*
-             * Validación del DNI
-             */
-
-            if (!/^\d{8}$/.test(dni)) {
-
-                mostrarMensaje(
-                    formularioEstudiante,
-                    "El DNI debe contener exactamente 8 números.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            /*
-             * Validación del teléfono
-             */
-
-            if (!/^9\d{8}$/.test(telefono)) {
-
-                mostrarMensaje(
-                    formularioEstudiante,
-                    "El teléfono debe contener 9 números y comenzar con 9.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            /*
-             * Validación del código
-             */
-
-            if (codigo.length < 4) {
-
-                mostrarMensaje(
-                    formularioEstudiante,
-                    "Ingrese un código de estudiante válido.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            /*
-             * Validación del nombre y apellido
-             */
-
-            if (nombre.length < 2) {
-
-                mostrarMensaje(
-                    formularioEstudiante,
-                    "Ingrese un nombre válido.",
-                    "error"
-                );
-
-                return;
-            }
-
-            if (apellido.length < 2) {
-
-                mostrarMensaje(
-                    formularioEstudiante,
-                    "Ingrese un apellido válido.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            /*
-             * Validación de la contraseña
-             */
-
-            if (contrasena.length < 8) {
-
-                mostrarMensaje(
-                    formularioEstudiante,
-                    "La contraseña debe tener al menos 8 caracteres.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            /*
-             * Confirmación de contraseña
-             */
-
-            if (contrasena !== confirmarContrasena) {
-
-                mostrarMensaje(
-                    formularioEstudiante,
-                    "Las contraseñas no coinciden.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            /*
-             * Validación de los campos académicos
-             */
+            // ====================================================
+            // VALIDACIONES
+            // ====================================================
 
             if (
-                carrera === "" ||
-                ciclo === "" ||
-                turno === "" ||
-                modalidad === "" ||
-                fechaNacimiento === ""
+                !codigo ||
+                !dni ||
+                !nombre ||
+                !apellido ||
+                !correo ||
+                !telefono ||
+                !fechaNacimiento ||
+                !carrera ||
+                !ciclo ||
+                !turno ||
+                !modalidad
             ) {
-
                 mostrarMensaje(
-                    formularioEstudiante,
-                    "Complete todos los datos personales y académicos.",
-                    "error"
+                    "Por favor, completa todos los campos del formulario.",
+                    "error",
+                    "mensaje-formulario"
                 );
 
                 return;
             }
 
 
-            /*
-             * Si todas las validaciones son correctas
-             */
+            // ====================================================
+            // OBTENER ESTUDIANTES GUARDADOS
+            // ====================================================
+
+            const estudiantesGuardados =
+                JSON.parse(localStorage.getItem("estudiantes")) || [];
+
+
+            // ====================================================
+            // VALIDAR CÓDIGO DUPLICADO
+            // ====================================================
+
+            const codigoExiste =
+                estudiantesGuardados.some(function (estudiante) {
+
+                    return estudiante.codigo.toLowerCase() ===
+                        codigo.toLowerCase();
+
+                });
+
+
+            if (codigoExiste) {
+
+                mostrarMensaje(
+                    "Ya existe un estudiante registrado con ese código.",
+                    "error",
+                    "mensaje-formulario"
+                );
+
+                return;
+            }
+
+
+            // ====================================================
+            // CREAR NUEVO ESTUDIANTE
+            // ====================================================
+
+            const nuevoEstudiante = {
+
+                codigo: codigo,
+                dni: dni,
+                nombre: nombre,
+                apellido: apellido,
+                correo: correo,
+                telefono: telefono,
+                fechaNacimiento: fechaNacimiento,
+                carrera: carrera,
+                ciclo: ciclo,
+                turno: turno,
+                modalidad: modalidad
+
+            };
+
+
+            // ====================================================
+            // GUARDAR ESTUDIANTE
+            // ====================================================
+
+            estudiantesGuardados.push(nuevoEstudiante);
+
+            localStorage.setItem(
+                "estudiantes",
+                JSON.stringify(estudiantesGuardados)
+            );
+
+
+            // ====================================================
+            // MOSTRAR MENSAJE DE ÉXITO
+            // ====================================================
 
             mostrarMensaje(
-                formularioEstudiante,
-                "Formulario de estudiante validado correctamente.",
-                "exito"
+                "Estudiante registrado correctamente.",
+                "exito",
+                "mensaje-formulario"
             );
+
+
+            // Limpiar formulario
+            formularioEstudiante.reset();
 
         });
     }
 
 
-    /*
-     * ==========================================================
-     * VALIDACIÓN DEL REGISTRO DE DOCENTE
-     * ==========================================================
-     */
+    // ============================================================
+    // MOSTRAR ESTUDIANTES EN LA PÁGINA DE GESTIÓN
+    // ============================================================
+
+    const estudiantesGrid =
+        document.querySelector(".estudiantes-grid");
+
+    if (estudiantesGrid) {
+        mostrarEstudiantes();
+    }
+
+
+    // ============================================================
+    // FUNCIÓN PARA MOSTRAR ESTUDIANTES
+    // ============================================================
+
+    function mostrarEstudiantes() {
+
+        const estudiantes =
+            JSON.parse(localStorage.getItem("estudiantes")) || [];
+
+
+        if (estudiantes.length === 0) {
+
+            estudiantesGrid.innerHTML = `
+                <div class="mensaje-aviso">
+                    No hay estudiantes registrados actualmente.
+                </div>
+            `;
+
+            actualizarCantidad(0);
+
+            return;
+        }
+
+
+        estudiantesGrid.innerHTML = "";
+
+
+        estudiantes.forEach(function (estudiante) {
+
+            const iniciales =
+                obtenerIniciales(
+                    estudiante.nombre,
+                    estudiante.apellido
+                );
+
+
+            const tarjeta = document.createElement("div");
+
+            tarjeta.classList.add("estudiante-card");
+
+
+            tarjeta.innerHTML = `
+                <div class="estudiante-avatar">
+                    ${iniciales}
+                </div>
+
+                <div class="estudiante-info">
+
+                    <h4>
+                        ${estudiante.nombre}
+                        ${estudiante.apellido}
+                    </h4>
+
+                    <p>
+                        <strong>Código:</strong>
+                        ${estudiante.codigo}
+                    </p>
+
+                    <p>
+                        <strong>Carrera:</strong>
+                        ${convertirCarrera(estudiante.carrera)}
+                    </p>
+
+                    <p>
+                        <strong>Ciclo:</strong>
+                        ${estudiante.ciclo}
+                    </p>
+
+                    <p>
+                        <strong>Turno:</strong>
+                        ${convertirTurno(estudiante.turno)}
+                    </p>
+
+                    <p>
+                        <strong>Modalidad:</strong>
+                        ${convertirModalidad(estudiante.modalidad)}
+                    </p>
+
+                    <a href="#" class="btn">
+                        Ver información
+                    </a>
+
+                </div>
+            `;
+
+
+            estudiantesGrid.appendChild(tarjeta);
+
+        });
+
+
+        actualizarCantidad(estudiantes.length);
+    }
+
+
+    // ============================================================
+    // ACTUALIZAR CANTIDAD DE ESTUDIANTES
+    // ============================================================
+
+    function actualizarCantidad(cantidad) {
+
+        const cantidadElemento =
+            document.querySelector(".cantidad");
+
+        if (!cantidadElemento) {
+            return;
+        }
+
+
+        cantidadElemento.textContent =
+            cantidad +
+            (
+                cantidad === 1
+                    ? " estudiante encontrado"
+                    : " estudiantes encontrados"
+            );
+    }
+
+
+    // ============================================================
+    // OBTENER INICIALES
+    // ============================================================
+
+    function obtenerIniciales(nombre, apellido) {
+
+        const inicialNombre =
+            nombre.charAt(0).toUpperCase();
+
+        const inicialApellido =
+            apellido.charAt(0).toUpperCase();
+
+        return inicialNombre + inicialApellido;
+    }
+
+
+    // ============================================================
+    // CONVERTIR CARRERA
+    // ============================================================
+
+    function convertirCarrera(carrera) {
+
+        const carreras = {
+
+            "ingenieria-sistemas":
+                "Ingeniería de Sistemas",
+
+            "ingenieria-industrial":
+                "Ingeniería Industrial",
+
+            "administracion":
+                "Administración",
+
+            "contabilidad":
+                "Contabilidad",
+
+            "derecho":
+                "Derecho"
+        };
+
+
+        return carreras[carrera] || carrera;
+    }
+
+
+    // ============================================================
+    // CONVERTIR TURNO
+    // ============================================================
+
+    function convertirTurno(turno) {
+
+        const turnos = {
+
+            "manana": "Mañana",
+            "tarde": "Tarde",
+            "noche": "Noche"
+
+        };
+
+
+        return turnos[turno] || turno;
+    }
+
+
+    // ============================================================
+    // CONVERTIR MODALIDAD
+    // ============================================================
+
+    function convertirModalidad(modalidad) {
+
+        const modalidades = {
+
+            "presencial": "Presencial",
+            "virtual": "Virtual",
+            "semipresencial": "Semipresencial"
+
+        };
+
+
+        return modalidades[modalidad] || modalidad;
+    }
+
+
+    // ============================================================
+    // REGISTRO DE DOCENTE
+    // ============================================================
 
     const formularioDocente =
         document.getElementById("formularioDocente");
@@ -242,6 +401,7 @@ document.addEventListener("DOMContentLoaded", function () {
         formularioDocente.addEventListener("submit", function (evento) {
 
             evento.preventDefault();
+
 
             const nombre =
                 document.getElementById("nombre").value.trim();
@@ -262,48 +422,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("confirmarContrasena").value;
 
 
-            if (nombre.length < 2) {
+            if (
+                !nombre ||
+                !apellido ||
+                !correo ||
+                !telefono ||
+                !contrasena ||
+                !confirmarContrasena
+            ) {
 
                 mostrarMensaje(
-                    formularioDocente,
-                    "Ingrese un nombre válido.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            if (apellido.length < 2) {
-
-                mostrarMensaje(
-                    formularioDocente,
-                    "Ingrese un apellido válido.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            if (!/^\d{9}$/.test(telefono)) {
-
-                mostrarMensaje(
-                    formularioDocente,
-                    "El teléfono debe contener exactamente 9 números.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            if (contrasena.length < 8) {
-
-                mostrarMensaje(
-                    formularioDocente,
-                    "La contraseña debe tener al menos 8 caracteres.",
-                    "error"
+                    "Por favor, completa todos los campos.",
+                    "error",
+                    "mensaje-formulario"
                 );
 
                 return;
@@ -313,9 +444,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (contrasena !== confirmarContrasena) {
 
                 mostrarMensaje(
-                    formularioDocente,
                     "Las contraseñas no coinciden.",
-                    "error"
+                    "error",
+                    "mensaje-formulario"
                 );
 
                 return;
@@ -323,20 +454,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             mostrarMensaje(
-                formularioDocente,
-                "Registro de docente validado correctamente.",
-                "exito"
+                "Docente registrado correctamente.",
+                "exito",
+                "mensaje-formulario"
             );
+
+
+            formularioDocente.reset();
 
         });
     }
 
 
-    /*
-     * ==========================================================
-     * VALIDACIÓN DEL INICIO DE SESIÓN
-     * ==========================================================
-     */
+    // ============================================================
+    // LOGIN DEL DOCENTE
+    // ============================================================
 
     const formularioLogin =
         document.getElementById("formularioLogin");
@@ -347,6 +479,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             evento.preventDefault();
 
+
             const correo =
                 document.getElementById("correo").value.trim();
 
@@ -354,24 +487,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("contrasena").value;
 
 
-            if (correo === "" || contrasena === "") {
+            if (!correo || !contrasena) {
 
                 mostrarMensaje(
-                    formularioLogin,
-                    "Ingrese su correo y contraseña.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            if (contrasena.length < 8) {
-
-                mostrarMensaje(
-                    formularioLogin,
-                    "La contraseña debe tener al menos 8 caracteres.",
-                    "error"
+                    "Ingresa tu correo y contraseña.",
+                    "error",
+                    "mensaje-formulario"
                 );
 
                 return;
@@ -379,25 +500,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             mostrarMensaje(
-                formularioLogin,
-                "Datos de acceso validados correctamente.",
-                "exito"
+                "Inicio de sesión correcto.",
+                "exito",
+                "mensaje-formulario"
             );
 
         });
     }
 
 
-    /*
-     * ==========================================================
-     * FUNCIÓN PARA MOSTRAR MENSAJES
-     * ==========================================================
-     */
+    // ============================================================
+    // FUNCIÓN GENERAL PARA MOSTRAR MENSAJES
+    // ============================================================
 
-    function mostrarMensaje(formulario, texto, tipo) {
+    function mostrarMensaje(texto, tipo, clase) {
 
         const mensajeAnterior =
-            formulario.parentNode.querySelector(".mensaje-formulario");
+            document.querySelector(
+                ".mensaje-formulario, .mensaje-aviso"
+            );
+
 
         if (mensajeAnterior) {
             mensajeAnterior.remove();
@@ -407,19 +529,38 @@ document.addEventListener("DOMContentLoaded", function () {
         const mensaje =
             document.createElement("div");
 
-        mensaje.className =
-            "mensaje-formulario " +
-            (tipo === "exito"
-                ? "mensaje-exito"
-                : "mensaje-error");
+
+        mensaje.classList.add(clase);
+
+
+        if (tipo === "error") {
+            mensaje.classList.add("mensaje-error");
+        }
+
+        if (tipo === "exito") {
+            mensaje.classList.add("mensaje-exito");
+        }
+
+
+        if (tipo === "aviso") {
+            mensaje.classList.add("mensaje-aviso");
+        }
+
 
         mensaje.textContent = texto;
 
 
-        formulario.parentNode.insertBefore(
-            mensaje,
-            formulario
-        );
+        const formulario =
+            document.querySelector("form");
+
+
+        if (formulario) {
+            formulario.parentNode.insertBefore(
+                mensaje,
+                formulario
+            );
+        }
+
     }
 
 });

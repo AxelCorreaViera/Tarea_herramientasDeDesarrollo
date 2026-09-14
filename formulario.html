@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="campo">
-                        <label for="codigo">Código de estudiante</label>
+                        <label for="codigo">Código</label>
 
                         <input type="text" id="codigo" name="codigo" placeholder="Ejemplo: EST2026001"
                             autocomplete="off" required>
@@ -66,21 +66,21 @@
                     <div class="campo">
                         <label for="dni">DNI</label>
 
-                        <input type="text" id="dni" name="dni" placeholder="Ingrese su DNI" maxlength="8"
+                        <input type="text" id="dni" name="dni" placeholder="Ingrese DNI del estudiante" maxlength="8"
                             autocomplete="off" required>
                     </div>
 
                     <div class="campo">
                         <label for="nombre">Nombre</label>
 
-                        <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre"
+                        <input type="text" id="nombre" name="nombre" placeholder="Ingrese nombre del estudiante"
                             autocomplete="given-name" required>
                     </div>
 
                     <div class="campo">
                         <label for="apellido">Apellido</label>
 
-                        <input type="text" id="apellido" name="apellido" placeholder="Ingrese su apellido"
+                        <input type="text" id="apellido" name="apellido" placeholder="Ingrese apellido del estudiante"
                             autocomplete="family-name" required>
                     </div>
 
@@ -143,11 +143,11 @@
                     </div>
 
                     <div class="campo">
-                        <label for="ciclo">Ciclo académico</label>
+                        <label for="ciclo">Ciclo</label>
 
                         <select id="ciclo" name="ciclo" required>
                             <option value="">
-                                Seleccione su ciclo
+                                Seleccione ciclo del estudiante
                             </option>
 
                             <option value="1">I ciclo</option>
@@ -164,11 +164,11 @@
                     </div>
 
                     <div class="campo">
-                        <label for="turno">Turno</label>
+                        <label for="turno">Turno de estudio</label>
 
                         <select id="turno" name="turno" required>
                             <option value="">
-                                Seleccione un turno
+                                Seleccione turno del estudiante
                             </option>
 
                             <option value="manana">Mañana</option>
@@ -182,35 +182,13 @@
 
                         <select id="modalidad" name="modalidad" required>
                             <option value="">
-                                Seleccione una modalidad
+                                Seleccione modalidad del estudiante
                             </option>
 
                             <option value="presencial">Presencial</option>
                             <option value="virtual">Virtual</option>
                             <option value="semipresencial">Semipresencial</option>
                         </select>
-                    </div>
-
-                    <!-- DATOS DE ACCESO -->
-
-                    <div class="section-label">
-                        DATOS DE ACCESO
-                    </div>
-
-                    <div class="campo">
-                        <label for="contrasena">Contraseña</label>
-
-                        <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese una contraseña"
-                            autocomplete="new-password" minlength="8" required>
-                    </div>
-
-                    <div class="campo">
-                        <label for="confirmarContrasena">
-                            Confirmar contraseña
-                        </label>
-
-                        <input type="password" id="confirmarContrasena" name="confirmarContrasena"
-                            placeholder="Repita su contraseña" autocomplete="new-password" minlength="8" required>
                     </div>
 
                     <button type="submit" class="btn">
