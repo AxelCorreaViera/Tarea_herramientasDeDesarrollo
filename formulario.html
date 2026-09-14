@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,117 +11,117 @@
 
 <div class="container">
 
-    <h2 class="pad">Registro de Estudiantes</h2>
+    <div class="formulario-card">
 
-    <form class="pad">
+        <h2>Registro de Estudiantes</h2>
 
-        <div class="campo">
-            <label for="nombre">Nombre</label>
-            <input 
-                type="text" 
-                id="nombre" 
-                name="nombre"
-                placeholder="Ingrese su nombre"
-                autocomplete="given-name"
-                required>
-        </div>
+        <form>
 
-        <div class="campo">
-            <label for="apellido">Apellido</label>
-            <input 
-                type="text" 
-                id="apellido" 
-                name="apellido"
-                placeholder="Ingrese su apellido"
-                autocomplete="family-name"
-                required>
-        </div>
+            <div class="campo">
+                <label for="nombre">Nombre</label>
+                <input 
+                    type="text" 
+                    id="nombre" 
+                    name="nombre"
+                    placeholder="Ingrese su nombre"
+                    autocomplete="given-name"
+                    required>
+            </div>
 
-        <div class="campo">
-            <label for="correo">Correo electrónico</label>
-            <input 
-                type="email" 
-                id="correo" 
-                name="correo"
-                placeholder="correo@ejemplo.com"
-                autocomplete="email"
-                required>
-        </div>
+            <div class="campo">
+                <label for="apellido">Apellido</label>
+                <input 
+                    type="text" 
+                    id="apellido" 
+                    name="apellido"
+                    placeholder="Ingrese su apellido"
+                    autocomplete="family-name"
+                    required>
+            </div>
 
-        <div class="campo">
-            <label for="telefono">Teléfono</label>
-            <input 
-                type="tel" 
-                id="telefono" 
-                name="telefono"
-                placeholder="987 654 321"
-                autocomplete="tel"
-                pattern="[0-9]{9}"
-                maxlength="9"
-                required>
-        </div>
+            <div class="campo">
+                <label for="correo">Correo electrónico</label>
+                <input 
+                    type="email" 
+                    id="correo" 
+                    name="correo"
+                    placeholder="correo@ejemplo.com"
+                    autocomplete="email"
+                    required>
+            </div>
 
-        <div class="campo">
-            <label for="fechaNacimiento">Fecha de nacimiento</label>
-            <input 
-                type="date" 
-                id="fechaNacimiento" 
-                name="fechaNacimiento"
-                required>
-        </div>
+            <div class="campo">
+                <label for="telefono">Teléfono</label>
+                <input 
+                    type="tel" 
+                    id="telefono" 
+                    name="telefono"
+                    placeholder="987654321"
+                    autocomplete="tel"
+                    pattern="[0-9]{9}"
+                    maxlength="9"
+                    required>
+            </div>
 
-        <div class="campo">
-            <label for="carrera">Carrera</label>
-            <select id="carrera" name="carrera" required>
-                <option value="">Seleccione una carrera</option>
-                <option value="ingenieria-sistemas">Ingeniería de Sistemas</option>
-                <option value="ingenieria-industrial">Ingeniería Industrial</option>
-                <option value="administracion">Administración</option>
-                <option value="contabilidad">Contabilidad</option>
-                <option value="derecho">Derecho</option>
-            </select>
-        </div>
+            <div class="campo">
+                <label for="fechaNacimiento">Fecha de nacimiento</label>
+                <input 
+                    type="date" 
+                    id="fechaNacimiento" 
+                    name="fechaNacimiento"
+                    required>
+            </div>
 
-        <div class="campo">
-            <label for="contrasena">Contraseña</label>
-            <input 
-                type="password" 
-                id="contrasena" 
-                name="contrasena"
-                placeholder="Ingrese una contraseña"
-                autocomplete="new-password"
-                minlength="8"
-                required>
-        </div>
+            <div class="campo">
+                <label for="carrera">Carrera</label>
+                <select id="carrera" name="carrera" required>
+                    <option value="">Seleccione una carrera</option>
+                    <option value="ingenieria-sistemas">Ingeniería de Sistemas</option>
+                    <option value="ingenieria-industrial">Ingeniería Industrial</option>
+                    <option value="administracion">Administración</option>
+                    <option value="contabilidad">Contabilidad</option>
+                    <option value="derecho">Derecho</option>
+                </select>
+            </div>
 
-        <div class="campo">
-            <label for="confirmarContrasena">Confirmar contraseña</label>
-            <input 
-                type="password" 
-                id="confirmarContrasena" 
-                name="confirmarContrasena"
-                placeholder="Repita su contraseña"
-                autocomplete="new-password"
-                minlength="8"
-                required>
-        </div>
+            <div class="campo">
+                <label for="contrasena">Contraseña</label>
+                <input 
+                    type="password" 
+                    id="contrasena" 
+                    name="contrasena"
+                    placeholder="Ingrese una contraseña"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required>
+            </div>
 
-        <button type="submit" class="btn">
-            Registrar Estudiante
-        </button>
+            <div class="campo">
+                <label for="confirmarContrasena">Confirmar contraseña</label>
+                <input 
+                    type="password" 
+                    id="confirmarContrasena" 
+                    name="confirmarContrasena"
+                    placeholder="Repita su contraseña"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required>
+            </div>
 
-    
-<div class="registro">
-    <p>¿Ya tienes una cuenta?</p>
-    <a href="login.html">Inicia sesión aquí</a>
-</div>
+            <button type="submit" class="btn">
+                Registrar Estudiante
+            </button>
 
+            <div class="registro">
+                <p>¿Ya tienes una cuenta?</p>
+                <a href="login.html">Inicia sesión aquí</a>
+            </div>
 
+        </form>
 
-    </form>
+    </div>
 
 </div>
 
 </body>
 </html>
-```

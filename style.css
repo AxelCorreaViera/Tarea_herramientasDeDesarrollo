@@ -188,28 +188,106 @@ body {
     border-color: #1f4e79;
 }
 
-.formulario-card .btn {
+.formulario-card {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 35px 40px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.10);
+}
+
+.formulario-card h2 {
+    text-align: center;
+    color: #1f4e79;
+    margin-bottom: 30px;
+}
+
+/* FORMULARIO */
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 25px;
+}
+
+.campo {
+    margin-bottom: 0;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #1f4e79;
+}
+
+.campo input,
+.campo select {
     width: 100%;
+    height: 45px;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo input:focus,
+.campo select:focus {
+    outline: none;
+    border-color: #1f4e79;
+    box-shadow: 0 0 0 3px rgba(31, 78, 121, 0.12);
+}
+
+.campo input::placeholder {
+    color: #9ca3af;
+}
+
+/* BOTÓN */
+
+.formulario-card .btn {
+    grid-column: 1 / -1;
+    width: 100%;
+    height: 46px;
+    margin-top: 10px;
     border: none;
     cursor: pointer;
+    background-color: #1f4e79;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: background-color 0.2s, transform 0.1s;
 }
 
-.pad{
-    padding: 20px 0px 0px 0px;
+.formulario-card .btn:hover {
+    background-color: #163a5c;
 }
 
+.formulario-card .btn:active {
+    transform: scale(0.99);
+}
+
+/* REGISTRO / LOGIN */
 
 .registro {
+    grid-column: 1 / -1;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 5px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
 }
 
 .registro p {
-    margin-bottom: 5px;
+    display: inline;
+    margin-right: 5px;
+    color: #666;
 }
 
 .registro a {
-    color: #007bff;
+    color: #1f4e79;
     text-decoration: none;
     font-weight: bold;
 }
@@ -217,3 +295,34 @@ body {
 .registro a:hover {
     text-decoration: underline;
 }
+
+/* ESPACIADO */
+
+.pad {
+    padding: 20px 0 0 0;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    .formulario-card .btn,
+    .registro {
+        grid-column: auto;
+    }
+
+    .formulario-card {
+        padding: 30px 20px;
+        margin: 25px auto;
+    }
+
+    .registro p {
+        display: block;
+        margin-bottom: 5px;
+    }
+}
+
