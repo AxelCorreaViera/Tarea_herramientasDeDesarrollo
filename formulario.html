@@ -4,58 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Estudiantes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+</head>
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <div class="formulario-card">
+<div class="formulario-card">
 
-        <h2>Registro de Estudiantes</h2>
+    <h2 class="text-center mb-4">Registro de Estudiantes</h2>
 
-        <form>
+    <form>
 
-            <div class="campo">
-                <label for="nombre">Nombre</label>
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
                 <input 
                     type="text" 
                     id="nombre" 
                     name="nombre"
+                    class="form-control"
                     placeholder="Ingrese su nombre"
                     autocomplete="given-name"
                     required>
             </div>
 
-            <div class="campo">
-                <label for="apellido">Apellido</label>
+            <div class="col-md-6 mb-3">
+                <label for="apellido" class="form-label">Apellido</label>
                 <input 
                     type="text" 
                     id="apellido" 
                     name="apellido"
+                    class="form-control"
                     placeholder="Ingrese su apellido"
                     autocomplete="family-name"
                     required>
             </div>
 
-            <div class="campo">
-                <label for="correo">Correo electrónico</label>
+            <div class="col-md-6 mb-3">
+                <label for="correo" class="form-label">Correo electrónico</label>
                 <input 
                     type="email" 
                     id="correo" 
                     name="correo"
+                    class="form-control"
                     placeholder="correo@ejemplo.com"
                     autocomplete="email"
                     required>
             </div>
 
-            <div class="campo">
-                <label for="telefono">Teléfono</label>
+            <div class="col-md-6 mb-3">
+                <label for="telefono" class="form-label">Teléfono</label>
                 <input 
                     type="tel" 
                     id="telefono" 
                     name="telefono"
+                    class="form-control"
                     placeholder="987654321"
                     autocomplete="tel"
                     pattern="[0-9]{9}"
@@ -63,65 +72,100 @@
                     required>
             </div>
 
-            <div class="campo">
-                <label for="fechaNacimiento">Fecha de nacimiento</label>
+            <div class="col-md-6 mb-3">
+                <label for="fechaNacimiento" class="form-label">
+                    Fecha de nacimiento
+                </label>
+
                 <input 
                     type="date" 
                     id="fechaNacimiento" 
                     name="fechaNacimiento"
+                    class="form-control"
                     required>
             </div>
 
-            <div class="campo">
-                <label for="carrera">Carrera</label>
-                <select id="carrera" name="carrera" required>
+            <div class="col-md-6 mb-3">
+                <label for="carrera" class="form-label">Carrera</label>
+
+                <select 
+                    id="carrera" 
+                    name="carrera" 
+                    class="form-select"
+                    required>
+
                     <option value="">Seleccione una carrera</option>
-                    <option value="ingenieria-sistemas">Ingeniería de Sistemas</option>
-                    <option value="ingenieria-industrial">Ingeniería Industrial</option>
-                    <option value="administracion">Administración</option>
-                    <option value="contabilidad">Contabilidad</option>
-                    <option value="derecho">Derecho</option>
+                    <option value="ingenieria-sistemas">
+                        Ingeniería de Sistemas
+                    </option>
+                    <option value="ingenieria-industrial">
+                        Ingeniería Industrial
+                    </option>
+                    <option value="administracion">
+                        Administración
+                    </option>
+                    <option value="contabilidad">
+                        Contabilidad
+                    </option>
+                    <option value="derecho">
+                        Derecho
+                    </option>
+
                 </select>
             </div>
 
-            <div class="campo">
-                <label for="contrasena">Contraseña</label>
+            <div class="col-md-6 mb-3">
+                <label for="contrasena" class="form-label">
+                    Contraseña
+                </label>
+
                 <input 
                     type="password" 
                     id="contrasena" 
                     name="contrasena"
+                    class="form-control"
                     placeholder="Ingrese una contraseña"
                     autocomplete="new-password"
                     minlength="8"
                     required>
             </div>
 
-            <div class="campo">
-                <label for="confirmarContrasena">Confirmar contraseña</label>
+            <div class="col-md-6 mb-3">
+                <label for="confirmarContrasena" class="form-label">
+                    Confirmar contraseña
+                </label>
+
                 <input 
                     type="password" 
                     id="confirmarContrasena" 
                     name="confirmarContrasena"
+                    class="form-control"
                     placeholder="Repita su contraseña"
                     autocomplete="new-password"
                     minlength="8"
                     required>
             </div>
 
-            <button type="submit" class="btn">
-                Registrar Estudiante
-            </button>
+        </div>
 
-            <div class="registro">
-                <p>¿Ya tienes una cuenta?</p>
-                <a href="login.html">Inicia sesión aquí</a>
-            </div>
+        <button type="submit" class="btn w-100 mt-2">
+            Registrar Estudiante
+        </button>
 
-        </form>
+        <div class="registro text-center mt-4">
+            <p>¿Ya tienes una cuenta?</p>
+            <a href="login.html">Inicia sesión aquí</a>
+        </div>
 
-    </div>
+    </form>
 
 </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrW/1p9Y8tP7E2e7G1vL7dQ8l" crossorigin="anonymous"></script>
+
+</body>
 
 </body>
 </html>

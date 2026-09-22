@@ -205,11 +205,6 @@ body {
 
 /* FORMULARIO */
 
-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px 25px;
-}
 
 .campo {
     margin-bottom: 0;
