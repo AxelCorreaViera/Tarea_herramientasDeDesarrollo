@@ -140,6 +140,16 @@ body {
     margin-top: 30px;
 }
 
+.bold{
+    font-weight: bold;
+
+}
+
+.resalto{
+    font-weight: bold;
+    color:#0c2842
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 768px) {
