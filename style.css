@@ -130,6 +130,14 @@ body {
     text-decoration: underline;
 }
 
+.hero-image {
+    width: 80%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
 /* FOOTER */
 
 .footer {
