@@ -78,7 +78,12 @@
                             Dato a buscar
                         </label>
 
-                        <input type="text" id="codigoBusqueda" placeholder="Ingresa el dato a buscar">
+                        <input type="search" id="codigoBusqueda" name="busqueda"
+                            placeholder="Ej.: nombre, código, DNI o correo" aria-describedby="ayudaBusqueda"
+                            autocomplete="off">
+                        <p id="ayudaBusqueda" class="texto-ayuda">
+                            Los resultados se actualizan mientras escribes.
+                        </p>
                     </div>
 
                 </div>
