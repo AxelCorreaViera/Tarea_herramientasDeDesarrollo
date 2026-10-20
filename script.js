@@ -72,8 +72,8 @@ document.addEventListener("DOMContentLoaded", function () {
         mensaje.classList.add(claseBase || "mensaje-formulario");
         mensaje.classList.add(
             tipo === "error" ? "mensaje-error" :
-            tipo === "exito" ? "mensaje-exito" :
-            "mensaje-aviso"
+                tipo === "exito" ? "mensaje-exito" :
+                    "mensaje-aviso"
         );
         mensaje.setAttribute("role", tipo === "error" ? "alert" : "status");
         mensaje.textContent = texto;
@@ -405,21 +405,53 @@ document.addEventListener("DOMContentLoaded", function () {
         actualizarCantidad(lista.length);
     }
 
+
+    function normalizarTextoBusqueda(valor) {
+        return String(valor ?? "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .trim()
+            .toLocaleLowerCase("es");
+    }
+
     function aplicarBusqueda() {
         if (!estudiantesGrid) return;
+
         const estudiantes = leerLista(CLAVES.estudiantes);
-        const consulta = normalizar(campoBusqueda ? campoBusqueda.value : "");
+        const consulta = normalizarTextoBusqueda(
+            campoBusqueda ? campoBusqueda.value : ""
+        );
 
         if (!consulta) {
-            renderizarEstudiantes(estudiantes, "No hay estudiantes registrados actualmente.");
+            renderizarEstudiantes(
+                estudiantes,
+                "No hay estudiantes registrados actualmente."
+            );
             return;
         }
 
         const resultados = estudiantes.filter(function (estudiante) {
-            return normalizar(estudiante.codigo).includes(consulta);
+            const datosBuscables = [
+                estudiante.codigo,
+                estudiante.nombre,
+                estudiante.apellido,
+                `${estudiante.nombre || ""} ${estudiante.apellido || ""}`,
+                estudiante.dni,
+                estudiante.correo,
+                estudiante.telefono
+            ];
+
+            return datosBuscables.some(function (dato) {
+                return normalizarTextoBusqueda(dato).includes(consulta);
+            });
         });
-        renderizarEstudiantes(resultados, "No se encontró ningún estudiante con ese código.");
+
+        renderizarEstudiantes(
+            resultados,
+            "No se encontraron estudiantes que coincidan con la búsqueda."
+        );
     }
+
 
     if (estudiantesGrid) {
         aplicarBusqueda();
