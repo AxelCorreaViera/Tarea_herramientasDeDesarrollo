@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Estudiantes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+
+            <div class="logo">
+                <div>
+                    <h1>Gestión Estudiantil</h1>
+                    <p>Administración de estudiantes</p>
+                </div>
+            </div>
+
+            <nav class="nav">
+                <a href="index.html">Inicio</a>
+                <a href="estudiantes.html" class="active">Estudiantes</a>
+                <a href="login.html">Cerrar sesión</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main class="pagina-gestion">
+
+        <div class="container">
+
+            <div class="section-title">
+                <span>GESTIÓN ACADÉMICA</span>
+
+                <h2>Gestión de estudiantes</h2>
+
+                <p>
+                    Consulta, organiza y administra la información
+                    académica de los estudiantes.
+                </p>
+            </div>
+
+            <div class="gestion-header">
+
+                <div>
+                    <h3>Estudiantes registrados</h3>
+
+                    <p>
+                        Busca y administra la información de los estudiantes registrados.
+                    </p>
+                </div>
+
+                <a href="formulario.html" class="btn">
+                    + Registrar estudiante
+                </a>
+
+            </div>
+
+            <section class="busqueda-card">
+
+                <div class="busqueda-title">
+                    <h3>Buscar estudiante</h3>
+
+                    <p>
+                        Ingresa el código del estudiante para encontrarlo rápidamente.
+                    </p>
+                </div>
+
+                <div class="filtros">
+
+                    <div class="campo">
+                        <label for="codigoBusqueda">
+                            Código de estudiante
+                        </label>
+
+                        <input type="text" id="codigoBusqueda" placeholder="Ingresa el codigo del estudiante">
+                    </div>
+
+                </div>
+
+                <button type="button" class="btn" id="btnBuscar">
+                    Buscar estudiante
+                </button>
+
+            </section>
+
+            <section class="resultados">
+
+                <div class="resultados-header">
+                    <h3>Resultados</h3>
+
+                    <span class="cantidad">
+                        0 estudiantes encontrados
+                    </span>
+                </div>
+
+                <div class="estudiantes-grid">
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+
+            <p>
+                © 2026 Sistema de Gestión de Estudiantes
+            </p>
+
+            <p>
+                Proyecto académico - Herramientas de Desarrollo
+            </p>
+
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

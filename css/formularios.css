@@ -1,0 +1,84 @@
+/* ==================== FORMULARIOS ==================== */
+
+.pagina-formulario {
+    padding: 70px 0;
+    min-height: 650px;
+}
+
+.formulario-card {
+    background-color: white;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid #e5edf5;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+}
+
+.campo {
+    margin-bottom: 22px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #1f4e79;
+}
+
+.campo input,
+.campo select {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: white;
+    color: #263238;
+    transition: all 0.3s ease;
+}
+
+.campo input:hover,
+.campo select:hover {
+    border-color: #9bb8ce;
+}
+
+.campo input:focus,
+.campo select:focus {
+    outline: none;
+    border-color: #1f4e79;
+    box-shadow: 0 0 0 3px rgba(31, 78, 121, 0.1);
+}
+
+.campo input::placeholder {
+    color: #9aa5ad;
+}
+
+.formulario-card .btn {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.registro {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e5edf5;
+}
+
+.registro p {
+    margin-bottom: 5px;
+    color: #607d8b;
+}
+
+.registro a {
+    color: #1f4e79;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.registro a:hover {
+    color: #2878b8;
+    text-decoration: underline;
+}

@@ -1,0 +1,205 @@
+/* ==================== HERO ==================== */
+
+.hero {
+    background: linear-gradient(135deg, #eaf3fb, #ffffff);
+    padding: 90px 20px;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 55px;
+    align-items: center;
+}
+
+.badge {
+    display: inline-block;
+    background-color: #dbeaf7;
+    color: #1f4e79;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.hero h2 {
+    color: #1f4e79;
+    font-size: 44px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #546e7a;
+    max-width: 650px;
+    margin-bottom: 32px;
+}
+
+/* ==================== HERO CARD ==================== */
+
+.hero-card {
+    background-color: white;
+    padding: 38px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5edf5;
+    transition: transform 0.3s ease;
+}
+
+.hero-card:hover {
+    transform: translateY(-5px);
+}
+
+.hero-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+    height: 75px;
+    margin: 0 auto 18px;
+    background: linear-gradient(135deg, #dbeaf7, #c8e0f3);
+    color: #1f4e79;
+    border-radius: 50%;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.hero-card h3 {
+    color: #1f4e79;
+    margin-bottom: 10px;
+}
+
+.hero-card p {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+/* ==================== OPCIONES ==================== */
+
+.opciones {
+    padding: 80px 0;
+}
+
+/* ==================== CARDS ==================== */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background-color: white;
+    padding: 32px;
+    border-radius: 14px;
+    border: 1px solid #e5edf5;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+    border-color: #c9ddec;
+}
+
+.card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #dbeaf7, #c8e0f3);
+    color: #1f4e79;
+    border-radius: 9px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.card h3 {
+    color: #1f4e79;
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #607d8b;
+    margin-bottom: 22px;
+}
+
+.card a {
+    color: #1f4e79;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.card a:hover {
+    color: #2878b8;
+}
+
+/* ==================== INFORMACIÓN ==================== */
+
+.info {
+    background: linear-gradient(135deg, #1f4e79, #286aa6);
+    color: white;
+    padding: 65px 0;
+}
+
+.info-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.info h2 {
+    font-size: 31px;
+    margin-top: 8px;
+}
+
+.info p {
+    color: #e3edf5;
+    font-size: 16px;
+}
+
+/* ==================== RESPONSIVE INICIO ==================== */
+
+@media (max-width: 768px) {
+
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .hero h2 {
+        font-size: 34px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .info-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .hero h2 {
+        font-size: 29px;
+    }
+}
