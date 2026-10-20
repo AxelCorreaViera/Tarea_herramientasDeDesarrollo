@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,103 +12,128 @@
 <body>
 
     <header class="header">
-        <div class="container">
+        <div class="container header-content">
+
             <div class="logo">
-                <h1>Gestión Estudiantil</h1>
-                <p>Registro de docente</p>
+                <div>
+                    <h1>Gestión Estudiantil</h1>
+                    <p>Registro de docente</p>
+                </div>
             </div>
 
             <nav class="nav">
                 <a href="index.html">Inicio</a>
-                <a href="login.html">Iniciar sesión</a>
             </nav>
+
         </div>
     </header>
 
     <main class="pagina-formulario">
-        <div class="container">
 
-            <div class="formulario-header">
-                <span class="badge">CUENTA DOCENTE</span>
-                <h2>Registrar docente</h2>
-                <p>
-                    Crea una cuenta para acceder al sistema de gestión de estudiantes.
-                </p>
+        <div class="container pad">
+
+            <div class="section-title">
+                <h2>Crear cuenta docente</h2>
             </div>
 
-            <form id="formularioDocente" class="formulario">
+            <div class="formulario-card">
 
-                <div class="formulario-seccion">
-                    <h3>Datos personales</h3>
+                <form id="formularioDocente">
 
-                    <div class="form-grid">
-
-                        <div class="campo">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre">
-                        </div>
-
-                        <div class="campo">
-                            <label for="apellido">Apellido</label>
-                            <input type="text" id="apellido" name="apellido" placeholder="Ingrese su apellido">
-                        </div>
-
-                        <div class="campo">
-                            <label for="correo">Correo electrónico</label>
-                            <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com">
-                        </div>
-
-                        <div class="campo">
-                            <label for="telefono">Teléfono</label>
-                            <input type="tel" id="telefono" name="telefono" placeholder="Ingrese su teléfono">
-                        </div>
-
+                    <div class="campo">
+                        <label for="nombre">Nombre</label>
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            placeholder="Ingrese su nombre"
+                            autocomplete="given-name"
+                            required>
                     </div>
-                </div>
 
-                <div class="formulario-seccion">
-                    <h3>Datos de acceso</h3>
-
-                    <div class="form-grid">
-
-                        <div class="campo">
-                            <label for="contrasena">Contraseña</label>
-                            <input type="password" id="contrasena" name="contrasena"
-                                placeholder="Ingrese una contraseña">
-                        </div>
-
-                        <div class="campo">
-                            <label for="confirmarContrasena">
-                                Confirmar contraseña
-                            </label>
-                            <input type="password" id="confirmarContrasena" name="confirmarContrasena"
-                                placeholder="Repita su contraseña">
-                        </div>
-
+                    <div class="campo">
+                        <label for="apellido">Apellido</label>
+                        <input
+                            type="text"
+                            id="apellido"
+                            name="apellido"
+                            placeholder="Ingrese su apellido"
+                            autocomplete="family-name"
+                            required>
                     </div>
-                </div>
 
-                <div class="formulario-acciones">
-                    <a href="login.html" class="btn-secundario">
-                        Volver al inicio de sesión
-                    </a>
+                    <div class="campo">
+                        <label for="correo">Correo electrónico</label>
+                        <input
+                            type="email"
+                            id="correo"
+                            name="correo"
+                            placeholder="correo@ejemplo.com"
+                            autocomplete="email"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="telefono">Teléfono</label>
+                        <input
+                            type="tel"
+                            id="telefono"
+                            name="telefono"
+                            placeholder="Ingrese su teléfono"
+                            autocomplete="tel"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="contrasena">Contraseña</label>
+                        <input
+                            type="password"
+                            id="contrasena"
+                            name="contrasena"
+                            placeholder="Cree una contraseña"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="confirmarContrasena">Confirmar contraseña</label>
+                        <input
+                            type="password"
+                            id="confirmarContrasena"
+                            name="confirmarContrasena"
+                            placeholder="Repita su contraseña"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required>
+                    </div>
 
                     <button type="submit" class="btn">
                         Crear cuenta
                     </button>
+
+                </form>
+
+                <div class="registro">
+                    <p>¿Ya tienes una cuenta?</p>
+                    <a href="login.html">Inicia sesión aquí</a>
                 </div>
 
-            </form>
+            </div>
 
         </div>
+
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 Gestión Estudiantil. Todos los derechos reservados.</p>
+            <p>© 2026 Sistema de Gestión de Estudiantes</p>
+            <p>Proyecto académico - Herramientas de Desarrollo</p>
         </div>
     </footer>
-<script src="script.js"></script>
+
+    <script src="script.js"></script>
+
 </body>
 
 </html>
