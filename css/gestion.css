@@ -264,3 +264,265 @@ ACCIONES DE LOS ESTUDIANTES
 .btn-eliminar:hover {
     background-color: #bb2d3b;
 }
+
+/* ===== MEJORAS VISUALES: GESTIÓN DE ESTUDIANTES ===== */
+
+/* Tarjeta del buscador */
+.busqueda-card {
+    background: #ffffff;
+    padding: 28px;
+    margin-bottom: 30px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(15, 23, 42, 0.06);
+}
+
+/* Encabezado del buscador */
+.busqueda-title {
+    margin-bottom: 20px;
+}
+
+.busqueda-title h3 {
+    color: #1e293b;
+    font-size: 1.35rem;
+    margin-bottom: 8px;
+}
+
+.busqueda-title p {
+    color: #64748b;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* El buscador tiene un solo campo, no cuatro columnas */
+.filtros {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.filtros .campo {
+    width: 100%;
+    min-width: 0;
+}
+
+.filtros input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #f8fafc;
+    color: #1e293b;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.filtros input:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* Botón de búsqueda */
+.busqueda-card > .btn {
+    min-height: 44px;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Distribución de tarjetas */
+.estudiantes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    align-items: stretch;
+}
+
+/* Presentación general de cada estudiante */
+.estudiante-card {
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.estudiante-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.10);
+}
+
+/* Adaptación a tablet */
+@media (max-width: 1000px) {
+    .estudiantes-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Adaptación a celular */
+@media (max-width: 640px) {
+    .busqueda-card {
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .estudiantes-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .estudiante-card {
+        padding: 18px;
+    }
+
+    .busqueda-card > .btn {
+        width: 100%;
+    }
+}
+/* ============================================================
+   MEJORA VISUAL: TARJETAS DE ESTUDIANTES
+   Compatible con la estructura generada por script.js
+============================================================ */
+
+.estudiante-card{
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    background:#fff;
+    border:1px solid #e5edf5;
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 8px 24px rgba(0,0,0,.06);
+    transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.estudiante-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 30px rgba(0,0,0,.10);
+}
+
+/* Avatar */
+
+.estudiante-avatar{
+    width:60px;
+    height:60px;
+    min-width:60px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+    font-size:22px;
+    color:white;
+    background:linear-gradient(135deg,#1f4e79,#2878b8);
+}
+
+/* Información */
+
+.estudiante-info{
+    flex:1;
+}
+
+.estudiante-info h4{
+    color:#1f4e79;
+    font-size:20px;
+    margin-bottom:12px;
+}
+
+.estudiante-info p{
+    margin:7px 0;
+    color:#546e7a;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.estudiante-info strong{
+    color:#37474f;
+}
+
+/* Información adicional */
+
+.informacion-adicional{
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px dashed #d6e3ef;
+}
+
+/* Acciones */
+
+.acciones-estudiante{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:18px;
+}
+
+.acciones-estudiante .btn{
+    flex:1;
+    min-width:125px;
+    padding:11px;
+    font-size:14px;
+}
+
+/* Botón información */
+
+.btn-info{
+    background:#0d6efd;
+}
+
+.btn-info:hover{
+    background:#0b5ed7;
+}
+
+/* Botón editar */
+
+.btn-editar{
+    background:#1f4e79;
+}
+
+.btn-editar:hover{
+    background:#163a5c;
+}
+
+/* Botón eliminar */
+
+.btn-eliminar{
+    background:#dc3545;
+}
+
+.btn-eliminar:hover{
+    background:#bb2d3b;
+}
+
+/* Responsive */
+
+@media (max-width:640px){
+
+    .estudiante-card{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+    }
+
+    .estudiante-avatar{
+        width:70px;
+        height:70px;
+        min-width:70px;
+        font-size:24px;
+    }
+
+    .acciones-estudiante{
+        width:100%;
+    }
+
+    .acciones-estudiante .btn{
+        width:100%;
+    }
+}
