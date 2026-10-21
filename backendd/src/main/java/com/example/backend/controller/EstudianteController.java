@@ -11,11 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/estudiantes")
-@CrossOrigin(origins = {
-    "http://localhost:5500",
-    "http://127.0.0.1:5500",
-    "http://localhost:8080"
-})
 public class EstudianteController {
 
     private final EstudianteService estudianteService;
@@ -24,19 +19,16 @@ public class EstudianteController {
         this.estudianteService = estudianteService;
     }
 
-    // Listar todos los estudiantes
     @GetMapping
     public ResponseEntity<List<Estudiante>> listar() {
         return ResponseEntity.ok(estudianteService.listar());
     }
 
-    // Buscar un estudiante por su ID
     @GetMapping("/{id}")
     public ResponseEntity<Estudiante> buscar(@PathVariable Long id) {
         return ResponseEntity.ok(estudianteService.buscar(id));
     }
 
-    // Registrar un estudiante
     @PostMapping
     public ResponseEntity<?> guardar(@RequestBody Estudiante estudiante) {
         try {
@@ -53,7 +45,6 @@ public class EstudianteController {
         }
     }
 
-    // Actualizar un estudiante
     @PutMapping("/{id}")
     public ResponseEntity<?> actualizar(
             @PathVariable Long id,
@@ -71,7 +62,6 @@ public class EstudianteController {
         }
     }
 
-    // Eliminar un estudiante
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {
         try {
