@@ -1,84 +1,369 @@
-/* ==================== FORMULARIOS ==================== */
+
+/* ==================== FORMULARIOS DEL SISTEMA ==================== */
 
 .pagina-formulario {
-    padding: 70px 0;
+    padding: 45px 0 55px;
     min-height: 650px;
 }
 
-.formulario-card {
-    background-color: white;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 40px;
-    border-radius: 16px;
-    border: 1px solid #e5edf5;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+/* ==================== ENCABEZADOS ==================== */
+
+.pagina-formulario > .container > .section-title,
+.pagina-formulario > .container > .formulario-header {
+    max-width: 760px;
+    margin: 0 auto 28px;
+    text-align: center;
 }
 
+.pagina-formulario .section-title > span,
+.pagina-formulario .formulario-header > .badge {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 7px 13px;
+    border-radius: 20px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.pagina-formulario .section-title h2,
+.pagina-formulario .formulario-header h2 {
+    margin-bottom: 12px;
+    color: #17365d;
+    font-size: clamp(25px, 3vw, 34px);
+    line-height: 1.3;
+}
+
+.pagina-formulario .section-title p,
+.pagina-formulario .formulario-header p {
+    max-width: 620px;
+    margin: 0 auto;
+    color: #64748b;
+    line-height: 1.7;
+}
+
+/* ==================== TARJETAS ==================== */
+
+.pagina-formulario .formulario-card {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 32px;
+    box-sizing: border-box;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07);
+}
+
+.formulario-card h2 {
+    margin-bottom: 12px;
+    color: #1e3a5f;
+    font-size: 1.7rem;
+    text-align: center;
+}
+
+.formulario-card > p {
+    margin-bottom: 24px;
+    color: #64748b;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* ==================== CAMPOS ==================== */
+
 .campo {
-    margin-bottom: 22px;
+    min-width: 0;
+    margin-bottom: 20px;
 }
 
 .campo label {
     display: block;
     margin-bottom: 8px;
-    font-weight: bold;
-    color: #1f4e79;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .campo input,
-.campo select {
+.campo select,
+.campo textarea {
+    display: block;
     width: 100%;
-    padding: 13px 14px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
+    min-height: 46px;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #f8fafc;
+    color: #1e293b;
+    font-family: inherit;
     font-size: 15px;
-    background-color: white;
-    color: #263238;
-    transition: all 0.3s ease;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
 }
 
 .campo input:hover,
-.campo select:hover {
-    border-color: #9bb8ce;
+.campo select:hover,
+.campo textarea:hover {
+    border-color: #94a3b8;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+    color: #94a3b8;
 }
 
 .campo input:focus,
-.campo select:focus {
+.campo select:focus,
+.campo textarea:focus {
     outline: none;
-    border-color: #1f4e79;
-    box-shadow: 0 0 0 3px rgba(31, 78, 121, 0.1);
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
-.campo input::placeholder {
-    color: #9aa5ad;
-}
+/* ==================== BOTONES ==================== */
 
 .formulario-card .btn {
     width: 100%;
     margin-top: 5px;
 }
 
-.registro {
+.pagina-formulario .formulario-card button[type="submit"],
+.pagina-formulario .formulario button[type="submit"] {
+    min-height: 47px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #1f4e79, #286aa6);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.pagina-formulario .formulario-card button[type="submit"]:hover,
+.pagina-formulario .formulario button[type="submit"]:hover {
+    background: linear-gradient(135deg, #163a5c, #1f4e79);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(31, 78, 121, 0.2);
+}
+
+.pagina-formulario button:focus-visible,
+.pagina-formulario a:focus-visible {
+    outline: 3px solid #80bfff;
+    outline-offset: 3px;
+}
+
+/* ==================== INICIO DE SESIÓN ==================== */
+
+#formularioLogin {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* ==================== REGISTRO DE ESTUDIANTES ==================== */
+
+#formularioEstudiante {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 22px;
+}
+
+#formularioEstudiante .section-label {
+    grid-column: 1 / -1;
+    margin: 12px 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dbe5f0;
+    color: #1d4ed8;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+}
+
+#formularioEstudiante .campo {
+    margin-bottom: 16px;
+}
+
+#formularioEstudiante > button[type="submit"] {
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-top: 8px;
+}
+
+/* ==================== REGISTRO DE DOCENTES ==================== */
+
+#formularioDocente.formulario {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 30px;
+    box-sizing: border-box;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07);
+}
+
+#formularioDocente .formulario-seccion {
+    margin-bottom: 26px;
+    padding: 22px;
+    border: 1px solid #e8eef5;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+#formularioDocente .formulario-seccion h3 {
+    margin: 0 0 20px;
+    color: #1e3a5f;
+    font-size: 17px;
+}
+
+#formularioDocente .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 20px;
+}
+
+#formularioDocente .campo {
+    margin-bottom: 12px;
+}
+
+#formularioDocente .formulario-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+#formularioDocente .formulario-acciones .btn,
+#formularioDocente .formulario-acciones .btn-secundario {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 46px;
+    padding: 12px 18px;
+    box-sizing: border-box;
+    border-radius: 10px;
     text-align: center;
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid #e5edf5;
-}
-
-.registro p {
-    margin-bottom: 5px;
-    color: #607d8b;
-}
-
-.registro a {
-    color: #1f4e79;
     text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
+    font-weight: 700;
 }
 
-.registro a:hover {
+#formularioDocente .formulario-acciones .btn-secundario {
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #334155;
+}
+
+/* ==================== ENLACES SECUNDARIOS ==================== */
+
+.pagina-formulario .registro {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e8eef5;
+    text-align: center;
+}
+
+.pagina-formulario .registro p {
+    margin-bottom: 8px;
+    color: #64748b;
+}
+
+.pagina-formulario .registro a {
+    color: #1f4e79;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.pagina-formulario .registro a:hover {
     color: #2878b8;
     text-decoration: underline;
+}
+
+/* ==================== MENSAJES ==================== */
+
+.mensaje-formulario,
+.mensaje-aviso,
+.mensaje-error,
+.mensaje-exito {
+    padding: 13px 16px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ==================== ADAPTACIÓN A MÓVILES ==================== */
+
+@media (max-width: 640px) {
+    .pagina-formulario {
+        padding: 25px 0 35px;
+    }
+
+    .pagina-formulario > .container > .section-title,
+    .pagina-formulario > .container > .formulario-header {
+        margin-bottom: 22px;
+    }
+
+    .pagina-formulario .formulario-card,
+    #formularioDocente.formulario {
+        padding: 22px 18px;
+        border-radius: 14px;
+    }
+
+    .formulario-card h2 {
+        font-size: 1.4rem;
+    }
+
+    #formularioEstudiante,
+    #formularioDocente .form-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #formularioEstudiante .section-label,
+    #formularioEstudiante > button[type="submit"] {
+        grid-column: 1;
+    }
+
+    #formularioDocente .formulario-seccion {
+        padding: 16px 12px;
+    }
+
+    #formularioDocente .formulario-acciones {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    #formularioDocente .formulario-acciones .btn,
+    #formularioDocente .formulario-acciones .btn-secundario {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .campo input,
+    .campo select,
+    .campo textarea,
+    .pagina-formulario .registro a,
+    .pagina-formulario button {
+        transition: none;
+    }
+
+    .pagina-formulario button:hover {
+        transform: none;
+    }
 }

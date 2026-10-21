@@ -1,175 +1,217 @@
+
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Estudiantes</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 
-</head>
 
 <body>
 
-<div class="container">
+    <header class="header">
+        <div class="container header-content">
 
-<div class="formulario-card">
-    
-   
-<div class="d-flex align-items-center mb-3">
-    <a href="index.html" class="btn btn-secondary">
-        ← Volver
-    </a>
-</div>
-
-<h2 class="text-center mb-4">Registro de Estudiantes</h2>
-
-
-    <form>
-
-        <div class="row">
-
-            <div class="col-md-6 mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input 
-                    type="text" 
-                    id="nombre" 
-                    name="nombre"
-                    class="form-control"
-                    placeholder="Ingrese su nombre"
-                    autocomplete="given-name"
-                    required>
+            <div class="logo">
+                <div>
+                    <h1>Gestión Estudiantil</h1>
+                    <p>Registro de estudiantes</p>
+                </div>
             </div>
 
-            <div class="col-md-6 mb-3">
-                <label for="apellido" class="form-label">Apellido</label>
-                <input 
-                    type="text" 
-                    id="apellido" 
-                    name="apellido"
-                    class="form-control"
-                    placeholder="Ingrese su apellido"
-                    autocomplete="family-name"
-                    required>
+            <nav class="nav">
+                <a href="index.html">Inicio</a>
+                <a href="estudiantes.html" class="active">Estudiantes</a>
+                <a href="login.html">Iniciar sesión</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main class="pagina-formulario">
+
+        <div class="container">
+
+            <div class="section-title">
+                <span>REGISTRO</span>
+
+                <h2>Registrar estudiante</h2>
+
+                <p>
+                    Complete los datos personales y académicos
+                    para registrar un nuevo estudiante.
+                </p>
             </div>
 
-            <div class="col-md-6 mb-3">
-                <label for="correo" class="form-label">Correo electrónico</label>
-                <input 
-                    type="email" 
-                    id="correo" 
-                    name="correo"
-                    class="form-control"
-                    placeholder="correo@ejemplo.com"
-                    autocomplete="email"
-                    required>
-            </div>
+            <div class="formulario-card">
 
-            <div class="col-md-6 mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input 
-                    type="tel" 
-                    id="telefono" 
-                    name="telefono"
-                    class="form-control"
-                    placeholder="987654321"
-                    autocomplete="tel"
-                    pattern="[0-9]{9}"
-                    maxlength="9"
-                    required>
-            </div>
+                <form id="formularioEstudiante">
 
-            <div class="col-md-6 mb-3">
-                <label for="fechaNacimiento" class="form-label">
-                    Fecha de nacimiento
-                </label>
+                    <!-- DATOS PERSONALES -->
 
-                <input 
-                    type="date" 
-                    id="fechaNacimiento" 
-                    name="fechaNacimiento"
-                    class="form-control"
-                    required>
-            </div>
+                    <div class="section-label">
+                        DATOS PERSONALES
+                    </div>
 
-            <div class="col-md-6 mb-3">
-                <label for="carrera" class="form-label">Carrera</label>
+                    <div class="campo">
+                        <label for="codigo">Código</label>
 
-                <select 
-                    id="carrera" 
-                    name="carrera" 
-                    class="form-select"
-                    required>
+                        <input type="text" id="codigo" name="codigo" placeholder="Ejemplo: EST2026001"
+                            autocomplete="off" required>
+                    </div>
 
-                    <option value="">Seleccione una carrera</option>
-                    <option value="ingenieria-sistemas">
-                        Ingeniería de Sistemas
-                    </option>
-                    <option value="ingenieria-industrial">
-                        Ingeniería Industrial
-                    </option>
-                    <option value="administracion">
-                        Administración
-                    </option>
-                    <option value="contabilidad">
-                        Contabilidad
-                    </option>
-                    <option value="derecho">
-                        Derecho
-                    </option>
+                    <div class="campo">
+                        <label for="dni">DNI</label>
 
-                </select>
-            </div>
+                        <input type="text" id="dni" name="dni" placeholder="Ingrese DNI del estudiante" maxlength="8"
+                            autocomplete="off" required>
+                    </div>
 
-            <div class="col-md-6 mb-3">
-                <label for="contrasena" class="form-label">
-                    Contraseña
-                </label>
+                    <div class="campo">
+                        <label for="nombre">Nombre</label>
 
-                <input 
-                    type="password" 
-                    id="contrasena" 
-                    name="contrasena"
-                    class="form-control"
-                    placeholder="Ingrese una contraseña"
-                    autocomplete="new-password"
-                    minlength="8"
-                    required>
-            </div>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ingrese nombre del estudiante"
+                            autocomplete="given-name" required>
+                    </div>
 
-            <div class="col-md-6 mb-3">
-                <label for="confirmarContrasena" class="form-label">
-                    Confirmar contraseña
-                </label>
+                    <div class="campo">
+                        <label for="apellido">Apellido</label>
 
-                <input 
-                    type="password" 
-                    id="confirmarContrasena" 
-                    name="confirmarContrasena"
-                    class="form-control"
-                    placeholder="Repita su contraseña"
-                    autocomplete="new-password"
-                    minlength="8"
-                    required>
+                        <input type="text" id="apellido" name="apellido" placeholder="Ingrese apellido del estudiante"
+                            autocomplete="family-name" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="correo">Correo electrónico</label>
+
+                        <input type="email" id="correo" name="correo" placeholder="correo@ejemplo.com"
+                            autocomplete="email" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="telefono">Teléfono</label>
+
+                        <input type="tel" id="telefono" name="telefono" placeholder="987654321" autocomplete="tel"
+                            maxlength="9" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="fechaNacimiento">
+                            Fecha de nacimiento
+                        </label>
+
+                        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                    </div>
+
+                    <!-- DATOS ACADÉMICOS -->
+
+                    <div class="section-label">
+                        DATOS ACADÉMICOS
+                    </div>
+
+                    <div class="campo">
+                        <label for="carrera">Carrera</label>
+
+                        <select id="carrera" name="carrera" required>
+                            <option value="">
+                                Seleccione una carrera
+                            </option>
+
+                            <option value="ingenieria-sistemas">
+                                Ingeniería de Sistemas
+                            </option>
+
+                            <option value="ingenieria-industrial">
+                                Ingeniería Industrial
+                            </option>
+
+                            <option value="administracion">
+                                Administración
+                            </option>
+
+                            <option value="contabilidad">
+                                Contabilidad
+                            </option>
+
+                            <option value="derecho">
+                                Derecho
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="ciclo">Ciclo</label>
+
+                        <select id="ciclo" name="ciclo" required>
+                            <option value="">
+                                Seleccione ciclo del estudiante
+                            </option>
+
+                            <option value="1">I ciclo</option>
+                            <option value="2">II ciclo</option>
+                            <option value="3">III ciclo</option>
+                            <option value="4">IV ciclo</option>
+                            <option value="5">V ciclo</option>
+                            <option value="6">VI ciclo</option>
+                            <option value="7">VII ciclo</option>
+                            <option value="8">VIII ciclo</option>
+                            <option value="9">IX ciclo</option>
+                            <option value="10">X ciclo</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="turno">Turno de estudio</label>
+
+                        <select id="turno" name="turno" required>
+                            <option value="">
+                                Seleccione turno del estudiante
+                            </option>
+
+                            <option value="manana">Mañana</option>
+                            <option value="tarde">Tarde</option>
+                            <option value="noche">Noche</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="modalidad">Modalidad de estudio</label>
+
+                        <select id="modalidad" name="modalidad" required>
+                            <option value="">
+                                Seleccione modalidad del estudiante
+                            </option>
+
+                            <option value="presencial">Presencial</option>
+                            <option value="virtual">Virtual</option>
+                            <option value="semipresencial">Semipresencial</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn">
+                        Registrar estudiante
+                    </button>
+
+                </form>
+
+
             </div>
 
         </div>
 
-        <button type="submit" class="btn w-100 mt-2">
-            Registrar Estudiante
-        </button>
+    </main>
 
-
-    </form>
-
-</div>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrW/1p9Y8tP7E2e7G1vL7dQ8l" crossorigin="anonymous"></script>
-
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 Sistema de Gestión de Estudiantes</p>
+            <p>Proyecto académico - Herramientas de Desarrollo</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
 </body>
 
-</body>
 </html>

@@ -67,7 +67,7 @@
                     <h3>Buscar estudiante</h3>
 
                     <p>
-                        Ingresa el código del estudiante para encontrarlo rápidamente.
+                        Puedes buscar por código, nombre, apellido, DNI, correo electrónico o celular.
                     </p>
                 </div>
 
@@ -75,10 +75,15 @@
 
                     <div class="campo">
                         <label for="codigoBusqueda">
-                            Código de estudiante
+                            Dato a buscar
                         </label>
 
-                        <input type="text" id="codigoBusqueda" placeholder="Ingresa el codigo del estudiante">
+                        <input type="search" id="codigoBusqueda" name="busqueda"
+                            placeholder="Ej.: nombre, código, DNI o correo" aria-describedby="ayudaBusqueda"
+                            autocomplete="off">
+                        <p id="ayudaBusqueda" class="texto-ayuda">
+                            Los resultados se actualizan mientras escribes.
+                        </p>
                     </div>
 
                 </div>
