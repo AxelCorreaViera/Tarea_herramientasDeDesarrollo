@@ -1,0 +1,224 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f3f6fb;
+    color: #243247;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.encabezado {
+    background: #173b68;
+    color: white;
+    padding: 24px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.encabezado h1 {
+    margin: 0 0 8px;
+}
+
+.encabezado p {
+    margin: 0;
+    color: #d9e6f5;
+}
+
+.estado {
+    border: 1px solid #8ba9cb;
+    border-radius: 20px;
+    padding: 9px 14px;
+    font-size: 13px;
+}
+
+.contenedor {
+    width: min(1100px, 92%);
+    margin: 32px auto;
+}
+
+.bienvenida {
+    margin-bottom: 24px;
+}
+
+.bienvenida h2,
+.panel h2 {
+    margin-bottom: 8px;
+}
+
+.mensaje {
+    color: #52657d;
+    margin: 16px 0;
+}
+
+.lista-cursos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.tarjeta-curso,
+.panel {
+    background: white;
+    border: 1px solid #dce5ef;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 4px 14px #18365a0b;
+}
+
+.tarjeta-curso h3 {
+    margin-top: 0;
+    color: #173b68;
+}
+
+.tarjeta-curso p {
+    color: #52657d;
+    line-height: 1.5;
+}
+
+.tarjeta-curso button {
+    width: 100%;
+    border: 0;
+    border-radius: 7px;
+    background: #245da0;
+    color: white;
+    padding: 11px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.tarjeta-curso button:hover {
+    background: #173b68;
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 14px 12px;
+    border-bottom: 1px solid #e4eaf1;
+}
+
+th {
+    background: #edf3fa;
+    color: #173b68;
+}
+
+footer {
+    padding: 24px;
+    text-align: center;
+    color: #66758a;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 600px) {
+    .encabezado {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .contenedor {
+        margin-top: 22px;
+    }
+}
+
+#gestionCurso {
+    margin-top: 32px;
+}
+
+#gestionCurso > h2 {
+    margin-top: 32px;
+    color: #173b68;
+}
+
+.formulario-portal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 14px;
+    align-items: end;
+    background: white;
+    border: 1px solid #dce5ef;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 18px 0;
+}
+
+.formulario-portal h3 {
+    grid-column: 1 / -1;
+    margin: 0;
+}
+
+.campo-portal {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    font-size: 14px;
+}
+
+.campo-portal input,
+.campo-portal select {
+    width: 100%;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #cbd7e5;
+    border-radius: 6px;
+    background: white;
+    font: inherit;
+}
+
+.formulario-portal button,
+.registro-fila button {
+    border: 0;
+    border-radius: 6px;
+    background: #245da0;
+    color: white;
+    padding: 11px 14px;
+    cursor: pointer;
+}
+
+.formulario-portal button:disabled,
+.registro-fila button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.lista-registros {
+    background: white;
+    border-radius: 8px;
+    padding: 10px 18px;
+}
+
+.registro-fila {
+    display: grid;
+    grid-template-columns: minmax(150px, 1.3fr) repeat(2, minmax(140px, 1fr)) auto;
+    gap: 12px;
+    align-items: end;
+    background: white;
+    border: 1px solid #dce5ef;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 12px 0;
+}
+
+@media (max-width: 750px) {
+    .registro-fila {
+        grid-template-columns: 1fr;
+    }
+}
+
