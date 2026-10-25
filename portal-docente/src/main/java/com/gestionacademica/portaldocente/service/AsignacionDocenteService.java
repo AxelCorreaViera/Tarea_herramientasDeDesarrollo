@@ -1,6 +1,7 @@
 package com.gestionacademica.portaldocente.service;
 
 import com.gestionacademica.portaldocente.model.AsignacionDocente;
+import com.gestionacademica.portaldocente.dto.AsignacionResumenDTO;
 import com.gestionacademica.portaldocente.repository.AsignacionDocenteRepository;
 import com.gestionacademica.portaldocente.repository.DocenteRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -46,4 +47,19 @@ public class AsignacionDocenteService {
                 .orElseThrow(() -> new EntityNotFoundException(
                         "No existe la asignación con ID " + asignacionId));
     }
+
+    public List<AsignacionResumenDTO> listarResumenesActivosPorDocente(
+            Long docenteId) {
+
+        return listarActivasPorDocente(docenteId)
+                .stream()
+                .map(asignacion -> new AsignacionResumenDTO(
+                        asignacion.getId(),
+                        asignacion.getCurso().getCodigo(),
+                        asignacion.getCurso().getNombre(),
+                        asignacion.getSeccion(),
+                        asignacion.getPeriodoAcademico()))
+                .toList();
+    }
+
 }

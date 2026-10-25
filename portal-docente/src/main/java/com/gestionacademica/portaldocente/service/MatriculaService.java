@@ -1,6 +1,7 @@
 package com.gestionacademica.portaldocente.service;
 
 import com.gestionacademica.portaldocente.model.AsignacionDocente;
+import com.gestionacademica.portaldocente.dto.EstudianteMatriculadoDTO;
 import com.gestionacademica.portaldocente.model.Matricula;
 import com.gestionacademica.portaldocente.repository.AsignacionDocenteRepository;
 import com.gestionacademica.portaldocente.repository.MatriculaRepository;
@@ -53,4 +54,20 @@ public class MatriculaService {
                 .orElseThrow(() -> new EntityNotFoundException(
                         "No existe la matrícula con ID " + matriculaId));
     }
+
+    public List<EstudianteMatriculadoDTO> listarEstudiantesPorAsignacion(
+            Long asignacionId) {
+
+        return listarActivasPorAsignacion(asignacionId)
+                .stream()
+                .map(matricula -> new EstudianteMatriculadoDTO(
+                        matricula.getId(),
+                        matricula.getEstudiante().getId(),
+                        matricula.getEstudiante().getCodigoEstudiante(),
+                        matricula.getEstudiante().getNombres(),
+                        matricula.getEstudiante().getApellidos(),
+                        matricula.getEstudiante().getCorreo()))
+                .toList();
+    }
+
 }
