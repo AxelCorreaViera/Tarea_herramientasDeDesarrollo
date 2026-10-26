@@ -222,3 +222,97 @@ footer {
     }
 }
 
+/* Organización de las secciones del curso */
+.seccion-plegable {
+    margin: 18px 0;
+    padding: 16px;
+    background: #ffffff;
+    border: 1px solid #dce4ee;
+    border-radius: 12px;
+}
+
+.seccion-plegable summary {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 6px;
+}
+
+.seccion-plegable[open] summary {
+    margin-bottom: 16px;
+    border-bottom: 1px solid #e5eaf0;
+    padding-bottom: 12px;
+}
+
+/* Ficha individual */
+#fichaEstudiante {
+    margin-top: 24px;
+    scroll-margin-top: 20px;
+}
+
+.ficha-encabezado,
+.resumen-academico {
+    padding: 18px;
+    margin-bottom: 18px;
+    background: #f5f8fc;
+    border: 1px solid #e0e8f2;
+    border-radius: 12px;
+}
+
+.resumen-academico p {
+    margin: 8px 0;
+}
+
+#fichaEstudiante table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#fichaEstudiante th,
+#fichaEstudiante td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5eaf0;
+}
+
+#fichaEstudiante .registro-fila {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #e5eaf0;
+}
+
+#fichaEstudiante .registro-fila > * {
+    min-width: 150px;
+}
+
+.seccion-registro-notas {
+    display: block;
+    width: 100%;
+    margin: 24px 0;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #dce5ef;
+    border-radius: 12px;
+}
+
+.seccion-registro-notas h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.seccion-registro-notas .registro-fila {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #e5eaf0;
+}
+
+.seccion-registro-notas .registro-fila input {
+    max-width: 180px;
+}
+
