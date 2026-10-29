@@ -1,318 +1,328 @@
-* {
-    box-sizing: border-box;
+
+/* ==================================================
+   PORTAL DOCENTE
+   Bootstrap 5.3 + ajustes propios
+   ================================================== */
+
+   :root {
+    --portal-primary: #173b68;
+    --portal-primary-hover: #245da0;
+    --portal-border: #dee2e6;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 1.5rem;
 }
 
 body {
-    margin: 0;
-    background: #f3f6fb;
-    color: #243247;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.encabezado {
-    background: #173b68;
-    color: white;
-    padding: 24px 6%;
+    min-height: 100vh;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+    flex-direction: column;
+    color: #243247;
 }
 
-.encabezado h1 {
-    margin: 0 0 8px;
+main {
+    flex: 1;
 }
 
-.encabezado p {
-    margin: 0;
-    color: #d9e6f5;
+/* Navegación */
+
+.navbar.bg-primary {
+    background-color: var(--portal-primary) !important;
 }
 
-.estado {
-    border: 1px solid #8ba9cb;
-    border-radius: 20px;
-    padding: 9px 14px;
-    font-size: 13px;
+.navbar-brand {
+    letter-spacing: 0.2px;
 }
 
-.contenedor {
-    width: min(1100px, 92%);
-    margin: 32px auto;
-}
+/* Cursos generados por JavaScript */
 
-.bienvenida {
-    margin-bottom: 24px;
-}
-
-.bienvenida h2,
-.panel h2 {
-    margin-bottom: 8px;
-}
-
-.mensaje {
-    color: #52657d;
-    margin: 16px 0;
-}
-
-.lista-cursos {
+#listaCursos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 18px;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 250px), 1fr)
+    );
+    gap: 1rem;
 }
 
-.tarjeta-curso,
-.panel {
-    background: white;
-    border: 1px solid #dce5ef;
-    border-radius: 12px;
-    padding: 22px;
-    box-shadow: 0 4px 14px #18365a0b;
+#listaCursos > * {
+    min-width: 0;
+}
+
+.tarjeta-curso {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1.25rem;
+    background-color: #fff;
+    border: 1px solid var(--portal-border);
+    border-radius: 0.75rem;
+    box-shadow: 0 0.125rem 0.35rem rgb(0 0 0 / 5%);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.tarjeta-curso:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 8%);
 }
 
 .tarjeta-curso h3 {
-    margin-top: 0;
-    color: #173b68;
+    margin-bottom: 0.75rem;
+    color: var(--portal-primary);
+    font-size: 1.15rem;
+    font-weight: 700;
 }
 
 .tarjeta-curso p {
-    color: #52657d;
-    line-height: 1.5;
+    color: #596579;
+    overflow-wrap: anywhere;
 }
 
 .tarjeta-curso button {
-    width: 100%;
-    border: 0;
-    border-radius: 7px;
-    background: #245da0;
-    color: white;
-    padding: 11px;
-    cursor: pointer;
-    font-size: 14px;
+    margin-top: auto;
 }
 
-.tarjeta-curso button:hover {
-    background: #173b68;
-}
+/* Paneles dinámicos */
 
-.tabla-contenedor {
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th,
-td {
-    text-align: left;
-    padding: 14px 12px;
-    border-bottom: 1px solid #e4eaf1;
-}
-
-th {
-    background: #edf3fa;
-    color: #173b68;
-}
-
-footer {
-    padding: 24px;
-    text-align: center;
-    color: #66758a;
-}
-
-[hidden] {
-    display: none !important;
-}
-
-@media (max-width: 600px) {
-    .encabezado {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .contenedor {
-        margin-top: 22px;
-    }
-}
-
-#gestionCurso {
-    margin-top: 32px;
+#gestionCurso,
+#fichaEstudiante {
+    margin-top: 1.5rem;
+    scroll-margin-top: 1.5rem;
 }
 
 #gestionCurso > h2 {
-    margin-top: 32px;
-    color: #173b68;
+    margin-top: 2rem;
+    color: var(--portal-primary);
+    font-size: 1.35rem;
+    font-weight: 700;
 }
+
+/* Formularios */
 
 .formulario-portal {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 14px;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 190px), 1fr)
+    );
+    gap: 1rem;
     align-items: end;
-    background: white;
-    border: 1px solid #dce5ef;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 18px 0;
+    margin: 1rem 0 1.5rem;
+    padding: 1.25rem;
+    background: #fff;
+    border: 1px solid var(--portal-border);
+    border-radius: 0.75rem;
 }
 
 .formulario-portal h3 {
     grid-column: 1 / -1;
     margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
 }
 
 .campo-portal {
     display: flex;
+    min-width: 0;
     flex-direction: column;
-    gap: 7px;
-    font-size: 14px;
+    gap: 0.4rem;
+}
+
+.campo-portal label {
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
 .campo-portal input,
-.campo-portal select {
+.campo-portal select,
+.campo-portal textarea,
+.formulario-portal input,
+.formulario-portal select,
+.formulario-portal textarea {
     width: 100%;
     min-width: 0;
-    padding: 10px;
-    border: 1px solid #cbd7e5;
-    border-radius: 6px;
-    background: white;
-    font: inherit;
 }
 
-.formulario-portal button,
-.registro-fila button {
-    border: 0;
-    border-radius: 6px;
-    background: #245da0;
-    color: white;
-    padding: 11px 14px;
-    cursor: pointer;
-}
-
-.formulario-portal button:disabled,
-.registro-fila button:disabled {
-    opacity: 0.6;
-    cursor: wait;
-}
+/* Listas y registros */
 
 .lista-registros {
-    background: white;
-    border-radius: 8px;
-    padding: 10px 18px;
+    padding: 0.75rem 1rem;
+    background: #fff;
+    border: 1px solid var(--portal-border);
+    border-radius: 0.75rem;
 }
 
 .registro-fila {
-    display: grid;
-    grid-template-columns: minmax(150px, 1.3fr) repeat(2, minmax(140px, 1fr)) auto;
-    gap: 12px;
-    align-items: end;
-    background: white;
-    border: 1px solid #dce5ef;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 12px 0;
-}
-
-@media (max-width: 750px) {
-    .registro-fila {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Organización de las secciones del curso */
-.seccion-plegable {
-    margin: 18px 0;
-    padding: 16px;
-    background: #ffffff;
-    border: 1px solid #dce4ee;
-    border-radius: 12px;
-}
-
-.seccion-plegable summary {
-    cursor: pointer;
-    font-weight: 600;
-    padding: 6px;
-}
-
-.seccion-plegable[open] summary {
-    margin-bottom: 16px;
-    border-bottom: 1px solid #e5eaf0;
-    padding-bottom: 12px;
-}
-
-/* Ficha individual */
-#fichaEstudiante {
-    margin-top: 24px;
-    scroll-margin-top: 20px;
-}
-
-.ficha-encabezado,
-.resumen-academico {
-    padding: 18px;
-    margin-bottom: 18px;
-    background: #f5f8fc;
-    border: 1px solid #e0e8f2;
-    border-radius: 12px;
-}
-
-.resumen-academico p {
-    margin: 8px 0;
-}
-
-#fichaEstudiante table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-#fichaEstudiante th,
-#fichaEstudiante td {
-    padding: 10px 12px;
-    text-align: left;
-    border-bottom: 1px solid #e5eaf0;
-}
-
-#fichaEstudiante .registro-fila {
     display: flex;
     flex-wrap: wrap;
     align-items: end;
-    gap: 12px;
-    padding: 14px 0;
-    border-bottom: 1px solid #e5eaf0;
+    gap: 0.75rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e9ecef;
 }
 
-#fichaEstudiante .registro-fila > * {
-    min-width: 150px;
+.registro-fila:last-child {
+    border-bottom: 0;
 }
+
+.registro-fila > * {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.registro-fila input,
+.registro-fila select {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.registro-fila button:disabled,
+.formulario-portal button:disabled {
+    cursor: wait;
+}
+
+/* Secciones desplegables */
+
+.seccion-plegable {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #fff;
+    border: 1px solid var(--portal-border);
+    border-radius: 0.75rem;
+}
+
+.seccion-plegable summary {
+    padding: 0.5rem;
+    color: var(--portal-primary);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.seccion-plegable[open] summary {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* Ficha del estudiante */
+
+.ficha-encabezado,
+.resumen-academico {
+    margin-bottom: 1rem;
+    padding: 1.25rem;
+    background: #f8f9fa;
+    border: 1px solid var(--portal-border);
+    border-radius: 0.75rem;
+}
+
+.resumen-academico p {
+    margin-bottom: 0.5rem;
+    overflow-wrap: anywhere;
+}
+
+/* Registro de notas */
 
 .seccion-registro-notas {
     display: block;
     width: 100%;
-    margin: 24px 0;
-    padding: 20px;
-    box-sizing: border-box;
-    background: #ffffff;
-    border: 1px solid #dce5ef;
-    border-radius: 12px;
+    margin: 1.5rem 0;
+    padding: 1.25rem;
+    background: #fff;
+    border: 1px solid var(--portal-border);
+    border-radius: 0.75rem;
 }
 
 .seccion-registro-notas h3 {
-    margin-top: 0;
-    margin-bottom: 12px;
-}
-
-.seccion-registro-notas .registro-fila {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: end;
-    gap: 12px;
-    padding: 14px 0;
-    border-bottom: 1px solid #e5eaf0;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
 }
 
 .seccion-registro-notas .registro-fila input {
-    max-width: 180px;
+    width: 100%;
+    max-width: 220px;
 }
 
+/* Tablas responsivas */
+
+.table-responsive {
+    max-width: 100%;
+    border-radius: 0.5rem;
+}
+
+.table {
+    vertical-align: middle;
+}
+
+.table th,
+.table td {
+    overflow-wrap: anywhere;
+}
+
+/* Accesibilidad */
+
+button,
+a,
+input,
+select,
+textarea {
+    scroll-margin-top: 1rem;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid #86b7fe;
+    outline-offset: 2px;
+}
+
+/* Pantallas pequeñas */
+
+@media (max-width: 576px) {
+    #listaCursos {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .formulario-portal {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 1rem;
+    }
+
+    .formulario-portal h3 {
+        grid-column: auto;
+    }
+
+    .registro-fila {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .registro-fila button,
+    .formulario-portal button {
+        width: 100%;
+    }
+
+    .seccion-registro-notas {
+        padding: 1rem;
+    }
+
+    .seccion-registro-notas .registro-fila input {
+        max-width: 100%;
+    }
+}
+
+/* Respeta las preferencias de movimiento del usuario */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
