@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluaciones | Portal Docente</title>
+    <link rel="stylesheet" href="../portal-docente.css">
+    <script src="../js/comun.js" defer></script>
+    <script src="../js/evaluaciones.js" defer></script>
+</head>
+<body>
+    <header class="encabezado">
+        <div>
+            <h1>Portal Docente</h1>
+            <p>Gestión de evaluaciones y ponderaciones</p>
+        </div>
+        <a href="cursos.html">Volver a cursos</a>
+    </header>
+
+    <main class="contenedor">
+        <section class="bienvenida">
+            <h2>Evaluaciones del curso</h2>
+            <p>
+                Consulta las evaluaciones y sus porcentajes
+                para cada curso asignado.
+            </p>
+        </section>
+
+        <section class="panel">
+            <h2>Seleccionar curso</h2>
+
+            <label class="campo-portal">
+                <span>Curso asignado</span>
+                <select id="selectorCurso" required>
+                    <option value="">Cargando cursos...</option>
+                </select>
+            </label>
+
+            <p id="mensaje" class="mensaje" role="status">
+                Consultando cursos asignados...
+            </p>
+        </section>
+
+        <section id="seccionEvaluaciones" class="panel" hidden>
+            <h2 id="tituloCurso">Evaluaciones del curso</h2>
+            <p id="detalleCurso"></p>
+
+            <div class="resumen-ponderaciones">
+                <p>
+                    Porcentaje asignado:
+                    <strong id="totalPonderacion">0.00 %</strong>
+                </p>
+                <p>
+                    Porcentaje disponible:
+                    <strong id="porcentajeRestante">100.00 %</strong>
+                </p>
+            </div>
+
+            <h3>Evaluaciones registradas</h3>
+            <div id="listaEvaluaciones"></div>
+        </section>
+    </main>
+
+    <footer>Portal Docente · Proyecto académico</footer><div hidden>
+    <h3>Registrar evaluación</h3>
+
+    <form id="formularioEvaluacion">
+        <input type="text" id="nombreEvaluacion" name="nombre">
+        <input type="text" id="tipoEvaluacion" name="tipo">
+        <input type="number" id="porcentajeEvaluacion" name="porcentaje">
+        <input type="number" id="ordenEvaluacion" name="orden">
+        <button id="botonGuardar" type="submit">Crear evaluación</button>
+    </form>
+
+    <p id="mensajeEvaluacion" class="mensaje" role="status"></p>
+</div>
+
+<h3>Evaluaciones registradas</h3>
+<div id="listaEvaluaciones"></div>
+</body>
+</html>
