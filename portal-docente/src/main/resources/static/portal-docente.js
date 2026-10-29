@@ -1114,7 +1114,7 @@ function crearTablaCalificaciones() {
                 );
 
                 // Actualizar el registro local con la respuesta del servidor.
-                const indicer = calificacionesActuales.findIndex((item) =>
+                const indice = calificacionesActuales.findIndex((item) =>
                     Number(item.matriculaId) === Number(estudiante.matriculaId) &&
                     Number(item.actividadEvaluableId) === Number(evaluacion.selector.value)
                 );
