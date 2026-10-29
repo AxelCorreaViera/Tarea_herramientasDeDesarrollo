@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudiantes | Portal Docente</title>
+    <link rel="stylesheet" href="../portal-docente.css">
+    <script src="../js/comun.js" defer></script>
+    <script src="../js/estudiantes.js" defer></script>
+</head>
+
+<body>
+    <header class="encabezado">
+        <div>
+            <h1>Portal Docente</h1>
+            <p>Consulta de estudiantes matriculados</p>
+        </div>
+        <a href="cursos.html">Volver a cursos</a>
+    </header>
+
+    <main class="contenedor">
+        <section class="bienvenida">
+            <h2>Estudiantes</h2>
+            <p>
+                Selecciona uno de tus cursos asignados para consultar
+                a sus estudiantes y revisar sus fichas académicas.
+            </p>
+        </section>
+
+        <section class="panel">
+            <h2>Seleccionar curso</h2>
+
+            <label class="campo-portal">
+                <span>Curso asignado</span>
+                <select id="selectorCurso" required>
+                    <option value="">Cargando cursos...</option>
+                </select>
+            </label>
+
+            <p id="mensaje" class="mensaje" role="status">
+                Consultando cursos asignados...
+            </p>
+        </section>
+
+        <section id="seccionEstudiantes" class="panel" hidden>
+            <h2 id="tituloCurso">Estudiantes matriculados</h2>
+            <p id="detalleCurso"></p>
+
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Apellidos y nombres</th>
+                            <th>Correo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaEstudiantes"></tbody>
+                </table>
+            </div>
+
+            <p id="mensajeEstudiantes" class="mensaje" role="status"></p>
+        </section>
+    </main>
+
+    <footer>
+        Portal Docente · Proyecto académico
+    </footer>
+</body>
+
+</html>
