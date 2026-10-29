@@ -101,85 +101,153 @@ public class DatosIniciales {
                         }
 
                         // 3. Asignar cada curso al docente.
+                        // Cada curso tendrá su propia sección en el periodo 2026-II.
                         List<AsignacionDocente> asignaciones = new ArrayList<>();
 
-                        for (Curso curso : cursos) {
+                        String[] secciones = { "A", "B", "A", "C", "B" };
+
+                        for (int i = 0; i < cursos.size(); i++) {
                                 AsignacionDocente asignacion = new AsignacionDocente();
 
                                 asignacion.setDocente(docente);
-                                asignacion.setCurso(curso);
-                                asignacion.setSeccion("A");
+                                asignacion.setCurso(cursos.get(i));
+                                asignacion.setSeccion(secciones[i]);
                                 asignacion.setPeriodoAcademico("2026-II");
 
-                                asignaciones.add(
-                                                asignacionRepository.save(asignacion));
+                                asignaciones.add(asignacionRepository.save(asignacion));
                         }
 
-                        // 4. Datos ficticios para los 75 estudiantes.
-                        // Cada curso tiene su propio grupo de 15 estudiantes.
+                        // 4. Crear 123 estudiantes ficticios con datos diferenciados por curso.
+                        // Cada curso tiene su propio grupo de nombres y apellidos.
+
                         String[][] nombresPorCurso = {
                                         {
-                                                        "Ana", "Luis", "María", "José", "Lucía",
-                                                        "Carlos", "Valeria", "Diego", "Camila", "Andrés",
-                                                        "Daniela", "Miguel", "Sofía", "Jorge", "Paola"
+                                                        "Ana", "Luis", "Maria", "Jose", "Lucia", "Carlos",
+                                                        "Valeria", "Diego", "Camila", "Andres", "Daniela",
+                                                        "Miguel", "Sofia", "Jorge", "Paola", "Elena",
+                                                        "Martin", "Claudia", "Rafael", "Irene", "Mateo", "Alma"
                                         },
                                         {
-                                                        "Gabriela", "Fernando", "Isabella", "Ricardo", "Mónica",
-                                                        "Sebastián", "Natalia", "Adrián", "Valentina", "Bruno",
-                                                        "Claudia", "Martín", "Ximena", "Alonso", "Patricia"
+                                                        "Gabriela", "Fernando", "Isabella", "Ricardo", "Monica",
+                                                        "Sebastian", "Natalia", "Adrian", "Valentina", "Bruno",
+                                                        "Ximena", "Alonso", "Patricia", "Emilio", "Julieta",
+                                                        "Franco", "Renata", "Cristian", "Fabiola", "Oscar",
+                                                        "Jimena", "Alvaro", "Hector", "Marina", "Esteban", "Lidia"
                                         },
                                         {
-                                                        "Daniel", "Alejandra", "Rodrigo", "Carolina", "Emilio",
-                                                        "Julieta", "Franco", "Renata", "Cristian", "Fabiola",
-                                                        "Óscar", "Jimena", "Álvaro", "Milagros", "Héctor"
+                                                        "Daniel", "Alejandra", "Rodrigo", "Carolina", "Bianca",
+                                                        "Gabriel", "Kiara", "Raul", "Antonella", "Mauricio",
+                                                        "Lorena", "Ivan", "Pilar", "Gonzalo", "Ariana",
+                                                        "Nicolas", "Veronica", "Leonardo", "Abril", "Cecilia",
+                                                        "Facundo", "Diana", "Renzo", "Silvia"
                                         },
                                         {
-                                                        "Andrea", "Samuel", "Fernanda", "Eduardo", "Bianca",
-                                                        "Gabriel", "Kiara", "Raúl", "Antonella", "Mauricio",
-                                                        "Lorena", "Iván", "Pilar", "Esteban", "Rocío"
+                                                        "Andrea", "Samuel", "Fernanda", "Eduardo", "Micaela",
+                                                        "Joaquin", "Tatiana", "Marco", "Florencia", "Alberto",
+                                                        "Rocio", "Enrique", "Beatriz", "Cesar", "Noelia",
+                                                        "Ignacio", "Carla", "Benjamin", "Olivia", "Felipe",
+                                                        "Teresa", "Santiago", "Miranda", "Pedro", "Alicia",
+                                                        "Julian", "Eva", "Manuel", "Amparo", "Agustin"
                                         },
                                         {
-                                                        "Mariano", "Elena", "Tomás", "Ariana", "Nicolás",
-                                                        "Verónica", "Leonardo", "Abril", "Gonzalo", "Irene",
-                                                        "Mateo", "Cecilia", "Facundo", "Diana", "Renzo"
+                                                        "Mariano", "Tomasa", "Nicolas", "Valeria", "Dario",
+                                                        "Belen", "Lorenzo", "Amelia", "Ezequiel", "Clara",
+                                                        "Salvador", "Estela", "Ruben", "Lourdes", "Axel",
+                                                        "Violeta", "Ismael", "Tamara", "Pablo", "Carmen",
+                                                        "Ernesto"
                                         }
                         };
 
-                        // Apellidos variados para cada grupo de estudiantes.
-                        String[] apellidos = {
-                                        "García López",
-                                        "Pérez Díaz",
-                                        "Torres Ruiz",
-                                        "Flores Sánchez",
-                                        "Rojas Mendoza",
-                                        "Vargas Castro",
-                                        "Chávez Medina",
-                                        "Ramírez Silva",
-                                        "Herrera Cruz",
-                                        "Díaz Romero",
-                                        "Castillo Vega",
-                                        "Morales Ríos",
-                                        "Navarro León",
-                                        "Córdova Reyes",
-                                        "Mendoza Paredes"
+                        String[][] apellidosPorCurso = {
+                                        {
+                                                        "Garcia Lopez", "Perez Diaz", "Torres Ruiz", "Flores Sanchez",
+                                                        "Rojas Mendoza", "Vargas Castro", "Chavez Medina",
+                                                        "Ramirez Silva",
+                                                        "Herrera Cruz", "Diaz Romero", "Castillo Vega", "Morales Rios",
+                                                        "Navarro Leon", "Cordova Reyes", "Mendoza Paredes",
+                                                        "Soto Aguilar",
+                                                        "Campos Fuentes", "Salazar Ortiz", "Ponce Cabrera",
+                                                        "Vera Lozano",
+                                                        "Espinoza Rivas", "Acosta Peña"
+                                        },
+                                        {
+                                                        "Fernandez Soto", "Gutierrez Campos", "Mendoza Rojas",
+                                                        "Silva Paredes",
+                                                        "Cabrera Torres", "Aguilar Navarro", "Fuentes Ramirez",
+                                                        "Ortiz Castillo",
+                                                        "Lozano Herrera", "Rivas Morales", "Peña Vargas",
+                                                        "Reyes Salazar",
+                                                        "Cruz Espinoza", "Vega Ponce", "Romero Acosta", "Leon Flores",
+                                                        "Medina Garcia", "Ruiz Fernandez", "Duran Castro",
+                                                        "Bravo Cardenas",
+                                                        "Mejia Valdez", "Palacios Soto", "Quispe Huaman",
+                                                        "Yupanqui Flores",
+                                                        "Chumpitaz Rojas", "Arce Mendoza"
+                                        },
+                                        {
+                                                        "Benavides Cruz", "Valdez Romero", "Cardenas Vega",
+                                                        "Huaman Rios",
+                                                        "Quispe Leon", "Yupanqui Castro", "Arce Flores",
+                                                        "Duran Herrera",
+                                                        "Mejia Silva", "Palacios Reyes", "Bravo Medina", "Soto Chavez",
+                                                        "Fuentes Morales", "Ponce Vargas", "Acosta Ramirez",
+                                                        "Lozano Torres",
+                                                        "Espinoza Diaz", "Cabrera Garcia", "Salazar Flores",
+                                                        "Ortiz Mendoza",
+                                                        "Rivas Paredes", "Aguilar Ruiz", "Campos Navarro",
+                                                        "Gutierrez Vega"
+                                        },
+                                        {
+                                                        "Huerta Salas", "Valencia Rojas", "Montoya Cruz",
+                                                        "Bustamante Leon",
+                                                        "Caceres Silva", "Vasquez Ponce", "Delgado Reyes",
+                                                        "Maldonado Ruiz",
+                                                        "Carrasco Vega", "Tapia Mendoza", "Ochoa Ramirez",
+                                                        "Miranda Flores",
+                                                        "Saavedra Castro", "Zamora Torres", "Cueva Morales",
+                                                        "Luna Herrera",
+                                                        "Arias Navarro", "Pacheco Diaz", "Villanueva Soto",
+                                                        "Benites Garcia",
+                                                        "Cornejo Rios", "Zuniga Medina", "Samaniego Lopez",
+                                                        "Paredes Chavez",
+                                                        "Alvarado Campos", "Espinoza Leon", "Chirinos Vera",
+                                                        "Pinto Acosta",
+                                                        "Peralta Quispe", "Noriega Huaman"
+                                        },
+                                        {
+                                                        "Alarcon Rivas", "Bustillos Paredes", "Calderon Soto",
+                                                        "Del Carpio Ruiz",
+                                                        "Escobar Vega", "Figueroa Torres", "Gamarra Leon",
+                                                        "Huertas Castro",
+                                                        "Ibarra Flores", "Jauregui Mendoza", "Lazo Herrera",
+                                                        "Mori Ramirez",
+                                                        "Navarrete Cruz", "Olivares Silva", "Paz Salazar",
+                                                        "Quezada Reyes",
+                                                        "Roldan Medina", "Sarmiento Diaz", "Tello Navarro",
+                                                        "Urbina Morales",
+                                                        "Valdivia Rojas"
+                                        }
                         };
 
-                        // 5. Crear 15 estudiantes y 15 matrículas por curso.
+                        int[] cantidadesEstudiantes = { 22, 26, 24, 30, 21 };
                         int numeroEstudiante = 1;
 
                         for (int i = 0; i < asignaciones.size(); i++) {
                                 AsignacionDocente asignacion = asignaciones.get(i);
 
-                                for (int j = 0; j < 15; j++) {
+                                for (int j = 0; j < cantidadesEstudiantes[i]; j++) {
+
+                                        String codigo = String.format(
+                                                        "2026%04d", numeroEstudiante);
+
+                                        String correo = String.format(
+                                                        "estudiante%03d@demo.edu.pe", numeroEstudiante);
 
                                         Estudiante estudiante = crearEstudiante(
-                                                        String.format(
-                                                                        "2026%04d", numeroEstudiante),
+                                                        codigo,
                                                         nombresPorCurso[i][j],
-                                                        apellidos[j],
-                                                        String.format(
-                                                                        "estudiante%03d@demo.edu.pe",
-                                                                        numeroEstudiante));
+                                                        apellidosPorCurso[i][j],
+                                                        correo);
 
                                         estudiante = estudianteRepository.save(estudiante);
 
