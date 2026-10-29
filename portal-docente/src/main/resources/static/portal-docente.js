@@ -9,6 +9,8 @@ const tituloCurso = document.getElementById("tituloCurso");
 const detalleCurso = document.getElementById("detalleCurso");
 const tablaEstudiantes = document.getElementById("tablaEstudiantes");
 const mensajeEstudiantes = document.getElementById("mensajeEstudiantes");
+const buscarEstudiante = document.getElementById("buscarEstudiante");
+const mensajeBusquedaEstudiantes = document.getElementById("mensajeBusquedaEstudiantes");
 
 let cursoActual = null;
 let estudiantesActuales = [];
@@ -242,21 +244,45 @@ async function cargarCurso(curso) {
 }
 
 
+
 function dibujarEstudiantes() {
     tablaEstudiantes.replaceChildren();
 
-    estudiantesActuales.forEach((estudiante) => {
+    const termino = buscarEstudiante.value.trim().toLowerCase();
+
+    const estudiantesFiltrados = estudiantesActuales.filter((estudiante) => {
+        const texto = [
+            estudiante.codigoEstudiante,
+            estudiante.apellidos,
+            estudiante.nombres,
+            estudiante.correo
+        ].join(" ").toLowerCase();
+
+        return texto.includes(termino);
+    });
+
+
+    mensajeBusquedaEstudiantes.textContent =
+        `Mostrando ${estudiantesFiltrados.length} de ${estudiantesActuales.length} estudiantes.`;
+
+
+    estudiantesFiltrados.forEach((estudiante) => {
         const fila = document.createElement("tr");
 
         fila.append(
             crearElemento("td", estudiante.codigoEstudiante),
-            crearElemento("td", `${estudiante.apellidos}, ${estudiante.nombres}`),
+            crearElemento(
+                "td",
+                `${estudiante.apellidos}, ${estudiante.nombres}`
+            ),
             crearElemento("td", estudiante.correo)
         );
 
         const celdaAcciones = document.createElement("td");
+
         const botonFicha = crearElemento("button", "Ver ficha");
         botonFicha.type = "button";
+        botonFicha.className = "btn btn-outline-primary btn-sm";
 
         botonFicha.addEventListener("click", () => {
             mostrarFichaEstudiante(estudiante);
@@ -268,14 +294,23 @@ function dibujarEstudiantes() {
         tablaEstudiantes.appendChild(fila);
     });
 
-    if (estudiantesActuales.length === 0) {
+    if (estudiantesFiltrados.length === 0) {
         const fila = document.createElement("tr");
-        const celda = crearElemento("td", "No hay estudiantes matriculados.");
+        const celda = crearElemento(
+            "td",
+            termino
+                ? "No se encontraron estudiantes con esa búsqueda."
+                : "No hay estudiantes matriculados."
+        );
+
         celda.colSpan = 4;
+        celda.className = "text-center text-secondary py-4";
+
         fila.appendChild(celda);
         tablaEstudiantes.appendChild(fila);
     }
 }
+
 
 
 async function mostrarFichaEstudiante(estudiante) {
@@ -1036,6 +1071,6 @@ function crearTablaCalificaciones() {
 
     return tabla;
 }
-
+buscarEstudiante.addEventListener("input", dibujarEstudiantes);
 
 cargarCursos();
