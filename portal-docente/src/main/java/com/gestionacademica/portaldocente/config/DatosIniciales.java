@@ -116,18 +116,52 @@ public class DatosIniciales {
                         }
 
                         // 4. Datos ficticios para los 75 estudiantes.
-                        String[] nombres = {
-                                        "Ana", "Luis", "María", "José", "Lucía",
-                                        "Carlos", "Valeria", "Diego", "Camila", "Andrés",
-                                        "Daniela", "Miguel", "Sofía", "Jorge", "Paola"
+                        // Cada curso tiene su propio grupo de 15 estudiantes.
+                        String[][] nombresPorCurso = {
+                                        {
+                                                        "Ana", "Luis", "María", "José", "Lucía",
+                                                        "Carlos", "Valeria", "Diego", "Camila", "Andrés",
+                                                        "Daniela", "Miguel", "Sofía", "Jorge", "Paola"
+                                        },
+                                        {
+                                                        "Gabriela", "Fernando", "Isabella", "Ricardo", "Mónica",
+                                                        "Sebastián", "Natalia", "Adrián", "Valentina", "Bruno",
+                                                        "Claudia", "Martín", "Ximena", "Alonso", "Patricia"
+                                        },
+                                        {
+                                                        "Daniel", "Alejandra", "Rodrigo", "Carolina", "Emilio",
+                                                        "Julieta", "Franco", "Renata", "Cristian", "Fabiola",
+                                                        "Óscar", "Jimena", "Álvaro", "Milagros", "Héctor"
+                                        },
+                                        {
+                                                        "Andrea", "Samuel", "Fernanda", "Eduardo", "Bianca",
+                                                        "Gabriel", "Kiara", "Raúl", "Antonella", "Mauricio",
+                                                        "Lorena", "Iván", "Pilar", "Esteban", "Rocío"
+                                        },
+                                        {
+                                                        "Mariano", "Elena", "Tomás", "Ariana", "Nicolás",
+                                                        "Verónica", "Leonardo", "Abril", "Gonzalo", "Irene",
+                                                        "Mateo", "Cecilia", "Facundo", "Diana", "Renzo"
+                                        }
                         };
 
+                        // Apellidos variados para cada grupo de estudiantes.
                         String[] apellidos = {
                                         "García López",
                                         "Pérez Díaz",
                                         "Torres Ruiz",
                                         "Flores Sánchez",
-                                        "Rojas Mendoza"
+                                        "Rojas Mendoza",
+                                        "Vargas Castro",
+                                        "Chávez Medina",
+                                        "Ramírez Silva",
+                                        "Herrera Cruz",
+                                        "Díaz Romero",
+                                        "Castillo Vega",
+                                        "Morales Ríos",
+                                        "Navarro León",
+                                        "Córdova Reyes",
+                                        "Mendoza Paredes"
                         };
 
                         // 5. Crear 15 estudiantes y 15 matrículas por curso.
@@ -141,8 +175,8 @@ public class DatosIniciales {
                                         Estudiante estudiante = crearEstudiante(
                                                         String.format(
                                                                         "2026%04d", numeroEstudiante),
-                                                        nombres[j],
-                                                        apellidos[i],
+                                                        nombresPorCurso[i][j],
+                                                        apellidos[j],
                                                         String.format(
                                                                         "estudiante%03d@demo.edu.pe",
                                                                         numeroEstudiante));

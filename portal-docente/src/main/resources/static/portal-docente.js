@@ -662,55 +662,168 @@ function dibujarGestionCurso() {
     ));
 }
 
+
 function crearFormularioSesion() {
     const fecha = crearCampo("Fecha de clase", "date", "fecha");
+
+    // Calcula la fecha de hoy en la zona horaria local.
+    const hoy = new Date();
+    hoy.setMinutes(hoy.getMinutes() - hoy.getTimezoneOffset());
+    fecha.campo.min = hoy.toISOString().slice(0, 10);
+
+    const horaInicio = crearCampo(
+        "Hora de inicio", "time", "horaInicio"
+    );
+    horaInicio.campo.min = "07:00";
+    horaInicio.campo.max = "22:59";
+
+    const horaFin = crearCampo(
+        "Hora de fin", "time", "horaFin"
+    );
+    horaFin.campo.min = "07:01";
+    horaFin.campo.max = "23:00";
+
     const descripcion = crearCampo(
-        "Descripción (opcional)", "text", "descripcion", false
+        "Descripción (opcional)",
+        "text",
+        "descripcion",
+        false
     );
     descripcion.campo.maxLength = 250;
 
-    return crearFormulario("Crear sesión", [fecha, descripcion], async () => {
-        const datos = {
-            fecha: fecha.campo.value,
-            descripcion: descripcion.campo.value.trim() || null
-        };
+    // Ajusta la hora mínima de fin al cambiar la hora de inicio.
+    horaInicio.campo.addEventListener("change", () => {
+        if (horaInicio.campo.value) {
+            horaFin.campo.min = horaInicio.campo.value;
+        } else {
+            horaFin.campo.min = "07:01";
+        }
 
-        await consultarAPI(
-            `/api/asignaciones/${cursoActual.id}/sesiones`,
-            {
-                method: "POST",
-                body: JSON.stringify(datos)
-            }
-        );
-
-        const actualizado = await cargarCurso(cursoActual);
-
-        mostrarMensajeOperacion(
-            actualizado
-                ? "Sesión creada correctamente."
-                : "La sesión se guardó, pero no se pudo actualizar la información del curso. Vuelve a cargar el curso."
-        );
+        if (
+            horaFin.campo.value
+            && horaFin.campo.value <= horaInicio.campo.value
+        ) {
+            horaFin.campo.value = "";
+        }
     });
+
+    return crearFormulario(
+        "Registrar sesión de clase",
+        [fecha, horaInicio, horaFin, descripcion],
+        async () => {
+            const fechaSeleccionada = fecha.campo.value;
+            const inicio = horaInicio.campo.value;
+            const fin = horaFin.campo.value;
+
+            if (!fechaSeleccionada || !inicio || !fin) {
+                throw new Error(
+                    "Completa la fecha, la hora de inicio y la hora de fin."
+                );
+            }
+
+            if (fechaSeleccionada < fecha.campo.min) {
+                throw new Error(
+                    "No puedes registrar sesiones en días pasados."
+                );
+            }
+
+            if (inicio < "07:00" || inicio > "22:59") {
+                throw new Error(
+                    "La hora de inicio debe estar entre las 07:00 y las 22:59."
+                );
+            }
+
+            if (fin <= inicio) {
+                throw new Error(
+                    "La hora de fin debe ser posterior a la hora de inicio."
+                );
+            }
+
+            if (fin > "23:00" || fin < "07:01") {
+                throw new Error(
+                    "La hora de fin debe estar entre las 07:01 y las 23:00."
+                );
+            }
+
+            const datos = {
+                fecha: fechaSeleccionada,
+                horaInicio: inicio,
+                horaFin: fin,
+                descripcion: descripcion.campo.value.trim() || null
+            };
+
+            await consultarAPI(
+                `/api/asignaciones/${cursoActual.id}/sesiones`,
+                {
+                    method: "POST",
+                    body: JSON.stringify(datos)
+                }
+            );
+
+            const actualizado = await cargarCurso(cursoActual);
+
+            mostrarMensajeOperacion(
+                actualizado
+                    ? "Sesión registrada correctamente."
+                    : "La sesión se guardó, pero no se pudo actualizar la información del curso. Vuelve a cargar el curso."
+            );
+        }
+    );
 }
+
+
 
 function crearListaSesiones() {
     const contenedor = document.createElement("div");
     contenedor.className = "lista-registros";
 
     if (sesionesActuales.length === 0) {
-        contenedor.appendChild(crearElemento("p", "Todavía no hay sesiones."));
+        contenedor.appendChild(
+            crearElemento("p", "Todavía no hay sesiones registradas.")
+        );
         return contenedor;
     }
 
     sesionesActuales.forEach((sesion) => {
-        contenedor.appendChild(crearElemento(
+        const tarjeta = document.createElement("article");
+        tarjeta.className = "registro-sesion";
+
+        const titulo = crearElemento(
+            "h4",
+            `${sesion.diaSemana} — ${new Intl.DateTimeFormat("es-PE", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            }).format(new Date(`${sesion.fecha}T00:00:00`))}`
+        );
+
+        const inicio = (sesion.horaInicio || "").substring(0, 5);
+        const fin = (sesion.horaFin || "").substring(0, 5);
+
+        const duracionHoras = Math.floor(sesion.duracionMinutos / 60);
+        const duracionMinutos = sesion.duracionMinutos % 60;
+
+        const duracionTexto = duracionHoras > 0
+            ? `${duracionHoras} h ${duracionMinutos} min`
+            : `${duracionMinutos} min`;
+
+        const horario = crearElemento(
             "p",
-            `${sesion.fecha} — ${sesion.descripcion || "Clase"} (ID ${sesion.id})`
-        ));
+            `Horario: ${inicio}–${fin} | Duración: ${duracionTexto}`
+        );
+
+        const descripcion = crearElemento(
+            "p",
+            sesion.descripcion || "Clase"
+        );
+
+        tarjeta.append(titulo, horario, descripcion);
+        contenedor.appendChild(tarjeta);
     });
 
     return contenedor;
 }
+
 
 function crearFormularioEvaluacion() {
     const nombre = crearCampo("Nombre", "text", "nombre");
@@ -1001,7 +1114,7 @@ function crearTablaCalificaciones() {
                 );
 
                 // Actualizar el registro local con la respuesta del servidor.
-                const indice = calificacionesActuales.findIndex((item) =>
+                const indicer = calificacionesActuales.findIndex((item) =>
                     Number(item.matriculaId) === Number(estudiante.matriculaId) &&
                     Number(item.actividadEvaluableId) === Number(evaluacion.selector.value)
                 );

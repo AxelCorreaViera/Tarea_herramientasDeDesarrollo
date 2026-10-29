@@ -316,3 +316,21 @@ footer {
     max-width: 180px;
 }
 
+.registro-sesion {
+    margin: 12px 0;
+    padding: 14px 16px;
+    border: 1px solid #d8e0eb;
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.registro-sesion h4 {
+    margin: 0 0 8px;
+    text-transform: capitalize;
+}
+
+.registro-sesion p {
+    margin: 6px 0;
+    line-height: 1.5;
+}
+
