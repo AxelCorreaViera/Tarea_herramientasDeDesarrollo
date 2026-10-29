@@ -330,7 +330,6 @@ async function mostrarFichaEstudiante(estudiante) {
 
         dibujarResumenAcademico(ficha, promedio, calificaciones);
         dibujarHistorialCalificaciones(ficha, calificaciones);
-        dibujarRegistroNotas(ficha, estudiante);
         dibujarHistorialAsistencia(ficha, asistencias);
     } catch (error) {
         ficha.replaceChildren(
@@ -477,84 +476,6 @@ function dibujarHistorialCalificaciones(ficha, calificaciones) {
     seccion.appendChild(contenedor);
     ficha.appendChild(seccion);
 }
-
-/**
- * Crea un formulario para registrar o actualizar la nota
- * de cada evaluación del curso seleccionado.
- */
-function dibujarRegistroNotas(ficha, estudiante) {
-    const seccion = crearElemento("section");
-    seccion.className = "seccion-registro-notas";
-
-    seccion.appendChild(
-        crearElemento("h3", "Registro de calificaciones")
-    );
-
-    if (evaluacionesActuales.length === 0) {
-        seccion.appendChild(
-            crearElemento(
-                "p",
-                "Este curso todavía no tiene evaluaciones registradas."
-            )
-        );
-
-        ficha.appendChild(seccion);
-        return;
-    }
-
-    evaluacionesActuales.forEach((evaluacion) => {
-        const nombreEvaluacion = obtenerTexto(
-            evaluacion,
-            "nombre",
-            "titulo",
-            "descripcion"
-        ) || `Evaluación ${evaluacion.id}`;
-
-        const campoNota = crearCampo(
-            `Nota para ${nombreEvaluacion} (0 a 20)`,
-            "number",
-            "nota",
-            true
-        );
-
-        campoNota.campo.min = "0";
-        campoNota.campo.max = "20";
-        campoNota.campo.step = "0.01";
-
-        const formulario = crearFormulario(
-            nombreEvaluacion,
-            [campoNota],
-            async () => {
-                const nota = Number(campoNota.campo.value);
-
-                if (
-                    !Number.isFinite(nota) ||
-                    nota < 0 ||
-                    nota > 20
-                ) {
-                    throw new Error(
-                        "La nota debe estar entre 0 y 20."
-                    );
-                }
-
-                await consultarAPI(
-                    `/api/matriculas/${estudiante.matriculaId}/calificaciones/${evaluacion.id}`,
-                    {
-                        method: "POST",
-                        body: JSON.stringify({ nota })
-                    }
-                );
-
-                await mostrarFichaEstudiante(estudiante);
-            }
-        );
-
-        seccion.appendChild(formulario);
-    });
-
-    ficha.appendChild(seccion);
-}
-
 /**
  * Muestra las sesiones y el estado de asistencia del estudiante.
  */

@@ -9,6 +9,14 @@
     <script src="portal-docente.js" defer></script>
 </head>
 
+<body><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Portal Docente</title>
+    <link rel="stylesheet" href="portal-docente.css">
+</head>
 <body>
     <header class="encabezado">
         <div>
@@ -20,35 +28,60 @@
 
     <main class="contenedor">
         <section class="bienvenida">
-            <h2>Mis cursos asignados</h2>
-            <p>Selecciona un curso para consultar a sus estudiantes matriculados.</p>
+            <h2>Bienvenido al Portal Docente</h2>
+            <p>
+                Consulta tus cursos asignados y administra la información
+                académica de los estudiantes desde un solo lugar.
+            </p>
+            <a class="boton-inicio" href="paginas/cursos.html">
+                Ir a ver cursos
+            </a>
         </section>
-
-        <p id="mensaje" class="mensaje" role="status">Cargando cursos...</p>
 
         <section>
-            <div id="listaCursos" class="lista-cursos"></div>
-        </section>
+            <h2>Áreas de gestión académica</h2>
 
-        <section id="seccionEstudiantes" class="panel" hidden>
-            <h2 id="tituloCurso">Estudiantes matriculados</h2>
-            <p id="detalleCurso"></p>
+            <div class="lista-cursos">
+                <article class="tarjeta-curso">
+                    <h3>Estudiantes</h3>
+                    <p>
+                        Consulta la información de los estudiantes
+                        matriculados en tus cursos.
+                    </p>
+                </article>
 
-            <div class="tabla-contenedor">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Apellidos y nombres</th>
-                            <th>Correo</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaEstudiantes"></tbody>
-                </table>
+                <article class="tarjeta-curso">
+                    <h3>Sesiones de clase</h3>
+                    <p>
+                        Consulta y administra las sesiones programadas
+                        para cada curso.
+                    </p>
+                </article>
+
+                <article class="tarjeta-curso">
+                    <h3>Asistencia</h3>
+                    <p>
+                        Registra la asistencia y consulta el historial
+                        de los estudiantes.
+                    </p>
+                </article>
+
+                <article class="tarjeta-curso">
+                    <h3>Evaluaciones</h3>
+                    <p>
+                        Consulta y administra las actividades evaluables
+                        de tus cursos.
+                    </p>
+                </article>
+
+                <article class="tarjeta-curso">
+                    <h3>Calificaciones</h3>
+                    <p>
+                        Registra y actualiza las notas de los estudiantes
+                        según las evaluaciones del curso.
+                    </p>
+                </article>
             </div>
-
-            <p id="mensajeEstudiantes" class="mensaje"></p>
         </section>
     </main>
 
@@ -56,5 +89,4 @@
         Portal Docente · Proyecto académico
     </footer>
 </body>
-
 </html>

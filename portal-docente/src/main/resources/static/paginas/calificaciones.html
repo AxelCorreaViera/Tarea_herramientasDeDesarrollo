@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificaciones | Portal Docente</title>
+    <link rel="stylesheet" href="../portal-docente.css">
+    <script src="../js/comun.js" defer></script>
+    <script src="../js/calificaciones.js" defer></script>
+</head>
+<body>
+    <header class="encabezado">
+        <div>
+            <h1>Portal Docente</h1>
+            <p>Gestión de calificaciones</p>
+        </div>
+        <a href="cursos.html">Volver a mis cursos</a>
+    </header>
+
+    <main class="contenedor">
+        <section class="bienvenida">
+            <h2>Registro de calificaciones</h2>
+            <p>
+                Selecciona un curso y registra las notas de sus estudiantes
+                de forma individual.
+            </p>
+        </section>
+
+        <section class="panel">
+            <div class="campo-portal">
+                <label for="selectorCurso">Curso asignado</label>
+                <select id="selectorCurso" required>
+                    <option value="">Cargando cursos...</option>
+                </select>
+            </div>
+
+            <p id="mensaje" class="mensaje" role="status">
+                Cargando cursos...
+            </p>
+        </section>
+
+        <section id="seccionCalificaciones" class="panel panel-calificaciones" hidden>
+            <div class="encabezado-calificaciones">
+                <div>
+                    <h2 id="tituloCurso">Calificaciones del curso</h2>
+                    <p id="detalleCurso"></p>
+                </div>
+            </div>
+
+            <div class="selector-estudiante">
+                <div class="campo-portal">
+                    <label for="selectorEstudiante">Estudiante</label>
+                    <select id="selectorEstudiante">
+                        <option value="">Selecciona un estudiante</option>
+                    </select>
+                </div>
+
+                <p id="progresoEstudiantes" class="progreso-estudiantes"></p>
+            </div>
+
+            <div class="navegacion-estudiantes">
+                <button id="botonAnterior" type="button">
+                    ← Anterior
+                </button>
+
+                <button id="botonSiguiente" type="button">
+                    Siguiente →
+                </button>
+            </div>
+
+            <section id="datosEstudiante" class="datos-estudiante" hidden>
+                <h3 id="nombreEstudiante"></h3>
+                <p id="codigoEstudiante"></p>
+            </section>
+
+            <div id="listaEvaluaciones" class="lista-evaluaciones"></div>
+
+            <p id="mensajeCalificaciones" class="mensaje" role="status"></p>
+
+            <div class="navegacion-estudiantes navegacion-inferior">
+                <button id="botonAnteriorInferior" type="button">
+                    ← Estudiante anterior
+                </button>
+
+                <button id="botonSiguienteInferior" type="button">
+                    Estudiante siguiente →
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer>Portal Docente · Proyecto académico</footer>
+</body>
+</html>

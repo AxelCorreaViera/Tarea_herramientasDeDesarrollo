@@ -1,3 +1,8 @@
+
+/* ========================================
+   ESTILOS GENERALES
+======================================== */
+
 * {
     box-sizing: border-box;
 }
@@ -54,6 +59,14 @@ body {
     margin: 16px 0;
 }
 
+.error {
+    color: #b42318;
+}
+
+/* ========================================
+   TARJETAS DE CURSOS Y MÓDULOS
+======================================== */
+
 .lista-cursos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -70,6 +83,7 @@ body {
     box-shadow: 0 4px 14px #18365a0b;
 }
 
+.tarjeta-curso h2,
 .tarjeta-curso h3 {
     margin-top: 0;
     color: #173b68;
@@ -80,23 +94,112 @@ body {
     line-height: 1.5;
 }
 
-.tarjeta-curso button {
-    width: 100%;
+/* ========================================
+   BOTONES GENERALES
+======================================== */
+
+.tarjeta-curso button,
+.formulario-portal button,
+.registro-fila button {
     border: 0;
-    border-radius: 7px;
-    background: #245da0;
+    border-radius: 6px;
+    background: #173b68;
     color: white;
-    padding: 11px;
+    padding: 11px 14px;
     cursor: pointer;
     font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
 }
 
-.tarjeta-curso button:hover {
-    background: #173b68;
+.tarjeta-curso button:hover,
+.formulario-portal button:hover,
+.registro-fila button:hover {
+    background: #102b4d;
 }
+
+.tarjeta-curso button:focus-visible,
+.formulario-portal button:focus-visible,
+.registro-fila button:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+.formulario-portal button:disabled,
+.registro-fila button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+/* ========================================
+   BOTÓN PRINCIPAL: IR A VER CURSOS
+======================================== */
+
+a.boton-inicio,
+a.boton-inicio:visited {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 12px 22px;
+    background-color: #173b68;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid #173b68;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+a.boton-inicio:hover {
+    background-color: #102b4d;
+    color: #ffffff;
+}
+
+a.boton-inicio:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+/* ========================================
+   BOTONES DE NAVEGACIÓN DEL ENCABEZADO
+   Volver al portal / Volver a mis cursos
+======================================== */
+
+.encabezado a,
+.encabezado a:visited {
+    display: inline-block;
+    padding: 11px 16px;
+    background-color: #ffffff;
+    color: #173b68;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid #d9e6f5;
+    border-radius: 8px;
+    white-space: nowrap;
+    transition: background-color 0.2s ease,
+                color 0.2s ease;
+}
+
+.encabezado a:hover {
+    background-color: #d9e6f5;
+    color: #102b4d;
+}
+
+.encabezado a:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+/* ========================================
+   TABLAS
+======================================== */
 
 .tabla-contenedor {
+    width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 table {
@@ -117,34 +220,27 @@ th {
     color: #173b68;
 }
 
-footer {
-    padding: 24px;
-    text-align: center;
-    color: #66758a;
+/* ========================================
+   FORMULARIOS DEL PORTAL
+======================================== */
+
+#selectorCurso {
+    width: 100%;
+    max-width: 100%;
+    padding: 11px;
+    border: 1px solid #cbd7e5;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #243247;
+    font: inherit;
 }
 
-[hidden] {
-    display: none !important;
-}
-
-@media (max-width: 600px) {
-    .encabezado {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .contenedor {
-        margin-top: 22px;
-    }
-}
-
-#gestionCurso {
-    margin-top: 32px;
-}
-
-#gestionCurso > h2 {
-    margin-top: 32px;
-    color: #173b68;
+#selectorCurso:focus-visible,
+.campo-portal input:focus-visible,
+.campo-portal select:focus-visible,
+.registro-fila input:focus-visible {
+    outline: 2px solid #245da0;
+    outline-offset: 2px;
 }
 
 .formulario-portal {
@@ -182,31 +278,22 @@ footer {
     font: inherit;
 }
 
-.formulario-portal button,
-.registro-fila button {
-    border: 0;
-    border-radius: 6px;
-    background: #245da0;
-    color: white;
-    padding: 11px 14px;
-    cursor: pointer;
-}
-
-.formulario-portal button:disabled,
-.registro-fila button:disabled {
-    opacity: 0.6;
-    cursor: wait;
-}
-
 .lista-registros {
     background: white;
     border-radius: 8px;
     padding: 10px 18px;
 }
 
+/* ========================================
+   FILAS DE REGISTRO
+======================================== */
+
 .registro-fila {
     display: grid;
-    grid-template-columns: minmax(150px, 1.3fr) repeat(2, minmax(140px, 1fr)) auto;
+    grid-template-columns:
+        minmax(150px, 1.3fr)
+        repeat(2, minmax(140px, 1fr))
+        auto;
     gap: 12px;
     align-items: end;
     background: white;
@@ -216,13 +303,29 @@ footer {
     margin: 12px 0;
 }
 
-@media (max-width: 750px) {
-    .registro-fila {
-        grid-template-columns: 1fr;
-    }
+.registro-fila input,
+.registro-fila select {
+    min-width: 0;
+    max-width: 100%;
+    padding: 10px;
+    border: 1px solid #cbd7e5;
+    border-radius: 6px;
+    font: inherit;
 }
 
-/* Organización de las secciones del curso */
+/* ========================================
+   ORGANIZACIÓN DE SECCIONES DEL CURSO
+======================================== */
+
+#gestionCurso {
+    margin-top: 32px;
+}
+
+#gestionCurso > h2 {
+    margin-top: 32px;
+    color: #173b68;
+}
+
 .seccion-plegable {
     margin: 18px 0;
     padding: 16px;
@@ -243,7 +346,10 @@ footer {
     padding-bottom: 12px;
 }
 
-/* Ficha individual */
+/* ========================================
+   FICHA INDIVIDUAL DEL ESTUDIANTE
+======================================== */
+
 #fichaEstudiante {
     margin-top: 24px;
     scroll-margin-top: 20px;
@@ -287,6 +393,10 @@ footer {
     min-width: 150px;
 }
 
+/* ========================================
+   REGISTRO DE NOTAS EN FICHA DE ESTUDIANTE
+======================================== */
+
 .seccion-registro-notas {
     display: block;
     width: 100%;
@@ -316,6 +426,10 @@ footer {
     max-width: 180px;
 }
 
+/* ========================================
+   REGISTRO DE SESIONES
+======================================== */
+
 .registro-sesion {
     margin: 12px 0;
     padding: 14px 16px;
@@ -334,3 +448,288 @@ footer {
     line-height: 1.5;
 }
 
+/* ========================================
+   BOTONES DE NAVEGACIÓN EN TARJETAS
+======================================== */
+
+.tarjeta-curso a.boton-portal,
+.tarjeta-curso a.boton-portal:visited {
+    display: inline-block;
+    padding: 11px 14px;
+    margin-top: 10px;
+    background: #173b68;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid #173b68;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.tarjeta-curso a.boton-portal:hover {
+    background: #102b4d;
+    color: #ffffff;
+}
+
+.tarjeta-curso a.boton-portal:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+/* ========================================
+   PIE DE PÁGINA
+======================================== */
+
+footer {
+    padding: 24px;
+    text-align: center;
+    color: #66758a;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ========================================
+   DISEÑO RESPONSIVE
+======================================== */
+
+@media (max-width: 750px) {
+    .registro-fila {
+        grid-template-columns: 1fr;
+    }
+
+    .tabla-contenedor table {
+        min-width: 600px;
+    }
+}
+
+@media (max-width: 600px) {
+    .encabezado {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 22px 5%;
+    }
+
+    .encabezado a {
+        white-space: normal;
+    }
+
+    .contenedor {
+        margin-top: 22px;
+    }
+
+    .formulario-portal {
+        grid-template-columns: 1fr;
+    }
+
+    .seccion-registro-notas {
+        padding: 14px;
+    }
+}
+
+/* ========================================
+   CALIFICACIONES: VISTA POR ESTUDIANTE
+======================================== */
+
+.panel-calificaciones {
+    margin-top: 24px;
+}
+
+.encabezado-calificaciones {
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e4eaf1;
+}
+
+.encabezado-calificaciones h2 {
+    color: #173b68;
+}
+
+.encabezado-calificaciones p {
+    color: #52657d;
+}
+
+.selector-estudiante {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 20px;
+    align-items: end;
+    margin: 22px 0 14px;
+}
+
+.selector-estudiante .campo-portal {
+    min-width: 0;
+}
+
+.selector-estudiante select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd7e5;
+    border-radius: 7px;
+    background: #ffffff;
+    font: inherit;
+}
+
+.progreso-estudiantes {
+    margin: 0 0 10px;
+    color: #52657d;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.datos-estudiante {
+    margin: 18px 0;
+    padding: 16px 18px;
+    background: #edf3fa;
+    border: 1px solid #dce5ef;
+    border-radius: 10px;
+}
+
+.datos-estudiante h3 {
+    margin: 0 0 6px;
+    color: #173b68;
+}
+
+.datos-estudiante p {
+    margin: 0;
+    color: #52657d;
+}
+
+.lista-evaluaciones {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.tarjeta-evaluacion {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(210px, 0.8fr);
+    gap: 20px;
+    align-items: center;
+    padding: 18px;
+    background: #ffffff;
+    border: 1px solid #dce5ef;
+    border-radius: 10px;
+}
+
+.informacion-evaluacion {
+    min-width: 0;
+}
+
+.nombre-evaluacion {
+    margin: 0 0 8px;
+    color: #173b68;
+    overflow-wrap: anywhere;
+}
+
+.porcentaje-evaluacion {
+    margin: 0;
+    color: #52657d;
+    font-size: 14px;
+}
+
+.formulario-calificacion {
+    display: grid;
+    grid-template-columns: minmax(80px, 1fr) auto;
+    gap: 8px 12px;
+    align-items: end;
+}
+
+.formulario-calificacion label {
+    grid-column: 1 / -1;
+    color: #52657d;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.formulario-calificacion input {
+    width: 100%;
+    min-width: 0;
+    padding: 11px;
+    border: 1px solid #cbd7e5;
+    border-radius: 7px;
+    font: inherit;
+}
+
+.formulario-calificacion button,
+.navegacion-estudiantes button {
+    padding: 11px 14px;
+    background: #173b68;
+    color: #ffffff;
+    border: 0;
+    border-radius: 7px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.formulario-calificacion button:hover,
+.navegacion-estudiantes button:hover {
+    background: #102b4d;
+}
+
+.formulario-calificacion button:disabled,
+.navegacion-estudiantes button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.formulario-calificacion button:focus-visible,
+.navegacion-estudiantes button:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+.navegacion-estudiantes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin: 18px 0;
+}
+
+.navegacion-inferior {
+    padding-top: 16px;
+    border-top: 1px solid #e4eaf1;
+}
+
+.navegacion-estudiantes button[hidden] {
+    display: none;
+}
+
+@media (max-width: 650px) {
+    .selector-estudiante {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .progreso-estudiantes {
+        white-space: normal;
+    }
+
+    .tarjeta-evaluacion {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 15px;
+    }
+
+    .formulario-calificacion {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .formulario-calificacion label {
+        grid-column: auto;
+    }
+
+    .formulario-calificacion button {
+        width: 100%;
+    }
+
+    .navegacion-estudiantes button {
+        flex: 1;
+    }
+}
