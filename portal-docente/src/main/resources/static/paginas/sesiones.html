@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesiones de clase | Portal Docente</title>
+    <link rel="stylesheet" href="../portal-docente.css">
+    <script src="../js/comun.js" defer></script>
+    <script src="../js/sesiones.js" defer></script>
+</head>
+<body>
+    <header class="encabezado">
+        <div>
+            <h1>Portal Docente</h1>
+            <p>Planificación de sesiones de clase</p>
+        </div>
+        <a href="cursos.html">Volver a cursos</a>
+    </header>
+
+    <main class="contenedor">
+        <section class="bienvenida">
+            <h2>Sesiones de clase</h2>
+            <p>Consulta las sesiones programadas y registra nuevas clases para tus cursos asignados.</p>
+        </section>
+
+        <section class="panel">
+            <h2>Seleccionar curso</h2>
+            <label class="campo-portal">
+                <span>Curso asignado</span>
+                <select id="selectorCurso" required>
+                    <option value="">Cargando cursos...</option>
+                </select>
+            </label>
+            <p id="mensaje" class="mensaje" role="status">Consultando cursos asignados...</p>
+        </section>
+
+        <section id="seccionSesiones" class="panel" hidden>
+            <h2 id="tituloCurso">Sesiones del curso</h2>
+            <p id="detalleCurso"></p>
+
+            <div id="formularioSesion"></div>
+
+            <hr>
+
+            <h3>Sesiones registradas</h3>
+            <div id="listaSesiones" class="lista-registros"></div>
+            <p id="mensajeSesiones" class="mensaje" role="status"></p>
+        </section>
+    </main>
+
+    <footer>Portal Docente · Proyecto académico</footer>
+</body>
+</html>
