@@ -1,8 +1,4 @@
 
-/* ==================================================
-   PORTAL DOCENTE
-   Bootstrap 5.3 + ajustes propios
-   ================================================== */
 
    :root {
     --portal-primary: #173b68;
@@ -26,8 +22,6 @@ main {
     flex: 1;
 }
 
-/* Navegación */
-
 .navbar.bg-primary {
     background-color: var(--portal-primary) !important;
 }
@@ -36,17 +30,17 @@ main {
     letter-spacing: 0.2px;
 }
 
-/* Cursos generados por JavaScript */
+.tabla-contenedor {
+    width: 100%;
+    overflow-x: auto;
+}
 
 #listaCursos {
     display: grid;
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(min(100%, 250px), 1fr)
-    );
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    align-items: stretch;
 }
-
 #listaCursos > * {
     min-width: 0;
 }
@@ -57,15 +51,15 @@ main {
     height: 100%;
     padding: 1.25rem;
     background-color: #fff;
-    border: 1px solid var(--portal-border);
+    border: 1px solid #dee2e6;
     border-radius: 0.75rem;
-    box-shadow: 0 0.125rem 0.35rem rgb(0 0 0 / 5%);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .tarjeta-curso:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 8%);
+    transform: translateY(-4px);
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.12);
 }
 
 .tarjeta-curso h3 {
@@ -84,7 +78,6 @@ main {
     margin-top: auto;
 }
 
-/* Paneles dinámicos */
 
 #gestionCurso,
 #fichaEstudiante {
@@ -99,7 +92,7 @@ main {
     font-weight: 700;
 }
 
-/* Formularios */
+
 
 .formulario-portal {
     display: grid;
@@ -145,7 +138,6 @@ main {
     min-width: 0;
 }
 
-/* Listas y registros */
 
 .lista-registros {
     padding: 0.75rem 1rem;
@@ -182,9 +174,6 @@ main {
 .formulario-portal button:disabled {
     cursor: wait;
 }
-
-/* Secciones desplegables */
-
 .seccion-plegable {
     margin: 1rem 0;
     padding: 1rem;
@@ -206,8 +195,6 @@ main {
     border-bottom: 1px solid #e9ecef;
 }
 
-/* Ficha del estudiante */
-
 .ficha-encabezado,
 .resumen-academico {
     margin-bottom: 1rem;
@@ -222,7 +209,6 @@ main {
     overflow-wrap: anywhere;
 }
 
-/* Registro de notas */
 
 .seccion-registro-notas {
     display: block;
@@ -311,8 +297,6 @@ a:focus-visible {
         max-width: 100%;
     }
 }
-
-/* Respeta las preferencias de movimiento del usuario */
 
 @media (prefers-reduced-motion: reduce) {
     html {

@@ -176,7 +176,13 @@ async function cargarCurso(curso) {
     tituloCurso.textContent = curso.nombreCurso;
     detalleCurso.textContent =
         `Código: ${curso.codigoCurso} · Sección: ${curso.seccion} · Periodo: ${curso.periodoAcademico}`;
-
+    // Bajar automáticamente hasta los estudiantes del curso.
+    requestAnimationFrame(() => {
+        seccionEstudiantes.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    });
     mostrarMensajeOperacion("Cargando información del curso...");
 
     try {
