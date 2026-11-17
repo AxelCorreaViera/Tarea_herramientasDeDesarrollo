@@ -29,4 +29,7 @@ public interface MatriculaRepository extends JpaRepository<Matricula, Long> {
 """)
 long contarEstudiantesUnicosPorDocente(
         @Param("docenteId") Long docenteId);
+
+        List<Matricula> findByAsignacionDocente_Docente_IdAndAsignacionDocente_ActivaTrueAndActivaTrue(
+                Long docenteId);
 }

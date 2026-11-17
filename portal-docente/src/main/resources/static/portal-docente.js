@@ -8,6 +8,7 @@ const totalCursos = document.getElementById("totalCursos");
 const totalEstudiantes = document.getElementById("totalEstudiantes");
 const totalSesiones = document.getElementById("totalSesiones");
 const totalEvaluaciones = document.getElementById("totalEvaluaciones");
+const promedioGeneral = document.getElementById("promedioGeneral");
 const seccionEstudiantes = document.getElementById("seccionEstudiantes");
 const tituloCurso = document.getElementById("tituloCurso");
 const detalleCurso = document.getElementById("detalleCurso");
@@ -39,7 +40,7 @@ async function consultarAPI(url, opciones = {}) {
             const error = await respuesta.json();
             detalle = error.mensaje || error.message || detalle;
         } catch {
-            // La respuesta de error puede no ser JSON.
+
         }
 
         throw new Error(detalle);
@@ -59,6 +60,11 @@ async function cargarEstadisticas() {
         totalEstudiantes.textContent = estadisticas.estudiantesMatriculados;
         totalSesiones.textContent = estadisticas.sesionesRegistradas;
         totalEvaluaciones.textContent = estadisticas.evaluacionesActivas;
+
+        promedioGeneral.textContent =
+            estadisticas.promedioGeneral !== null
+                ? `${Number(estadisticas.promedioGeneral).toFixed(2)} / 20`
+                : "Sin notas";
 
     } catch (error) {
         console.error("Error al cargar las estadísticas:", error);
