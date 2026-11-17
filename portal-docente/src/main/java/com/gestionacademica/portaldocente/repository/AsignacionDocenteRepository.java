@@ -12,4 +12,6 @@ public interface AsignacionDocenteRepository
     List<AsignacionDocente> findByDocente_IdAndActivaTrue(Long docenteId);
 
     List<AsignacionDocente> findByDocente_Id(Long docenteId);
+
+    long countByDocente_IdAndActivaTrue(Long docenteId);
 }
