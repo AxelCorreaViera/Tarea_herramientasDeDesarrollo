@@ -16,4 +16,8 @@ public interface ActividadEvaluableRepository
     List<ActividadEvaluable>
         findByAsignacionDocente_IdOrderByOrdenAsc(
             Long asignacionDocenteId);
+
+
+            long countByAsignacionDocente_Docente_IdAndAsignacionDocente_ActivaTrueAndActivaTrue(
+                Long docenteId);
 }

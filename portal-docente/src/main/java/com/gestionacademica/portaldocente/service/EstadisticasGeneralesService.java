@@ -5,6 +5,8 @@ import com.gestionacademica.portaldocente.dto.EstadisticasBasicasDTO;
 import com.gestionacademica.portaldocente.repository.AsignacionDocenteRepository;
 import com.gestionacademica.portaldocente.repository.DocenteRepository;
 import com.gestionacademica.portaldocente.repository.MatriculaRepository;
+import com.gestionacademica.portaldocente.repository.SesionClaseRepository;
+import com.gestionacademica.portaldocente.repository.ActividadEvaluableRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -18,15 +20,21 @@ public class EstadisticasGeneralesService {
     private final DocenteRepository docenteRepository;
     private final AsignacionDocenteRepository asignacionRepository;
     private final MatriculaRepository matriculaRepository;
+    private final SesionClaseRepository sesionClaseRepository;
+    private final ActividadEvaluableRepository actividadEvaluableRepository;
 
     public EstadisticasGeneralesService(
             DocenteRepository docenteRepository,
             AsignacionDocenteRepository asignacionRepository,
-            MatriculaRepository matriculaRepository) {
+            MatriculaRepository matriculaRepository,
+            SesionClaseRepository sesionClaseRepository,
+            ActividadEvaluableRepository actividadEvaluableRepository) {
 
         this.docenteRepository = docenteRepository;
         this.asignacionRepository = asignacionRepository;
         this.matriculaRepository = matriculaRepository;
+        this.sesionClaseRepository = sesionClaseRepository;
+        this.actividadEvaluableRepository = actividadEvaluableRepository;
     }
 
     public EstadisticasBasicasDTO obtenerEstadisticas(Long docenteId) {
@@ -41,9 +49,21 @@ public class EstadisticasGeneralesService {
         long estudiantesMatriculados =
                 matriculaRepository.contarEstudiantesUnicosPorDocente(docenteId);
 
+        long sesionesRegistradas =
+                sesionClaseRepository
+                        .countByAsignacionDocente_Docente_IdAndAsignacionDocente_ActivaTrue(
+                                docenteId);
+
+        long evaluacionesActivas =
+                actividadEvaluableRepository
+                        .countByAsignacionDocente_Docente_IdAndAsignacionDocente_ActivaTrueAndActivaTrue(
+                                docenteId);
+
         return new EstadisticasBasicasDTO(
                 cursosActivos,
-                estudiantesMatriculados
+                estudiantesMatriculados,
+                sesionesRegistradas,
+                evaluacionesActivas
         );
     }
 }

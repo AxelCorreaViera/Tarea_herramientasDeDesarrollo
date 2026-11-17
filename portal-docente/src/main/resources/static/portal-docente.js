@@ -6,6 +6,8 @@ const listaCursos = document.getElementById("listaCursos");
 const mensaje = document.getElementById("mensaje");
 const totalCursos = document.getElementById("totalCursos");
 const totalEstudiantes = document.getElementById("totalEstudiantes");
+const totalSesiones = document.getElementById("totalSesiones");
+const totalEvaluaciones = document.getElementById("totalEvaluaciones");
 const seccionEstudiantes = document.getElementById("seccionEstudiantes");
 const tituloCurso = document.getElementById("tituloCurso");
 const detalleCurso = document.getElementById("detalleCurso");
@@ -55,6 +57,8 @@ async function cargarEstadisticas() {
 
         totalCursos.textContent = estadisticas.cursosActivos;
         totalEstudiantes.textContent = estadisticas.estudiantesMatriculados;
+        totalSesiones.textContent = estadisticas.sesionesRegistradas;
+        totalEvaluaciones.textContent = estadisticas.evaluacionesActivas;
 
     } catch (error) {
         console.error("Error al cargar las estadísticas:", error);

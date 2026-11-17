@@ -1,3 +1,4 @@
+
 package com.gestionacademica.portaldocente.repository;
 
 import java.util.List;
@@ -9,7 +10,10 @@ import com.gestionacademica.portaldocente.model.SesionClase;
 public interface SesionClaseRepository
         extends JpaRepository<SesionClase, Long> {
 
-    List<SesionClase>
-        findByAsignacionDocente_IdOrderByFechaAsc(
+    List<SesionClase> findByAsignacionDocente_IdOrderByFechaAsc(
             Long asignacionDocenteId);
+
+    long countByAsignacionDocente_Docente_IdAndAsignacionDocente_ActivaTrue(
+            Long docenteId);
+
 }
