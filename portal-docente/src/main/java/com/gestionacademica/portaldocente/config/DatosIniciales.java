@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import com.gestionacademica.portaldocente.model.ActividadEvaluable;
 import com.gestionacademica.portaldocente.model.AsignacionDocente;
@@ -22,6 +23,7 @@ import com.gestionacademica.portaldocente.repository.DocenteRepository;
 import com.gestionacademica.portaldocente.repository.EstudianteRepository;
 import com.gestionacademica.portaldocente.repository.MatriculaRepository;
 
+@Profile("dev")
 @Configuration
 public class DatosIniciales {
 

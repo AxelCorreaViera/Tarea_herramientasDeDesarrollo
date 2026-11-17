@@ -1,1 +1,14 @@
+# Bases de datos locales y respaldos
+/portal-docente/data/
 /portal-docente/data-anterior-*/
+
+# Archivos de entorno y credenciales
+.env
+.env.*
+!.env.example
+*.local.properties
+application-secrets.properties
+
+# Archivos generados
+/portal-docente/target/
+*.log
