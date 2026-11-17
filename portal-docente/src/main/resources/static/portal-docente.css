@@ -366,3 +366,100 @@ a:focus-visible {
     font-size: 0.8rem;
 }
 
+/* =====================================
+   REGISTRO GRUPAL DE ASISTENCIA
+===================================== */
+
+.registro-asistencia {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.asistencia-sesion {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 500px;
+}
+
+.asistencia-sesion label {
+    font-weight: 600;
+}
+
+.asistencia-sesion select,
+.asistencia-estado {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    font: inherit;
+}
+
+.asistencia-estudiantes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.asistencia-estudiantes h3 {
+    margin: 8px 0;
+}
+
+.asistencia-fila {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(160px, 220px);
+    align-items: center;
+    gap: 16px;
+    padding: 12px 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: white;
+}
+
+.asistencia-encabezado {
+    background: #f3f4f6;
+    font-size: 0.9rem;
+}
+
+.asistencia-nombre {
+    font-weight: 500;
+}
+
+.boton-guardar-asistencia {
+    align-self: flex-start;
+    padding: 11px 22px;
+    border: none;
+    border-radius: 8px;
+    background: #176b55;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+}
+
+.boton-guardar-asistencia:hover:not(:disabled) {
+    background: #105440;
+}
+
+.boton-guardar-asistencia:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+    .asistencia-fila {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .asistencia-encabezado {
+        display: none;
+    }
+
+    .boton-guardar-asistencia {
+        width: 100%;
+    }
+}
