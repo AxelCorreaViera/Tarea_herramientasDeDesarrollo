@@ -12,6 +12,8 @@ import com.gestionacademica.portaldocente.repository.DocenteRepository;
 import com.gestionacademica.portaldocente.repository.MatriculaRepository;
 import com.gestionacademica.portaldocente.repository.SesionClaseRepository;
 import com.gestionacademica.portaldocente.repository.ActividadEvaluableRepository;
+import com.gestionacademica.portaldocente.model.EstadoAsistencia;
+import com.gestionacademica.portaldocente.repository.AsistenciaRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -23,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class EstadisticasGeneralesService {
 
     private final DocenteRepository docenteRepository;
+    private final AsistenciaRepository asistenciaRepository;
     private final AsignacionDocenteRepository asignacionRepository;
     private final MatriculaRepository matriculaRepository;
     private final SesionClaseRepository sesionClaseRepository;
@@ -30,6 +33,7 @@ public class EstadisticasGeneralesService {
     private final CalificacionService calificacionService;
 
     public EstadisticasGeneralesService(
+        AsistenciaRepository asistenciaRepository,
             DocenteRepository docenteRepository,
             AsignacionDocenteRepository asignacionRepository,
             MatriculaRepository matriculaRepository,
@@ -38,6 +42,7 @@ public class EstadisticasGeneralesService {
             CalificacionService calificacionService) {
 
         this.docenteRepository = docenteRepository;
+        this.asistenciaRepository = asistenciaRepository;
         this.asignacionRepository = asignacionRepository;
         this.matriculaRepository = matriculaRepository;
         this.sesionClaseRepository = sesionClaseRepository;
@@ -69,12 +74,16 @@ public class EstadisticasGeneralesService {
 
         BigDecimal promedioGeneral = calcularPromedioGeneral(docenteId);
 
+        BigDecimal porcentajeAsistencia =
+        calcularPorcentajeAsistencia(docenteId);
+
         return new EstadisticasBasicasDTO(
                 cursosActivos,
                 estudiantesMatriculados,
                 sesionesRegistradas,
                 evaluacionesActivas,
-                promedioGeneral
+                promedioGeneral,
+                porcentajeAsistencia
         );
     }
 
@@ -114,5 +123,29 @@ public class EstadisticasGeneralesService {
                 2,
                 RoundingMode.HALF_UP
         );
+    }
+
+    private BigDecimal calcularPorcentajeAsistencia(Long docenteId) {
+
+        long totalAsistencias =
+                asistenciaRepository.contarAsistenciasDeDocente(docenteId);
+    
+        if (totalAsistencias == 0) {
+            return null;
+        }
+    
+        long presentes =
+                asistenciaRepository.contarAsistenciasPorEstadoDeDocente(
+                        docenteId,
+                        EstadoAsistencia.PRESENTE
+                );
+    
+        return BigDecimal.valueOf(presentes)
+                .multiply(BigDecimal.valueOf(100))
+                .divide(
+                        BigDecimal.valueOf(totalAsistencias),
+                        2,
+                        RoundingMode.HALF_UP
+                );
     }
 }

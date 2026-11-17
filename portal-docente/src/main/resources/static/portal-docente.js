@@ -9,6 +9,7 @@ const totalEstudiantes = document.getElementById("totalEstudiantes");
 const totalSesiones = document.getElementById("totalSesiones");
 const totalEvaluaciones = document.getElementById("totalEvaluaciones");
 const promedioGeneral = document.getElementById("promedioGeneral");
+const porcentajeAsistencia = document.getElementById("porcentajeAsistencia");
 const seccionEstudiantes = document.getElementById("seccionEstudiantes");
 const tituloCurso = document.getElementById("tituloCurso");
 const detalleCurso = document.getElementById("detalleCurso");
@@ -65,6 +66,11 @@ async function cargarEstadisticas() {
             estadisticas.promedioGeneral !== null
                 ? `${Number(estadisticas.promedioGeneral).toFixed(2)} / 20`
                 : "Sin notas";
+
+                porcentajeAsistencia.textContent =
+    estadisticas.porcentajeAsistencia !== null
+        ? `${Number(estadisticas.porcentajeAsistencia).toFixed(2)} %`
+        : "Sin registros";
 
     } catch (error) {
         console.error("Error al cargar las estadísticas:", error);

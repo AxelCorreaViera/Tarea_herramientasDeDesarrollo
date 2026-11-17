@@ -8,6 +8,7 @@ public record EstadisticasBasicasDTO(
         long estudiantesMatriculados,
         long sesionesRegistradas,
         long evaluacionesActivas,
-        BigDecimal promedioGeneral
+        BigDecimal promedioGeneral,
+        BigDecimal porcentajeAsistencia
 ) {
 }
