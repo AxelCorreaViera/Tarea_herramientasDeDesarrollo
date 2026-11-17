@@ -463,3 +463,30 @@ a:focus-visible {
         width: 100%;
     }
 }
+
+.asistencia-pie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-top: 25px;
+    padding-top: 18px;
+    border-top: 1px solid #dee2e6;
+}
+
+.asistencia-porcentaje {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #198754;
+}
+
+@media (max-width: 600px) {
+    .asistencia-pie {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .asistencia-porcentaje {
+        text-align: center;
+    }
+}

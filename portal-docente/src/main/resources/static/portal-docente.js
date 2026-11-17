@@ -839,16 +839,46 @@ function crearTablaAsistencia() {
 
     tabla.appendChild(zonaEstudiantes);
 
-    const botonGuardar = crearElemento(
-        "button",
-        "Guardar asistencia"
+    // Resumen y botón de asistencia
+const pieAsistencia = document.createElement("div");
+pieAsistencia.className = "asistencia-pie";
+
+const resumenAsistencia = crearElemento(
+    "div",
+    "Asistencia de la clase: 0% (0 de 0 presentes)"
+);
+resumenAsistencia.className = "asistencia-porcentaje";
+
+const botonGuardar = crearElemento(
+    "button",
+    "Guardar asistencia"
+);
+
+botonGuardar.type = "button";
+botonGuardar.className = "boton-guardar-asistencia";
+botonGuardar.disabled = true;
+
+pieAsistencia.append(resumenAsistencia, botonGuardar);
+tabla.appendChild(pieAsistencia);
+
+function actualizarPorcentajeAsistencia() {
+    const selectores = zonaEstudiantes.querySelectorAll(
+        ".asistencia-estado"
     );
 
-    botonGuardar.type = "button";
-    botonGuardar.className = "boton-guardar-asistencia";
-    botonGuardar.disabled = true;
+    const presentes = Array.from(selectores).filter(
+        (selector) => selector.value === "PRESENTE"
+    ).length;
 
-    tabla.appendChild(botonGuardar);
+    const total = estudiantesActuales.length;
+
+    const porcentaje = total > 0
+        ? (presentes / total) * 100
+        : 0;
+
+    resumenAsistencia.textContent =
+        `Asistencia de la clase: ${porcentaje.toFixed(1)}% (${presentes} de ${total} presentes)`;
+}
 
     // Dibujar estudiantes cuando se selecciona una sesión
     function dibujarListaEstudiantes() {
@@ -926,11 +956,17 @@ function crearTablaAsistencia() {
                 selectorEstado.value = asistenciaExistente.estado;
             }
 
+            selectorEstado.addEventListener(
+                "change",
+                actualizarPorcentajeAsistencia
+            );
+
             fila.append(nombre, selectorEstado);
             zonaEstudiantes.appendChild(fila);
         });
 
         botonGuardar.disabled = false;
+        actualizarPorcentajeAsistencia();
     }
 
     selectorSesion.addEventListener("change", dibujarListaEstudiantes);
