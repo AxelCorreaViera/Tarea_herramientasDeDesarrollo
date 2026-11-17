@@ -67,9 +67,7 @@
                     </li>
                 </ul>
 
-                <span class="badge text-bg-light text-primary ms-lg-3 mt-2 mt-lg-0">
-                    Sistema académico
-                </span>
+        
             </div>
 
         </div>
@@ -109,7 +107,126 @@
             </div>
         </section>
 
-        <!-- Estado de carga y mensajes -->
+        <!-- Estadísticas generales -->
+        <section id="seccionEstadisticas" class="mb-5">
+
+            <div class="mb-3">
+                <h2 class="h4 fw-bold mb-1">
+                    <i class="bi bi-bar-chart-line-fill text-primary me-2"></i>
+                    Estadísticas generales
+                </h2>
+
+                <p class="text-secondary mb-0">
+                    Resumen de tu actividad académica.
+                </p>
+            </div>
+
+            <div class="row g-3">
+
+                <!-- Cursos activos -->
+                <div class="col-12 col-sm-6 col-xl-4">
+                    <article class="tarjeta-estadistica">
+                        <div class="estadistica-icono bg-primary-subtle text-primary">
+                            <i class="bi bi-journal-bookmark-fill"></i>
+                        </div>
+
+                        <div>
+                            <p class="estadistica-titulo">Cursos activos</p>
+                            <h3 id="totalCursos" class="estadistica-valor">--</h3>
+                            <p class="estadistica-descripcion">
+                                Cursos asignados
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Estudiantes -->
+                <div class="col-12 col-sm-6 col-xl-4">
+                    <article class="tarjeta-estadistica">
+                        <div class="estadistica-icono bg-success-subtle text-success">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+
+                        <div>
+                            <p class="estadistica-titulo">Estudiantes</p>
+                            <h3 id="totalEstudiantes" class="estadistica-valor">--</h3>
+                            <p class="estadistica-descripcion">
+                                Estudiantes matriculados
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Sesiones -->
+                <div class="col-12 col-sm-6 col-xl-4">
+                    <article class="tarjeta-estadistica">
+                        <div class="estadistica-icono bg-info-subtle text-info">
+                            <i class="bi bi-calendar-check-fill"></i>
+                        </div>
+
+                        <div>
+                            <p class="estadistica-titulo">Sesiones</p>
+                            <h3 id="totalSesiones" class="estadistica-valor">--</h3>
+                            <p class="estadistica-descripcion">
+                                Clases registradas
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Promedio -->
+                <div class="col-12 col-sm-6 col-xl-4">
+                    <article class="tarjeta-estadistica">
+                        <div class="estadistica-icono bg-warning-subtle text-warning">
+                            <i class="bi bi-mortarboard-fill"></i>
+                        </div>
+
+                        <div>
+                            <p class="estadistica-titulo">Promedio general</p>
+                            <h3 id="promedioGeneral" class="estadistica-valor">--</h3>
+                            <p class="estadistica-descripcion">
+                                Sobre 20 puntos
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Asistencia -->
+                <div class="col-12 col-sm-6 col-xl-4">
+                    <article class="tarjeta-estadistica">
+                        <div class="estadistica-icono bg-danger-subtle text-danger">
+                            <i class="bi bi-clipboard2-check-fill"></i>
+                        </div>
+
+                        <div>
+                            <p class="estadistica-titulo">Asistencia general</p>
+                            <h3 id="porcentajeAsistencia" class="estadistica-valor">--</h3>
+                            <p class="estadistica-descripcion">
+                                Porcentaje de presentes
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-12 col-sm-6 col-xl-4">
+                    <article class="tarjeta-estadistica">
+                        <div class="estadistica-icono bg-secondary-subtle text-secondary">
+                            <i class="bi bi-file-earmark-text-fill"></i>
+                        </div>
+
+                        <div>
+                            <p class="estadistica-titulo">Evaluaciones</p>
+                            <h3 id="totalEvaluaciones" class="estadistica-valor">--</h3>
+                            <p class="estadistica-descripcion">
+                                Evaluaciones activas
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+
         <div
             id="mensaje"
             class="alert alert-info d-flex align-items-center shadow-sm"
