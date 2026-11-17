@@ -4,6 +4,8 @@ const DOCENTE_ID_DEMO = 1;
 
 const listaCursos = document.getElementById("listaCursos");
 const mensaje = document.getElementById("mensaje");
+const totalCursos = document.getElementById("totalCursos");
+const totalEstudiantes = document.getElementById("totalEstudiantes");
 const seccionEstudiantes = document.getElementById("seccionEstudiantes");
 const tituloCurso = document.getElementById("tituloCurso");
 const detalleCurso = document.getElementById("detalleCurso");
@@ -43,6 +45,20 @@ async function consultarAPI(url, opciones = {}) {
 
     if (respuesta.status === 204) return null;
     return respuesta.json();
+}
+
+async function cargarEstadisticas() {
+    try {
+        const estadisticas = await consultarAPI(
+            `/api/docentes/${DOCENTE_ID_DEMO}/estadisticas`
+        );
+
+        totalCursos.textContent = estadisticas.cursosActivos;
+        totalEstudiantes.textContent = estadisticas.estudiantesMatriculados;
+
+    } catch (error) {
+        console.error("Error al cargar las estadísticas:", error);
+    }
 }
 
 function crearElemento(etiqueta, texto = "") {
@@ -1074,3 +1090,4 @@ function crearTablaCalificaciones() {
 buscarEstudiante.addEventListener("input", dibujarEstudiantes);
 
 cargarCursos();
+cargarEstadisticas();
