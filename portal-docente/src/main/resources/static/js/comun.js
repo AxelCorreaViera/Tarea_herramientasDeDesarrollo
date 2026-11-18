@@ -1,16 +1,42 @@
-"use strict";
+﻿"use strict";
+/**
+ * Obtiene el token CSRF almacenado en la cookie XSRF-TOKEN.
+ */
+function obtenerTokenCSRF() {
+    const cookie = document.cookie
+        .split("; ")
+        .find((elemento) => elemento.startsWith("XSRF-TOKEN="));
+
+    return cookie
+        ? decodeURIComponent(cookie.substring("XSRF-TOKEN=".length))
+        : null;
+}
 
 /**
  * Realiza peticiones HTTP al backend del Portal Docente.
- * Gestiona respuestas correctas, errores HTTP y respuestas sin contenido.
+ * Gestiona CSRF, respuestas correctas, errores HTTP y respuestas sin contenido.
  */
 async function consultarAPI(url, opciones = {}) {
+    const metodo = (opciones.method || "GET").toUpperCase();
+
+    const encabezados = {
+        "Content-Type": "application/json",
+        ...opciones.headers
+    };
+
+    const metodosProtegidos = ["POST", "PUT", "PATCH", "DELETE"];
+
+    if (metodosProtegidos.includes(metodo)) {
+        const tokenCSRF = obtenerTokenCSRF();
+
+        if (tokenCSRF) {
+            encabezados["X-XSRF-TOKEN"] = tokenCSRF;
+        }
+    }
+
     const respuesta = await fetch(url, {
         ...opciones,
-        headers: {
-            "Content-Type": "application/json",
-            ...opciones.headers
-        }
+        headers: encabezados
     });
 
     if (!respuesta.ok) {
@@ -144,3 +170,4 @@ function crearFormulario(titulo, campos, alEnviar) {
 
     return formulario;
 }
+

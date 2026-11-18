@@ -1,5 +1,6 @@
 package com.gestionacademica.portaldocente.service;
 
+import com.gestionacademica.portaldocente.dto.AsistenciaDTO;
 import com.gestionacademica.portaldocente.model.Asistencia;
 import com.gestionacademica.portaldocente.model.EstadoAsistencia;
 import com.gestionacademica.portaldocente.model.Matricula;
@@ -8,11 +9,10 @@ import com.gestionacademica.portaldocente.repository.AsistenciaRepository;
 import com.gestionacademica.portaldocente.repository.MatriculaRepository;
 import com.gestionacademica.portaldocente.repository.SesionClaseRepository;
 import jakarta.persistence.EntityNotFoundException;
-import com.gestionacademica.portaldocente.dto.AsistenciaDTO;
-import java.util.stream.Collectors;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,14 +23,17 @@ public class AsistenciaService {
         private final AsistenciaRepository asistenciaRepository;
         private final MatriculaRepository matriculaRepository;
         private final SesionClaseRepository sesionClaseRepository;
+        private final AutorizacionDocenteService autorizacionDocenteService;
 
         public AsistenciaService(
                         AsistenciaRepository asistenciaRepository,
                         MatriculaRepository matriculaRepository,
-                        SesionClaseRepository sesionClaseRepository) {
+                        SesionClaseRepository sesionClaseRepository,
+                        AutorizacionDocenteService autorizacionDocenteService) {
                 this.asistenciaRepository = asistenciaRepository;
                 this.matriculaRepository = matriculaRepository;
                 this.sesionClaseRepository = sesionClaseRepository;
+                this.autorizacionDocenteService = autorizacionDocenteService;
         }
 
         @Transactional
@@ -49,13 +52,16 @@ public class AsistenciaService {
                                         "Debe especificarse el estado de asistencia.");
                 }
 
+                // Verifica que la matrícula pertenezca al docente autenticado.
+                autorizacionDocenteService.verificarMatricula(matriculaId);
+
                 Matricula matricula = matriculaRepository.findById(matriculaId)
                                 .orElseThrow(() -> new EntityNotFoundException(
-                                                "No existe la matrícula con ID " + matriculaId));
+                                                "No se encontró la matrícula solicitada."));
 
                 SesionClase sesion = sesionClaseRepository.findById(sesionId)
                                 .orElseThrow(() -> new EntityNotFoundException(
-                                                "No existe la sesión de clase con ID " + sesionId));
+                                                "No se encontró la sesión de clase solicitada."));
 
                 if (!matricula.isActiva()) {
                         throw new IllegalStateException(
@@ -89,9 +95,12 @@ public class AsistenciaService {
                                         "El identificador de la matrícula es obligatorio.");
                 }
 
+                // Impide consultar asistencias de matrículas de otros docentes.
+                autorizacionDocenteService.verificarMatricula(matriculaId);
+
                 if (!matriculaRepository.existsById(matriculaId)) {
                         throw new EntityNotFoundException(
-                                        "No existe la matrícula con ID " + matriculaId);
+                                        "No se encontró la matrícula solicitada.");
                 }
 
                 return asistenciaRepository.findByMatricula_Id(matriculaId);
@@ -160,5 +169,4 @@ public class AsistenciaService {
                                 asistencia.getSesionClase().getDescripcion(),
                                 asistencia.getEstado());
         }
-
 }

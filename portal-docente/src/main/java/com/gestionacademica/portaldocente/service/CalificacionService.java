@@ -1,5 +1,6 @@
 package com.gestionacademica.portaldocente.service;
 
+import com.gestionacademica.portaldocente.dto.CalificacionDTO;
 import com.gestionacademica.portaldocente.model.ActividadEvaluable;
 import com.gestionacademica.portaldocente.model.Calificacion;
 import com.gestionacademica.portaldocente.model.Matricula;
@@ -7,11 +8,10 @@ import com.gestionacademica.portaldocente.repository.ActividadEvaluableRepositor
 import com.gestionacademica.portaldocente.repository.CalificacionRepository;
 import com.gestionacademica.portaldocente.repository.MatriculaRepository;
 import jakarta.persistence.EntityNotFoundException;
-import com.gestionacademica.portaldocente.dto.CalificacionDTO;
-import java.util.stream.Collectors;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,14 +26,17 @@ public class CalificacionService {
         private final CalificacionRepository calificacionRepository;
         private final MatriculaRepository matriculaRepository;
         private final ActividadEvaluableRepository actividadRepository;
+        private final AutorizacionDocenteService autorizacionDocenteService;
 
         public CalificacionService(
                         CalificacionRepository calificacionRepository,
                         MatriculaRepository matriculaRepository,
-                        ActividadEvaluableRepository actividadRepository) {
+                        ActividadEvaluableRepository actividadRepository,
+                        AutorizacionDocenteService autorizacionDocenteService) {
                 this.calificacionRepository = calificacionRepository;
                 this.matriculaRepository = matriculaRepository;
                 this.actividadRepository = actividadRepository;
+                this.autorizacionDocenteService = autorizacionDocenteService;
         }
 
         @Transactional
@@ -42,16 +45,28 @@ public class CalificacionService {
                         Long actividadId,
                         BigDecimal nota) {
 
+                if (matriculaId == null || actividadId == null) {
+                        throw new IllegalArgumentException(
+                                        "La matrícula y la evaluación son obligatorias.");
+                }
+
                 validarNota(nota);
+
+                // Comprueba que la matrícula pertenezca al docente autenticado.
+                autorizacionDocenteService.verificarMatricula(matriculaId);
 
                 Matricula matricula = matriculaRepository.findById(matriculaId)
                                 .orElseThrow(() -> new EntityNotFoundException(
-                                                "No existe la matrícula con ID " + matriculaId));
+                                                "No se encontró la matrícula solicitada."));
 
                 ActividadEvaluable actividad = actividadRepository
                                 .findById(actividadId)
                                 .orElseThrow(() -> new EntityNotFoundException(
-                                                "No existe la evaluación con ID " + actividadId));
+                                                "No se encontró la evaluación solicitada."));
+
+                // Comprueba también que la evaluación pertenezca al docente.
+                autorizacionDocenteService.verificarAsignacion(
+                                actividad.getAsignacionDocente().getId());
 
                 if (!matricula.isActiva()) {
                         throw new IllegalStateException(
@@ -91,9 +106,11 @@ public class CalificacionService {
                                         "El identificador de la matrícula es obligatorio.");
                 }
 
+                autorizacionDocenteService.verificarMatricula(matriculaId);
+
                 if (!matriculaRepository.existsById(matriculaId)) {
                         throw new EntityNotFoundException(
-                                        "No existe la matrícula con ID " + matriculaId);
+                                        "No se encontró la matrícula solicitada.");
                 }
 
                 return calificacionRepository.findByMatricula_Id(matriculaId);
@@ -105,9 +122,12 @@ public class CalificacionService {
                                         "El identificador de la matrícula es obligatorio.");
                 }
 
+                // Evita calcular promedios de matrículas de otros docentes.
+                autorizacionDocenteService.verificarMatricula(matriculaId);
+
                 Matricula matricula = matriculaRepository.findById(matriculaId)
                                 .orElseThrow(() -> new EntityNotFoundException(
-                                                "No existe la matrícula con ID " + matriculaId));
+                                                "No se encontró la matrícula solicitada."));
 
                 Long asignacionId = matricula.getAsignacionDocente().getId();
 
@@ -211,5 +231,4 @@ public class CalificacionService {
                                 calificacion.getActividadEvaluable().getNombre(),
                                 calificacion.getNota());
         }
-
 }

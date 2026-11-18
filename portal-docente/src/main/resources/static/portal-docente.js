@@ -1,7 +1,4 @@
-"use strict";
-
-const DOCENTE_ID_DEMO = 1;
-
+﻿"use strict";
 const listaCursos = document.getElementById("listaCursos");
 const mensaje = document.getElementById("mensaje");
 const seccionEstudiantes = document.getElementById("seccionEstudiantes");
@@ -17,13 +14,44 @@ let evaluacionesActuales = [];
 let asistenciasActuales = [];
 let calificacionesActuales = [];
 
+/**
+ * Obtiene el token CSRF almacenado en la cookie XSRF-TOKEN.
+ */
+function obtenerTokenCSRF() {
+    const cookie = document.cookie
+        .split("; ")
+        .find((elemento) => elemento.startsWith("XSRF-TOKEN="));
+
+    return cookie
+        ? decodeURIComponent(cookie.substring("XSRF-TOKEN=".length))
+        : null;
+}
+
+/**
+ * Realiza peticiones HTTP al backend del Portal Docente.
+ * Gestiona CSRF, respuestas correctas, errores HTTP y respuestas sin contenido.
+ */
 async function consultarAPI(url, opciones = {}) {
+    const metodo = (opciones.method || "GET").toUpperCase();
+
+    const encabezados = {
+        "Content-Type": "application/json",
+        ...opciones.headers
+    };
+
+    const metodosProtegidos = ["POST", "PUT", "PATCH", "DELETE"];
+
+    if (metodosProtegidos.includes(metodo)) {
+        const tokenCSRF = obtenerTokenCSRF();
+
+        if (tokenCSRF) {
+            encabezados["X-XSRF-TOKEN"] = tokenCSRF;
+        }
+    }
+
     const respuesta = await fetch(url, {
         ...opciones,
-        headers: {
-            "Content-Type": "application/json",
-            ...opciones.headers
-        }
+        headers: encabezados
     });
 
     if (!respuesta.ok) {
@@ -39,7 +67,10 @@ async function consultarAPI(url, opciones = {}) {
         throw new Error(detalle);
     }
 
-    if (respuesta.status === 204) return null;
+    if (respuesta.status === 204) {
+        return null;
+    }
+
     return respuesta.json();
 }
 
@@ -138,7 +169,7 @@ async function cargarCursos() {
         mensaje.textContent = "Consultando cursos asignados...";
 
         const cursos = await consultarAPI(
-            `/api/docentes/${DOCENTE_ID_DEMO}/asignaciones`
+            `/api/docentes/me/asignaciones`
         );
 
         listaCursos.replaceChildren();
@@ -1146,3 +1177,4 @@ function crearTablaCalificaciones() {
 
 
 cargarCursos();
+

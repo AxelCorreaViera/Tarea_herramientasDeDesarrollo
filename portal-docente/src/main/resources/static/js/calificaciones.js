@@ -1,7 +1,6 @@
-
+﻿
 "use strict";
 
-const DOCENTE_ID_CALIFICACIONES = 1;
 
 const selectorCurso = document.getElementById("selectorCurso");
 const selectorEstudiante = document.getElementById("selectorEstudiante");
@@ -56,7 +55,7 @@ async function cargarCursos() {
 
     try {
         const cursos = await consultarAPI(
-            `/api/docentes/${DOCENTE_ID_CALIFICACIONES}/asignaciones`
+            `/api/docentes/me/asignaciones`
         );
 
         selectorCurso.replaceChildren(
@@ -428,3 +427,4 @@ botonAnteriorInferior.addEventListener("click", () => cambiarEstudiante(-1));
 botonSiguienteInferior.addEventListener("click", () => cambiarEstudiante(1));
 
 cargarCursos();
+

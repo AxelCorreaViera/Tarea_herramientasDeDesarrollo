@@ -1,7 +1,7 @@
 package com.gestionacademica.portaldocente.service;
 
-import com.gestionacademica.portaldocente.model.AsignacionDocente;
 import com.gestionacademica.portaldocente.dto.EstudianteMatriculadoDTO;
+import com.gestionacademica.portaldocente.model.AsignacionDocente;
 import com.gestionacademica.portaldocente.model.Matricula;
 import com.gestionacademica.portaldocente.repository.AsignacionDocenteRepository;
 import com.gestionacademica.portaldocente.repository.MatriculaRepository;
@@ -14,60 +14,64 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class MatriculaService {
 
-    private final MatriculaRepository matriculaRepository;
-    private final AsignacionDocenteRepository asignacionDocenteRepository;
+        private final MatriculaRepository matriculaRepository;
+        private final AsignacionDocenteRepository asignacionDocenteRepository;
+        private final AutorizacionDocenteService autorizacionDocenteService;
 
-    public MatriculaService(
-            MatriculaRepository matriculaRepository,
-            AsignacionDocenteRepository asignacionDocenteRepository) {
-        this.matriculaRepository = matriculaRepository;
-        this.asignacionDocenteRepository = asignacionDocenteRepository;
-    }
-
-    public List<Matricula> listarActivasPorAsignacion(Long asignacionId) {
-        if (asignacionId == null) {
-            throw new IllegalArgumentException(
-                    "El identificador de la asignación es obligatorio.");
+        public MatriculaService(
+                        MatriculaRepository matriculaRepository,
+                        AsignacionDocenteRepository asignacionDocenteRepository,
+                        AutorizacionDocenteService autorizacionDocenteService) {
+                this.matriculaRepository = matriculaRepository;
+                this.asignacionDocenteRepository = asignacionDocenteRepository;
+                this.autorizacionDocenteService = autorizacionDocenteService;
         }
 
-        AsignacionDocente asignacion = asignacionDocenteRepository
-                .findById(asignacionId)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "No existe la asignación con ID " + asignacionId));
+        public List<Matricula> listarActivasPorAsignacion(Long asignacionId) {
+                autorizacionDocenteService.verificarAsignacion(asignacionId);
 
-        if (!asignacion.isActiva()) {
-            throw new IllegalStateException(
-                    "No se pueden consultar matrículas de una asignación inactiva.");
+                AsignacionDocente asignacion = asignacionDocenteRepository
+                                .findById(asignacionId)
+                                .orElseThrow(() -> new EntityNotFoundException(
+                                                "No se encontró la asignación solicitada."));
+
+                if (!asignacion.isActiva()) {
+                        throw new IllegalStateException(
+                                        "La asignación docente está inactiva.");
+                }
+
+                return matriculaRepository
+                                .findByAsignacionDocente_IdAndActivaTrue(asignacionId);
         }
 
-        return matriculaRepository
-                .findByAsignacionDocente_IdAndActivaTrue(asignacionId);
-    }
+        public Matricula buscarPorId(Long matriculaId) {
+                if (matriculaId == null) {
+                        throw new IllegalArgumentException(
+                                        "El identificador de la matrícula es obligatorio.");
+                }
 
-    public Matricula buscarPorId(Long matriculaId) {
-        if (matriculaId == null) {
-            throw new IllegalArgumentException(
-                    "El identificador de la matrícula es obligatorio.");
+                Matricula matricula = matriculaRepository.findById(matriculaId)
+                                .orElseThrow(() -> new EntityNotFoundException(
+                                                "No se encontró la matrícula solicitada."));
+
+                autorizacionDocenteService.verificarAsignacion(
+                                matricula.getAsignacionDocente().getId());
+
+                return matricula;
         }
 
-        return matriculaRepository.findById(matriculaId)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "No existe la matrícula con ID " + matriculaId));
-    }
+        public List<EstudianteMatriculadoDTO> listarEstudiantesPorAsignacion(
+                        Long asignacionId) {
 
-    public List<EstudianteMatriculadoDTO> listarEstudiantesPorAsignacion(
-            Long asignacionId) {
-
-        return listarActivasPorAsignacion(asignacionId)
-                .stream()
-                .map(matricula -> new EstudianteMatriculadoDTO(
-                        matricula.getId(),
-                        matricula.getEstudiante().getId(),
-                        matricula.getEstudiante().getCodigoEstudiante(),
-                        matricula.getEstudiante().getNombres(),
-                        matricula.getEstudiante().getApellidos(),
-                        matricula.getEstudiante().getCorreo()))
-                .toList();
-    }
-
+                return listarActivasPorAsignacion(asignacionId)
+                                .stream()
+                                .map(matricula -> new EstudianteMatriculadoDTO(
+                                                matricula.getId(),
+                                                matricula.getEstudiante().getId(),
+                                                matricula.getEstudiante().getCodigoEstudiante(),
+                                                matricula.getEstudiante().getNombres(),
+                                                matricula.getEstudiante().getApellidos(),
+                                                matricula.getEstudiante().getCorreo()))
+                                .toList();
+        }
 }

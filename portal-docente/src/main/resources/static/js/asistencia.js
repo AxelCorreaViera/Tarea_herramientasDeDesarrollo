@@ -1,6 +1,5 @@
-"use strict";
+﻿"use strict";
 
-const DOCENTE_ID_DEMO = 1;
 
 const selectorCurso = document.getElementById("selectorCurso");
 const mensaje = document.getElementById("mensaje");
@@ -26,7 +25,7 @@ async function cargarCursos() {
 
     try {
         const cursos = await consultarAPI(
-            `/api/docentes/${DOCENTE_ID_DEMO}/asignaciones`
+            `/api/docentes/me/asignaciones`
         );
 
         selectorCurso.replaceChildren(
@@ -332,3 +331,4 @@ async function dibujarHistorialAsistencia() {
 selectorCurso.addEventListener("change", seleccionarCurso);
 
 cargarCursos();
+

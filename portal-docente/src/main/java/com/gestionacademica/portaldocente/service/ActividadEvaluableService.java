@@ -1,3 +1,4 @@
+
 package com.gestionacademica.portaldocente.service;
 
 import com.gestionacademica.portaldocente.model.ActividadEvaluable;
@@ -18,12 +19,15 @@ public class ActividadEvaluableService {
 
         private final ActividadEvaluableRepository actividadRepository;
         private final AsignacionDocenteRepository asignacionRepository;
+        private final AutorizacionDocenteService autorizacionDocenteService;
 
         public ActividadEvaluableService(
                         ActividadEvaluableRepository actividadRepository,
-                        AsignacionDocenteRepository asignacionRepository) {
+                        AsignacionDocenteRepository asignacionRepository,
+                        AutorizacionDocenteService autorizacionDocenteService) {
                 this.actividadRepository = actividadRepository;
                 this.asignacionRepository = asignacionRepository;
+                this.autorizacionDocenteService = autorizacionDocenteService;
         }
 
         public List<ActividadEvaluable> listarActivasPorAsignacion(
@@ -42,9 +46,14 @@ public class ActividadEvaluableService {
                                         "El identificador de la evaluación es obligatorio.");
                 }
 
-                return actividadRepository.findById(actividadId)
+                ActividadEvaluable actividad = actividadRepository.findById(actividadId)
                                 .orElseThrow(() -> new EntityNotFoundException(
                                                 "No existe la evaluación con ID " + actividadId));
+
+                autorizacionDocenteService.verificarAsignacion(
+                                actividad.getAsignacionDocente().getId());
+
+                return actividad;
         }
 
         @Transactional
@@ -191,10 +200,7 @@ public class ActividadEvaluableService {
         }
 
         private AsignacionDocente verificarAsignacion(Long asignacionId) {
-                if (asignacionId == null) {
-                        throw new IllegalArgumentException(
-                                        "El identificador de la asignación es obligatorio.");
-                }
+                autorizacionDocenteService.verificarAsignacion(asignacionId);
 
                 return asignacionRepository.findById(asignacionId)
                                 .orElseThrow(() -> new EntityNotFoundException(

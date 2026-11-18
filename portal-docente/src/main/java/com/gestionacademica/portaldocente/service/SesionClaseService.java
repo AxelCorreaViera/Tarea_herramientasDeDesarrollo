@@ -23,173 +23,167 @@ import jakarta.persistence.EntityNotFoundException;
 @Transactional(readOnly = true)
 public class SesionClaseService {
 
-    private static final LocalTime HORA_MINIMA =
-            LocalTime.of(7, 0);
+        private static final LocalTime HORA_MINIMA = LocalTime.of(7, 0);
 
-    private static final LocalTime HORA_MAXIMA =
-            LocalTime.of(23, 0);
+        private static final LocalTime HORA_MAXIMA = LocalTime.of(23, 0);
 
-    private final SesionClaseRepository sesionRepository;
-    private final AsignacionDocenteRepository asignacionRepository;
+        private final SesionClaseRepository sesionRepository;
+        private final AsignacionDocenteRepository asignacionRepository;
+        private final AutorizacionDocenteService autorizacionDocenteService;
 
-    public SesionClaseService(
-            SesionClaseRepository sesionRepository,
-            AsignacionDocenteRepository asignacionRepository) {
-        this.sesionRepository = sesionRepository;
-        this.asignacionRepository = asignacionRepository;
-    }
-
-    public List<SesionClaseDTO> listarPorAsignacion(
-            Long asignacionId) {
-
-        verificarAsignacion(asignacionId);
-
-        return sesionRepository
-                .findByAsignacionDocente_IdOrderByFechaAscHoraInicioAsc(
-                        asignacionId)
-                .stream()
-                .map(this::convertirDTO)
-                .toList();
-    }
-
-    @Transactional
-    public SesionClaseDTO crear(
-            Long asignacionId,
-            CrearSesionDTO datos) {
-
-        if (datos == null) {
-            throw new IllegalArgumentException(
-                    "Debes proporcionar los datos de la sesión.");
+        public SesionClaseService(
+                        SesionClaseRepository sesionRepository,
+                        AsignacionDocenteRepository asignacionRepository,
+                        AutorizacionDocenteService autorizacionDocenteService) {
+                this.sesionRepository = sesionRepository;
+                this.asignacionRepository = asignacionRepository;
+                this.autorizacionDocenteService = autorizacionDocenteService;
         }
 
-        LocalDate fecha = datos.fecha();
-        LocalTime horaInicio = datos.horaInicio();
-        LocalTime horaFin = datos.horaFin();
+        public List<SesionClaseDTO> listarPorAsignacion(
+                        Long asignacionId) {
 
-        if (fecha == null) {
-            throw new IllegalArgumentException(
-                    "La fecha de la sesión es obligatoria.");
-        }
-
-        if (fecha.isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException(
-                    "No se pueden registrar sesiones en días pasados.");
-        }
-
-        if (horaInicio == null || horaFin == null) {
-            throw new IllegalArgumentException(
-                    "La hora de inicio y la hora de fin son obligatorias.");
-        }
-
-        if (horaInicio.isBefore(HORA_MINIMA)) {
-            throw new IllegalArgumentException(
-                    "La sesión no puede comenzar antes de las 07:00.");
-        }
-
-        if (horaFin.isAfter(HORA_MAXIMA)) {
-            throw new IllegalArgumentException(
-                    "La sesión no puede terminar después de las 23:00.");
-        }
-
-        if (!horaFin.isAfter(horaInicio)) {
-            throw new IllegalArgumentException(
-                    "La hora de fin debe ser posterior a la hora de inicio.");
-        }
-
-        AsignacionDocente asignacion =
                 verificarAsignacion(asignacionId);
 
-        if (!asignacion.isActiva()) {
-            throw new IllegalStateException(
-                    "No se pueden crear sesiones para una asignación inactiva.");
+                return sesionRepository
+                                .findByAsignacionDocente_IdOrderByFechaAscHoraInicioAsc(
+                                                asignacionId)
+                                .stream()
+                                .map(this::convertirDTO)
+                                .toList();
         }
 
-        validarCruceHorario(
-                asignacion, fecha, horaInicio, horaFin);
+        @Transactional
+        public SesionClaseDTO crear(
+                        Long asignacionId,
+                        CrearSesionDTO datos) {
 
-        SesionClase sesion = new SesionClase();
-        sesion.setFecha(fecha);
-        sesion.setHoraInicio(horaInicio);
-        sesion.setHoraFin(horaFin);
-        sesion.setDescripcion(datos.descripcion());
-        sesion.setAsignacionDocente(asignacion);
+                if (datos == null) {
+                        throw new IllegalArgumentException(
+                                        "Debes proporcionar los datos de la sesión.");
+                }
 
-        return convertirDTO(sesionRepository.save(sesion));
-    }
+                LocalDate fecha = datos.fecha();
+                LocalTime horaInicio = datos.horaInicio();
+                LocalTime horaFin = datos.horaFin();
 
-    private void validarCruceHorario(
-            AsignacionDocente asignacion,
-            LocalDate fecha,
-            LocalTime horaInicio,
-            LocalTime horaFin) {
+                if (fecha == null) {
+                        throw new IllegalArgumentException(
+                                        "La fecha de la sesión es obligatoria.");
+                }
 
-        Long docenteId = asignacion.getDocente().getId();
+                if (fecha.isBefore(LocalDate.now())) {
+                        throw new IllegalArgumentException(
+                                        "No se pueden registrar sesiones en días pasados.");
+                }
 
-        List<SesionClase> sesionesDelDia =
-                sesionRepository.findByFecha(fecha);
+                if (horaInicio == null || horaFin == null) {
+                        throw new IllegalArgumentException(
+                                        "La hora de inicio y la hora de fin son obligatorias.");
+                }
 
-        for (SesionClase existente : sesionesDelDia) {
+                if (horaInicio.isBefore(HORA_MINIMA)) {
+                        throw new IllegalArgumentException(
+                                        "La sesión no puede comenzar antes de las 07:00.");
+                }
 
-            Long docenteExistenteId = existente
-                    .getAsignacionDocente()
-                    .getDocente()
-                    .getId();
+                if (horaFin.isAfter(HORA_MAXIMA)) {
+                        throw new IllegalArgumentException(
+                                        "La sesión no puede terminar después de las 23:00.");
+                }
 
-            // Solo se comparan sesiones del mismo docente.
-            if (!docenteId.equals(docenteExistenteId)) {
-                continue;
-            }
+                if (!horaFin.isAfter(horaInicio)) {
+                        throw new IllegalArgumentException(
+                                        "La hora de fin debe ser posterior a la hora de inicio.");
+                }
 
-            boolean seSuperpone =
-                    horaInicio.isBefore(existente.getHoraFin())
-                    && horaFin.isAfter(existente.getHoraInicio());
+                AsignacionDocente asignacion = verificarAsignacion(asignacionId);
 
-            if (seSuperpone) {
-                throw new IllegalStateException(
-                        "El horario se cruza con otra sesión del mismo docente. "
-                        + "Elige una hora diferente.");
-            }
+                if (!asignacion.isActiva()) {
+                        throw new IllegalStateException(
+                                        "No se pueden crear sesiones para una asignación inactiva.");
+                }
+
+                validarCruceHorario(
+                                asignacion, fecha, horaInicio, horaFin);
+
+                SesionClase sesion = new SesionClase();
+                sesion.setFecha(fecha);
+                sesion.setHoraInicio(horaInicio);
+                sesion.setHoraFin(horaFin);
+                sesion.setDescripcion(datos.descripcion());
+                sesion.setAsignacionDocente(asignacion);
+
+                return convertirDTO(sesionRepository.save(sesion));
         }
-    }
 
-    private AsignacionDocente verificarAsignacion(
-            Long asignacionId) {
+        private void validarCruceHorario(
+                        AsignacionDocente asignacion,
+                        LocalDate fecha,
+                        LocalTime horaInicio,
+                        LocalTime horaFin) {
 
-        if (asignacionId == null) {
-            throw new IllegalArgumentException(
-                    "El identificador de la asignación es obligatorio.");
+                Long docenteId = asignacion.getDocente().getId();
+
+                List<SesionClase> sesionesDelDia = sesionRepository.findByFecha(fecha);
+
+                for (SesionClase existente : sesionesDelDia) {
+
+                        Long docenteExistenteId = existente
+                                        .getAsignacionDocente()
+                                        .getDocente()
+                                        .getId();
+
+                        // Solo se comparan sesiones del mismo docente.
+                        if (!docenteId.equals(docenteExistenteId)) {
+                                continue;
+                        }
+
+                        boolean seSuperpone = horaInicio.isBefore(existente.getHoraFin())
+                                        && horaFin.isAfter(existente.getHoraInicio());
+
+                        if (seSuperpone) {
+                                throw new IllegalStateException(
+                                                "El horario se cruza con otra sesión del mismo docente. "
+                                                                + "Elige una hora diferente.");
+                        }
+                }
         }
 
-        return asignacionRepository.findById(asignacionId)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "No existe la asignación con ID "
-                                + asignacionId));
-    }
+        private AsignacionDocente verificarAsignacion(
+                        Long asignacionId) {
 
-    private SesionClaseDTO convertirDTO(SesionClase sesion) {
+                autorizacionDocenteService.verificarAsignacion(asignacionId);
 
-        String diaSemana = sesion.getFecha()
-                .getDayOfWeek()
-                .getDisplayName(
-                        TextStyle.FULL,
-                        Locale.forLanguageTag("es-PE"));
+                return asignacionRepository.findById(asignacionId)
+                                .orElseThrow(() -> new EntityNotFoundException(
+                                                "No existe la asignación con ID "
+                                                                + asignacionId));
+        }
 
-        diaSemana = diaSemana.substring(0, 1).toUpperCase()
-                + diaSemana.substring(1);
+        private SesionClaseDTO convertirDTO(SesionClase sesion) {
 
-        long duracionMinutos = Duration.between(
-                sesion.getHoraInicio(),
-                sesion.getHoraFin()
-        ).toMinutes();
+                String diaSemana = sesion.getFecha()
+                                .getDayOfWeek()
+                                .getDisplayName(
+                                                TextStyle.FULL,
+                                                Locale.forLanguageTag("es-PE"));
 
-        return new SesionClaseDTO(
-                sesion.getId(),
-                sesion.getAsignacionDocente().getId(),
-                sesion.getFecha(),
-                diaSemana,
-                sesion.getHoraInicio(),
-                sesion.getHoraFin(),
-                duracionMinutos,
-                sesion.getDescripcion());
-    }
+                diaSemana = diaSemana.substring(0, 1).toUpperCase()
+                                + diaSemana.substring(1);
+
+                long duracionMinutos = Duration.between(
+                                sesion.getHoraInicio(),
+                                sesion.getHoraFin()).toMinutes();
+
+                return new SesionClaseDTO(
+                                sesion.getId(),
+                                sesion.getAsignacionDocente().getId(),
+                                sesion.getFecha(),
+                                diaSemana,
+                                sesion.getHoraInicio(),
+                                sesion.getHoraFin(),
+                                duracionMinutos,
+                                sesion.getDescripcion());
+        }
 }
