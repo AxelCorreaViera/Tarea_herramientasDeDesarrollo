@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión | Portal Docente</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="login.js" defer></script>
+</head>
+<body>
+    <main class="contenedor-login">
+        <section class="panel-login">
+            <div class="encabezado-login">
+                <h1>Portal Docente</h1>
+                <p>Gestión académica de tus cursos</p>
+            </div>
+
+            <div class="contenido-login">
+                <h2>Iniciar sesión</h2>
+                <p class="descripcion">
+                    Ingresa tus credenciales para acceder al portal.
+                </p>
+
+                <form id="formularioLogin">
+                    <label for="correo">Correo electrónico</label>
+                    <input
+                        type="email"
+                        id="correo"
+                        name="username"
+                        placeholder="docente@institucion.edu.pe"
+                        autocomplete="username"
+                        required
+                    >
+
+                    <label for="contrasena">Contraseña</label>
+                    <input
+                        type="password"
+                        id="contrasena"
+                        name="password"
+                        placeholder="Ingresa tu contraseña"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <p id="mensaje" class="mensaje" role="alert"></p>
+
+                    <button type="submit" id="botonIngresar">
+                        Ingresar
+                    </button>
+                </form>
+            </div>
+
+            <footer class="pie-login">
+                Portal Docente · Proyecto académico
+            </footer>
+        </section>
+    </main>
+</body>
+</html>

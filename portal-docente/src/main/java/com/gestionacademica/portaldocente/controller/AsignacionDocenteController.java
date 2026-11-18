@@ -1,10 +1,11 @@
 package com.gestionacademica.portaldocente.controller;
 
 import com.gestionacademica.portaldocente.dto.AsignacionResumenDTO;
+import com.gestionacademica.portaldocente.security.DocentePrincipal;
 import com.gestionacademica.portaldocente.service.AsignacionDocenteService;
 import java.util.List;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,11 +20,11 @@ public class AsignacionDocenteController {
         this.asignacionDocenteService = asignacionDocenteService;
     }
 
-    @GetMapping("/{docenteId}/asignaciones")
+    @GetMapping("/me/asignaciones")
     public List<AsignacionResumenDTO> listarAsignaciones(
-            @PathVariable Long docenteId) {
+            @AuthenticationPrincipal DocentePrincipal principal) {
 
         return asignacionDocenteService
-                .listarResumenesActivosPorDocente(docenteId);
+                .listarResumenesActivosPorDocente(principal.getId());
     }
 }

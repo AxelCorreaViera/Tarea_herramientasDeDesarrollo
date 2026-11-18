@@ -1,0 +1,141 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eef2f7;
+    color: #243247;
+}
+
+.contenedor-login {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+.panel-login {
+    width: 100%;
+    max-width: 440px;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(23, 59, 104, 0.12);
+}
+
+.encabezado-login {
+    background: #173b68;
+    color: #ffffff;
+    padding: 30px;
+    text-align: center;
+}
+
+.encabezado-login h1 {
+    margin: 0 0 10px;
+    font-size: 27px;
+}
+
+.encabezado-login p {
+    margin: 0;
+    color: #d9e6f5;
+    font-size: 14px;
+}
+
+.contenido-login {
+    padding: 32px;
+}
+
+.contenido-login h2 {
+    margin: 0 0 8px;
+    font-size: 23px;
+}
+
+.descripcion {
+    margin: 0 0 26px;
+    color: #68778a;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#formularioLogin {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#formularioLogin label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+#formularioLogin input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#formularioLogin input:focus {
+    border-color: #2d6097;
+    box-shadow: 0 0 0 3px rgba(45, 96, 151, 0.12);
+}
+
+#formularioLogin button {
+    margin-top: 12px;
+    padding: 13px;
+    border: none;
+    border-radius: 7px;
+    background: #173b68;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#formularioLogin button:hover {
+    background: #24548b;
+}
+
+#formularioLogin button:disabled {
+    background: #8195ad;
+    cursor: not-allowed;
+}
+
+.mensaje {
+    min-height: 20px;
+    margin: 4px 0 0;
+    color: #b42318;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.pie-login {
+    padding: 16px;
+    border-top: 1px solid #e5eaf0;
+    color: #718096;
+    text-align: center;
+    font-size: 12px;
+}
+
+@media (max-width: 480px) {
+    .contenedor-login {
+        padding: 16px;
+    }
+
+    .encabezado-login {
+        padding: 25px 20px;
+    }
+
+    .contenido-login {
+        padding: 25px 22px;
+    }
+}
