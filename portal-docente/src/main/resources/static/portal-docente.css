@@ -19,7 +19,7 @@ body {
     color: white;
     padding: 24px 6%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     gap: 20px;
 }
@@ -38,6 +38,7 @@ body {
     border-radius: 20px;
     padding: 9px 14px;
     font-size: 13px;
+    margin-left: auto;
 }
 
 .contenedor {
@@ -169,6 +170,7 @@ a.boton-inicio:focus-visible {
 .encabezado a,
 .encabezado a:visited {
     display: inline-block;
+    margin-left: auto;
     padding: 11px 16px;
     background-color: #ffffff;
     color: #173b68;
@@ -512,7 +514,9 @@ footer {
         flex-direction: column;
         padding: 22px 5%;
     }
-
+    .estado {
+    margin-left: 0;
+    }
     .encabezado a {
         white-space: normal;
     }
