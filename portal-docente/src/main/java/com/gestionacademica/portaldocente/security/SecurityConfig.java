@@ -62,16 +62,30 @@ public class SecurityConfig {
             )
 
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login", "/error").permitAll()
+                .requestMatchers(
+                    "/login.html",
+                    "/login.css",
+                    "/login.js",
+                    "/error"
+                ).permitAll()
                 .anyRequest().authenticated()
             )
 
             .formLogin(form -> form
+                .loginPage("/login.html")
+                .loginProcessingUrl("/login")
+                .failureUrl("/login.html?error")
                 .defaultSuccessUrl("/portal-docente.html", true)
+                .permitAll()
             )
 
             .logout(logout -> logout
-                .logoutSuccessUrl("/login?logout")
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login.html?logout")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID", "XSRF-TOKEN")
+                .permitAll()
             )
 
             .sessionManagement(session -> session

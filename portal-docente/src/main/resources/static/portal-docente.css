@@ -733,3 +733,36 @@ footer {
         flex: 1;
     }
 }
+
+/* Botón para cerrar la sesión del docente */
+.boton-cerrar-sesion {
+    padding: 10px 16px;
+    border: 1px solid #ffffff;
+    border-radius: 7px;
+    background: transparent;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.boton-cerrar-sesion:hover {
+    background: #ffffff;
+    color: #173b68;
+}
+
+.boton-cerrar-sesion:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+    .encabezado {
+        flex-wrap: wrap;
+    }
+
+    .boton-cerrar-sesion {
+        width: 100%;
+    }
+}
